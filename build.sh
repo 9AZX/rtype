@@ -2,7 +2,7 @@
 # @Author: Cédric Hennequin
 # @Date:   19-09-2019 00:51:03
 # @Last Modified by:   Cédric Hennequin
-# @Last Modified time: 18-11-2019 15:50:19
+# @Last Modified time: 19-11-2019 09:57:37
 
 clear
 set -e
@@ -49,7 +49,7 @@ function run_build
 	run_clean
 	mkdir "./build"
 	cd "./build"
-	conan install ".."
+	conan install ".." --build=missing
 	cmake ".."
 	make
 }
