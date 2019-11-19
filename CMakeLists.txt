@@ -23,6 +23,7 @@ set(PROJECT_DIR "${PROJECT_SOURCE_DIR}/src")
 # Set sources.
 set(R_TYPE_CLIENT
 	./src/client/main.cpp
+	./src/client/render/Sprites.cpp
 )
 
 set(R_TYPE_SERVER
@@ -42,6 +43,8 @@ add_executable(r-type_client ${R_TYPE_CLIENT})
 add_executable(r-type_server ${R_TYPE_SERVER})
 # Include headers.
 target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}")
+target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}/client")
+target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}/client/render")
 target_include_directories(r-type_server PRIVATE "${INCLUDE_DIR}")
 
 # Link librarie(s).
