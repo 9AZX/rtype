@@ -14,10 +14,10 @@
 
 void testClient()
 {
-	std::unique_ptr<Entity> entity;
+	// std::unique_ptr<Entity> entity;
 
 	std::cout << "Test session..." << std::endl;
-	std::make_unique<Entity>(new Entity("../../assets/r-typesheet42.gif"));
+	auto entity = new Entity("../../assets/r-typesheet42.gif");
 	entity->renderSprite();
 }
 

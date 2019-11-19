@@ -9,8 +9,8 @@
 
 Entity::Entity(std::string imgPath)
 {
+    this->_sprite = std::unique_ptr<Sprite>(new Sprite());
     this->_imgPath = imgPath;
-    this->_sprite = std::make_unique<Sprite>(new Sprite());
 }
 
 Entity::~Entity()
@@ -28,6 +28,6 @@ void Entity::renderSprite()
     if (!texture.create(500, 500))
         return;
     texture.clear();
-    texture.draw(this->_sprite.getSprite());
+    texture.draw(this->_sprite->getSprite());
     texture.display();
 }
