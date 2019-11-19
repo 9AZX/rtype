@@ -10,15 +10,26 @@
 */
 
 #include <SFML/Window.hpp>
+#include "Sprites.hpp"
+
+void testClient()
+{
+	std::cout << "Test session..." << std::endl;
+	std::unique_ptr<Sprites> sprites(new Sprites);
+}
 
 int main()
 {
 	sf::Event event;
-	sf::Window window(sf::VideoMode(800, 600), "My window");
+	sf::Window window(sf::VideoMode(1920, 1080), "My window");
 
-	while (window.isOpen()) {
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed) {
+	testClient();
+	while (window.isOpen())
+	{
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
 				window.close();
 			}
 		}
