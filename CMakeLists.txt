@@ -23,7 +23,8 @@ set(PROJECT_DIR "${PROJECT_SOURCE_DIR}/src")
 # Set sources.
 set(R_TYPE_CLIENT
 	./src/client/main.cpp
-	./src/client/render/Sprites.cpp
+	./src/client/render/Sprite.cpp
+	./src/client/Entity.cpp
 )
 
 set(R_TYPE_SERVER
