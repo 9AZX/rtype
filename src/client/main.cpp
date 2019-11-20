@@ -10,26 +10,29 @@
 */
 
 #include <SFML/Window.hpp>
-#include "Sprites.hpp"
+#include "Entity.hpp"
 
-void testClient()
+#include <typeinfo>
+
+void testClient(sf::RenderWindow *window)
 {
+	auto entity = std::unique_ptr<Entity>(new Entity("../../assets/r-typesheet42.gif"));
+	// std::unique_ptr<Entity> entity;
+
 	std::cout << "Test session..." << std::endl;
-	std::unique_ptr<Sprites> sprites(new Sprites);
+	// auto entity = new Entity("../../assets/r-typesheet42.gif");
+	entity->renderSprite(window);
 }
 
 int main()
 {
 	sf::Event event;
-	sf::Window window(sf::VideoMode(1920, 1080), "My window");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "My window");
 
-	testClient();
-	while (window.isOpen())
-	{
-		while (window.pollEvent(event))
-		{
-			if (event.type == sf::Event::Closed)
-			{
+	while (window.isOpen()) {
+		testClient(&window);
+		while (window.pollEvent(event)) {
+			if (event.type == sf::Event::Closed) {
 				window.close();
 			}
 		}
