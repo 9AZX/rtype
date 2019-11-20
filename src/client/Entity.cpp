@@ -21,7 +21,7 @@ void Entity::setSprite()
 {
 }
 
-void Entity::renderSprite()
+void Entity::renderSprite(sf::RenderWindow *window)
 {
     sf::RenderTexture texture;
 
@@ -30,4 +30,7 @@ void Entity::renderSprite()
     texture.clear();
     texture.draw(this->_sprite->getSprite());
     texture.display();
+    sf::Sprite sprite(texture.getTexture());
+    window->draw(sprite);
+    window->display();
 }

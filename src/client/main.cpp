@@ -14,23 +14,23 @@
 
 #include <typeinfo>
 
-void testClient()
+void testClient(sf::RenderWindow *window)
 {
+	auto entity = std::unique_ptr<Entity>(new Entity("../../assets/r-typesheet42.gif"));
 	// std::unique_ptr<Entity> entity;
 
 	std::cout << "Test session..." << std::endl;
 	// auto entity = new Entity("../../assets/r-typesheet42.gif");
-	auto entity = std::unique_ptr<Entity>(new Entity("../../assets/r-typesheet42.gif"));
-	entity->renderSprite();
+	entity->renderSprite(window);
 }
 
 int main()
 {
 	sf::Event event;
-	sf::Window window(sf::VideoMode(1920, 1080), "My window");
+	sf::RenderWindow window(sf::VideoMode(1920, 1080), "My window");
 
 	while (window.isOpen()) {
-		testClient();
+		testClient(&window);
 		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
 				window.close();

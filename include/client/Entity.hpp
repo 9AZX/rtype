@@ -21,7 +21,7 @@ class Entity {
 		~Entity();
 
         void setSprite();
-        void renderSprite();
+        void renderSprite(sf::RenderWindow *window);
 
 	protected:
         std::unique_ptr<Sprite> _sprite;
