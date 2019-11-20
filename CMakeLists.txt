@@ -49,11 +49,11 @@ if (
 )
 	add_definitions("-Wall")
 	add_definitions("-Wextra")
-	add_definitions("-std=c++11")
+	add_definitions("-std=c++14")
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 	add_definitions("/Wall")
 	add_definitions("/w4")
-	add_definitions("/std:c++11")
+	add_definitions("/std:c++14")
 endif()
 
 # Create executable.
