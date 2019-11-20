@@ -15,18 +15,20 @@
 #include <SFML/Graphics.hpp>
 #include "Sprite.hpp"
 
-class Entity {
-	public:
-		Entity(std::string imgPath);
-		~Entity();
+class Entity
+{
+public:
+	Entity(std::string imgPath);
+	~Entity();
 
-        void setSprite();
-        void renderSprite(sf::RenderWindow *window);
+	void setSprite();
+	void renderSprite(sf::RenderWindow &window);
 
-	protected:
-        std::unique_ptr<Sprite> _sprite;
-        std::string _imgPath;
-	private:
+protected:
+	std::unique_ptr<Sprite> _sprite;
+	std::string _imgPath;
+
+private:
 };
 
 #endif /* !ENTITY_HPP_ */

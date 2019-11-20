@@ -21,16 +21,13 @@ void Entity::setSprite()
 {
 }
 
-void Entity::renderSprite(sf::RenderWindow *window)
+void Entity::renderSprite(sf::RenderWindow &window)
 {
-    sf::RenderTexture texture;
+    sf::Texture texture;
+    sf::Sprite sprite;
 
-    if (!texture.create(500, 500))
+    if (!texture.loadFromFile("./r-typesheet42.png"))
         return;
-    texture.clear();
-    texture.draw(this->_sprite->getSprite());
-    texture.display();
-    sf::Sprite sprite(texture.getTexture());
-    window->draw(sprite);
-    window->display();
+    sprite.setTexture(texture);
+    window.draw(sprite);
 }
