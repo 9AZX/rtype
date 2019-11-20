@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 17:53:27
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 20-11-2019 16:36:20
+** @Last Modified time: 20-11-2019 23:55:08
 */
 
 #include <iostream>
@@ -26,24 +26,44 @@ CLI::CLI(int argc, char **argv)
 
 void CLI::launchCLI()
 {
+	std::string input = "";
+
 	do {
 		std::cout << CLI_HEADER;
-		std::getline(std::cin, this->_cmd, '\n');
-		if (!this->callCommand()) {
+		std::getline(std::cin, input, '\n');
+		if (!input.empty()) {
+			input = std::regex_replace(input, std::regex("^\\s+"), "");
+			input = std::regex_replace(input, std::regex("\\s+$"), "");
+		}
+		if (!this->callCommand(input)) {
 			break;
 		}
+		(input).clear();
 	} while (true);
 	std::cout << std::endl << CLI_STOP << std::endl;
 }
 
-bool CLI::callCommand()
+std::vector<std::string> CLI::explode(const std::string &str, const char delim)
 {
-	if ((std::cin.eof() || std::cin.fail()) || this->_cmd == "exit") {
+	std::string token = "";
+	std::istringstream iss(str);
+	std::vector<std::string> result;
+
+	while (std::getline(iss, token, delim)) {
+		result.push_back(std::move(token));
+	}
+	return result;
+}
+
+bool CLI::callCommand(const std::string &str)
+{
+	if ((std::cin.eof() || std::cin.fail()) || str == "exit") {
 		return false;
 	}
-	this->_cmd = std::regex_replace(this->_cmd, std::regex("^\\s+"), "");
-	this->_cmd = std::regex_replace(this->_cmd, std::regex("\\s+$"), "");
-	std::cout << "input: \"" << this->_cmd << '\"' << std::endl;
-	this->_cmd.clear();
+	std::cout << "input: \"" << str.c_str() << '\"' << std::endl;
+	this->_args = this->explode(str, ' ');
+	for (const auto &v : this->_args) {
+		std::cout << "value: " << v << std::endl;
+	}
 	return true;
 }
