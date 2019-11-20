@@ -6,12 +6,13 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 20-11-2019 15:45:06
+** @Last Modified time: 20-11-2019 17:20:12
 */
 
 #ifndef	_CLI_HPP_
 #define	_CLI_HPP_
 
+#include <string>
 #include <vector>
 #include "Commands.hpp"
 
