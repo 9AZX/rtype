@@ -1,9 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(R-Type)
 
-# Enable compilation database for clang tooling.
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-
 # Configure CONAN extension.
 if (NOT EXISTS ${CMAKE_BINARY_DIR}/conanbuildinfo.cmake)
 	message(FATAL_ERROR "Conan build info file is missing.")
@@ -18,6 +15,9 @@ endif ()
 
 # Set option(s).
 set(CONAN_SYSTEM_INCLUDES ON)
+
+# Enable compilation database for clang tooling.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 # Set the include directory.
 set(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
