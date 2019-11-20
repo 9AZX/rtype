@@ -12,12 +12,15 @@
 #include <SFML/Window.hpp>
 #include "Entity.hpp"
 
+#include <typeinfo>
+
 void testClient()
 {
 	// std::unique_ptr<Entity> entity;
 
 	std::cout << "Test session..." << std::endl;
-	auto entity = new Entity("../../assets/r-typesheet42.gif");
+	// auto entity = new Entity("../../assets/r-typesheet42.gif");
+	auto entity = std::unique_ptr<Entity>(new Entity("../../assets/r-typesheet42.gif"));
 	entity->renderSprite();
 }
 
