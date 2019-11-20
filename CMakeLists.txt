@@ -27,7 +27,13 @@ set(R_TYPE_CLIENT
 )
 
 set(R_TYPE_SERVER
+	# Main file.
 	./src/server/main.cpp
+	# Exception file(s).
+	./src/Exception.cpp
+	# Commands for the CLI.
+	./src/server/CLI.cpp
+	./src/server/Commands.cpp
 )
 
 # Find packages.
