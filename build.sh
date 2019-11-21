@@ -2,7 +2,7 @@
 # @Author: Cédric Hennequin
 # @Date:   19-09-2019 00:51:03
 # @Last Modified by:   Cédric Hennequin
-# @Last Modified time: 19-11-2019 09:57:37
+# @Last Modified time: 20-11-2019 17:26:03
 
 clear
 set -e
@@ -52,6 +52,7 @@ function run_build
 	conan install ".." --build=missing
 	cmake ".."
 	make
+	cp "compile_commands.json" ".."
 }
 
 function run_pretty

@@ -16,6 +16,9 @@ endif ()
 # Set option(s).
 set(CONAN_SYSTEM_INCLUDES ON)
 
+# Enable compilation database for clang tooling.
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Set the include directory.
 set(INCLUDE_DIR "${PROJECT_SOURCE_DIR}/include")
 set(PROJECT_DIR "${PROJECT_SOURCE_DIR}/src")
