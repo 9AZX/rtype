@@ -6,10 +6,11 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 13:27:54
+** @Last Modified time: 21-11-2019 14:34:33
 */
 
 #include <iostream>
+#include <cstdlib>
 #include "CLI.hpp"
 
 using namespace App;
@@ -24,10 +25,12 @@ bool Commands::dispatcher(const int type, const std::vector<std::string> &args)
 
 bool Commands::start(const std::vector<std::string> &args)
 {
+	unsigned short port = 0;
 	//CLI *cli = dynamic_cast<CLI *>(this);
 
-	for (const auto &v : args) {
-		std::cout << "value: \"" << v << '\"' << std::endl;
+	if (args.size() != 1) {
+		std::cerr << "Error: \"" << CMD_HELP_START << '\"' << std::endl;
 	}
+	port = static_cast<unsigned short>(std::atoi(args.front().c_str()));
 	return true;
 }

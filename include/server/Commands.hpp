@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:21:19
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 13:26:00
+** @Last Modified time: 21-11-2019 14:25:57
 */
 
 #ifndef	_COMMANDS_HPP_
@@ -14,6 +14,8 @@
 
 #include <string>
 #include <vector>
+
+#define	CMD_HELP_START	"start [port]"
 
 namespace App
 {
