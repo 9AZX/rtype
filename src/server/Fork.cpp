@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:58:43
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:19:53
+** @Last Modified time: 21-11-2019 17:29:22
 */
 
 #include <sys/types.h>
@@ -30,6 +30,7 @@ void Fork::fork()
 		return;
 	}
 	this->_process_id.push_back(pid);
+	this->_last = pid;
 }
 
 void Fork::kill() const
@@ -60,4 +61,9 @@ bool Fork::isParent() const noexcept
 std::vector<pid_t> &Fork::getProcess() noexcept
 {
 	return this->_process_id;
+}
+
+pid_t Fork::getLastPid() const noexcept
+{
+	return this->_last;
 }

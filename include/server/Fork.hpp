@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:42:50
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:19:06
+** @Last Modified time: 21-11-2019 17:29:18
 */
 
 #ifndef	_FORK_HPP_
@@ -34,8 +34,10 @@ public:
 	constexpr void killDebug(const bool state, const pid_t pid) const noexcept;
 	bool isParent() const noexcept;
 	std::vector<pid_t> &getProcess() noexcept;
+	pid_t getLastPid() const noexcept;
 
 private:
+	pid_t _last = 0;
 	int _fork = FORK_PARENT;
 	std::vector<pid_t> _process_id;
 };

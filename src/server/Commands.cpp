@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:43:52
+** @Last Modified time: 21-11-2019 17:30:35
 */
 
 #include <iostream>
@@ -46,6 +46,8 @@ bool Commands::start(const std::vector<std::string> &args)
 	}
 	port = static_cast<unsigned short>(std::atoi(args.front().c_str()));
 	cli->_server->run();
+	std::cout << SERVER_NEW_INSTANCE << cli->_server->getLastPid();
+	std::cout << ')' << std::endl;
 	return true;
 }
 

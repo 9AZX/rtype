@@ -6,10 +6,9 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:20:26
+** @Last Modified time: 21-11-2019 17:28:39
 */
 
-#include <iostream>
 #include "Server.hpp"
 
 Server::Server(unsigned short port): _port(port)
@@ -39,10 +38,11 @@ void Server::run()
 	if (!this->isParent()) {
 		this->launch();
 	}
-	return;
 }
 
 void Server::launch()
 {
-	std::cout << std::endl << "Server run..." << std::endl;
+	while (true) {
+		//
+	}
 }
