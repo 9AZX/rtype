@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:21:19
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 14:25:57
+** @Last Modified time: 21-11-2019 16:02:14
 */
 
 #ifndef	_COMMANDS_HPP_
@@ -23,7 +23,8 @@ namespace App
 	{
 	public:
 		enum {
-			CMD_START
+			CMD_START,
+			CMD_EXIT
 		};
 
 	public:
@@ -35,6 +36,7 @@ namespace App
 
 	private:
 		bool start(const std::vector<std::string> &args);
+		bool exit() const noexcept;
 	};
 }
 

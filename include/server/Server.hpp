@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 12:49:38
+** @Last Modified time: 21-11-2019 16:13:58
 */
 
 #ifndef	_SERVER_HPP_
@@ -18,7 +18,14 @@ class Server: public Fork
 {
 public:
 	Server() = default;
-	~Server() = default;
+	Server(unsigned short port);
+	~Server();
+
+public:
+	void setPort(unsigned short port) noexcept;
+	unsigned short getPort() const noexcept;
+	void run();
+	void launch();
 
 private:
 	unsigned short _port = 0;

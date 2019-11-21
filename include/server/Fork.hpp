@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:42:50
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 13:31:39
+** @Last Modified time: 21-11-2019 16:19:06
 */
 
 #ifndef	_FORK_HPP_
@@ -14,17 +14,29 @@
 
 #include <vector>
 
+#define	FORK_DEBUG	true
+
 class Fork
 {
+public:
+	enum {
+		FORK_PARENT,
+		FORK_CHILD
+	};
+
 public:
 	Fork() = default;
 	virtual ~Fork() = default;
 
 public:
-	bool fork();
+	void fork();
+	void kill() const;
+	constexpr void killDebug(const bool state, const pid_t pid) const noexcept;
+	bool isParent() const noexcept;
 	std::vector<pid_t> &getProcess() noexcept;
 
 private:
+	int _fork = FORK_PARENT;
 	std::vector<pid_t> _process_id;
 };
 

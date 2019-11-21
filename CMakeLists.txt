@@ -38,6 +38,10 @@ set(R_TYPE_SERVER
 	# Commands for the CLI.
 	./src/server/CLI.cpp
 	./src/server/Commands.cpp
+	# Server files.
+	./src/server/Server.cpp
+	# Other(s).
+	./src/server/Fork.cpp
 )
 
 # Find packages.

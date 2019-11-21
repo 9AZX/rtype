@@ -6,19 +6,22 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 13:27:57
+** @Last Modified time: 21-11-2019 15:20:01
 */
 
 #ifndef	_CLI_HPP_
 #define	_CLI_HPP_
 
 #include <functional>
+#include <memory>
 #include <map>
 #include "Commands.hpp"
+#include "Server.hpp"
 
 #define	CLI_HEADER	"r-type $> "
 #define	CLI_STOP	"Server stop."
-#define	CLI_HELP	"Type \"exit\" for stop."
+#define	CLI_HELP	"Welcome! You can type \"exit\" for stop."
+#define	CLI_UNKNOWN	"Unknown command (\""
 
 using vecStr = std::vector<std::string>;
 using argsIterator = std::map<std::string, int>::const_iterator;
@@ -39,14 +42,16 @@ namespace App
 	private:
 		bool callCommand(const std::string &str);
 
+	public:
+		std::unique_ptr<Server> _server = nullptr;
+
 	private:
 		int _argc = 0;
 		std::vector<std::string> _args;
 		std::vector<std::string> _argv;
-
-	private:
-		std::map<std::string, int> _cmdList = {
-			{"start", CLI::CMD_START}
+		const std::map<std::string, int> _cmdList = {
+			{"start", CLI::CMD_START},
+			{"exit", CLI::CMD_EXIT}
 		};
 	};
 }
