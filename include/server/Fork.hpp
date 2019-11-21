@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:42:50
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 12:58:38
+** @Last Modified time: 21-11-2019 13:31:39
 */
 
 #ifndef	_FORK_HPP_
@@ -22,6 +22,7 @@ public:
 
 public:
 	bool fork();
+	std::vector<pid_t> &getProcess() noexcept;
 
 private:
 	std::vector<pid_t> _process_id;
