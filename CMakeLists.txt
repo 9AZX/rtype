@@ -25,7 +25,11 @@ set(PROJECT_DIR "${PROJECT_SOURCE_DIR}/src")
 
 # Set sources.
 set(R_TYPE_CLIENT
+	# Main file.
 	./src/client/main.cpp
+	# Exception file(s).
+	./src/Exception.cpp
+	# Other(s).
 	./src/client/App.cpp
 	./src/client/Game.cpp
 	./src/client/GameEngine.cpp
