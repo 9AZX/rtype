@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 17:30:15
+** @Last Modified time: 21-11-2019 17:41:59
 */
 
 #ifndef	_SERVER_HPP_
@@ -14,7 +14,7 @@
 
 #include "Fork.hpp"
 
-#define	SERVER_NEW_INSTANCE	"New server instance run [on pid: "
+#define	SERVER_NEW_INSTANCE	"New server instance run (on pid: "
 
 class Server: public Fork
 {
