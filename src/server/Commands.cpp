@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:02:25
+** @Last Modified time: 21-11-2019 16:43:52
 */
 
 #include <iostream>
@@ -17,13 +17,22 @@ using namespace App;
 
 bool Commands::dispatcher(const int type, const std::vector<std::string> &args)
 {
-	if (type == Commands::CMD_START) {
-		return this->start(args);
+	bool value = true;
+
+	switch (type) {
+		case Commands::CMD_START:
+			value = this->start(args);
+			break;
+		case Commands::CMD_STATE:
+			value = this->state();
+			break;
+		case Commands::CMD_EXIT:
+			value = this->exit();
+			break;
+		default:
+			break;
 	}
-	else if (type == Commands::CMD_EXIT) {
-		return this->exit();
-	}
-	return true;
+	return value;
 }
 
 bool Commands::start(const std::vector<std::string> &args)
@@ -37,6 +46,17 @@ bool Commands::start(const std::vector<std::string> &args)
 	}
 	port = static_cast<unsigned short>(std::atoi(args.front().c_str()));
 	cli->_server->run();
+	return true;
+}
+
+bool Commands::state() noexcept
+{
+	CLI *cli = dynamic_cast<CLI *>(this);
+	std::vector<pid_t> process = cli->_server->getProcess();
+
+	for (const auto &pid : process) {
+		std::cout << "Server instance: [" << pid << ']' << std::endl;
+	}
 	return true;
 }
 

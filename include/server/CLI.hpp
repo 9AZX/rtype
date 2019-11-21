@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 15:20:01
+** @Last Modified time: 21-11-2019 16:33:34
 */
 
 #ifndef	_CLI_HPP_
@@ -51,6 +51,7 @@ namespace App
 		std::vector<std::string> _argv;
 		const std::map<std::string, int> _cmdList = {
 			{"start", CLI::CMD_START},
+			{"state", CLI::CMD_STATE},
 			{"exit", CLI::CMD_EXIT}
 		};
 	};
