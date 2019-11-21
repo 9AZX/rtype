@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 17:41:59
+** @Last Modified time: 21-11-2019 23:37:22
 */
 
 #ifndef	_SERVER_HPP_
@@ -16,12 +16,12 @@
 
 #define	SERVER_NEW_INSTANCE	"New server instance run (on pid: "
 
-class Server: public Fork
+class Instance: public Fork
 {
 public:
-	Server() = default;
-	Server(unsigned short port);
-	~Server();
+	Instance() = default;
+	Instance(unsigned short port);
+	~Instance();
 
 public:
 	void setPort(unsigned short port) noexcept;

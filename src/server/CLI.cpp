@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 17:53:27
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 18:03:14
+** @Last Modified time: 21-11-2019 23:42:04
 */
 
 #include <iostream>
@@ -22,7 +22,7 @@ CLI::CLI(int argc, char **argv)
 	while (--argc) {
 		this->_argv.push_back(argv[argc]);
 	}
-	this->_server = std::make_unique<Server>();
+	this->_server = std::make_unique<Instance>();
 }
 
 void CLI::launchCLI()
