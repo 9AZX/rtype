@@ -7,27 +7,23 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(std::string imgPath)
+Entity::Entity(std::string imgPath, sf::Vector2f pos)
+: _imgPath(imgPath), _pos(pos)
 {
-    this->_sprite = std::unique_ptr<Sprite>(new Sprite());
-    this->_imgPath = imgPath;
 }
 
 Entity::~Entity()
 {
 }
 
-void Entity::setSprite()
-{
-}
-
-void Entity::renderSprite(sf::RenderWindow &window)
+void Entity::render(sf::RenderWindow &window)
 {
     sf::Texture texture;
     sf::Sprite sprite;
 
-    if (!texture.loadFromFile("./r-typesheet42.png"))
+    if (!texture.loadFromFile(this->_imgPath))
         return;
     sprite.setTexture(texture);
+    sprite.setPosition(this->_pos.x, this->_pos.y);
     window.draw(sprite);
 }

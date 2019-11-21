@@ -8,26 +8,19 @@
 #ifndef ENTITY_HPP_
 #define ENTITY_HPP_
 
-#include <stdio.h>
-#include <iostream>
-#include <memory>
-#include <vector>
 #include <SFML/Graphics.hpp>
-#include "Sprite.hpp"
 
 class Entity
 {
 public:
-	Entity(std::string imgPath);
+	Entity(std::string imgPath, sf::Vector2f pos);
 	~Entity();
 
-	void setSprite();
-	void renderSprite(sf::RenderWindow &window);
+	void render(sf::RenderWindow &window);
 
 protected:
-	std::unique_ptr<Sprite> _sprite;
 	std::string _imgPath;
-
+	sf::Vector2f _pos;
 private:
 };
 
