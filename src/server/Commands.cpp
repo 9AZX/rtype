@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 17:30:35
+** @Last Modified time: 21-11-2019 18:01:34
 */
 
 #include <iostream>
@@ -25,6 +25,9 @@ bool Commands::dispatcher(const int type, const std::vector<std::string> &args)
 			break;
 		case Commands::CMD_STATE:
 			value = this->state();
+			break;
+		case Commands::CMD_HELP:
+			value = this->help();
 			break;
 		case Commands::CMD_EXIT:
 			value = this->exit();
@@ -59,6 +62,18 @@ bool Commands::state() noexcept
 	for (const auto &pid : process) {
 		std::cout << "Server instance: [" << pid << ']' << std::endl;
 	}
+	return true;
+}
+
+bool Commands::help() const noexcept
+{
+	std::cout << CMD_HELP__1 << std::endl;
+	std::cout << CMD_HELP__2 << std::endl;
+	std::cout << std::endl << CMD_HELP__3 << std::endl;
+	std::cout << CMD_HELP__4 << std::endl;
+	std::cout << CMD_HELP__5 << std::endl;
+	std::cout << CMD_HELP__6 << std::endl;
+	std::cout << CMD_HELP__7 << std::endl;
 	return true;
 }
 

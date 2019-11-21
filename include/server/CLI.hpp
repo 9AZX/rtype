@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:33:34
+** @Last Modified time: 21-11-2019 17:46:14
 */
 
 #ifndef	_CLI_HPP_
@@ -52,6 +52,7 @@ namespace App
 		const std::map<std::string, int> _cmdList = {
 			{"start", CLI::CMD_START},
 			{"state", CLI::CMD_STATE},
+			{"help", CLI::CMD_HELP},
 			{"exit", CLI::CMD_EXIT}
 		};
 	};

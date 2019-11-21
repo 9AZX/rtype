@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 17:53:27
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 16:02:41
+** @Last Modified time: 21-11-2019 18:03:14
 */
 
 #include <iostream>
@@ -72,6 +72,6 @@ bool CLI::callCommand(const std::string &str)
 		this->_args.erase(this->_args.begin());
 		return this->dispatcher(it->second, this->_args);
 	}
-	std::cerr << CLI_UNKNOWN << this->_args.front() << "\")." << std::endl;
+	std::cerr << CLI_UNKNOWN << this->_args.front() << "\")" << std::endl;
 	return true;
 }
