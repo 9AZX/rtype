@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 17:53:27
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 20-11-2019 23:55:08
+** @Last Modified time: 21-11-2019 12:32:32
 */
 
 #include <iostream>
@@ -38,7 +38,7 @@ void CLI::launchCLI()
 		if (!this->callCommand(input)) {
 			break;
 		}
-		(input).clear();
+		input.clear();
 	} while (true);
 	std::cout << std::endl << CLI_STOP << std::endl;
 }
@@ -60,10 +60,15 @@ bool CLI::callCommand(const std::string &str)
 	if ((std::cin.eof() || std::cin.fail()) || str == "exit") {
 		return false;
 	}
-	std::cout << "input: \"" << str.c_str() << '\"' << std::endl;
 	this->_args = this->explode(str, ' ');
-	for (const auto &v : this->_args) {
-		std::cout << "value: " << v << std::endl;
+	if (this->_args.empty()) {
+		return true;
+	}
+	argsIterator it = this->_cmdList.find(this->_args.front());
+	std::cout << "cmd: \"" << this->_args.front() << '\"' << std::endl;
+	if (it != this->_cmdList.end()) {
+		this->_args.erase(this->_args.begin());
+		this->dispatcher(it->second, this->_args);
 	}
 	return true;
 }

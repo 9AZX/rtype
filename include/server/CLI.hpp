@@ -6,15 +6,13 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 20-11-2019 23:51:43
+** @Last Modified time: 21-11-2019 13:27:57
 */
 
 #ifndef	_CLI_HPP_
 #define	_CLI_HPP_
 
 #include <functional>
-#include <string>
-#include <vector>
 #include <map>
 #include "Commands.hpp"
 
@@ -23,7 +21,7 @@
 #define	CLI_HELP	"Type \"exit\" for stop."
 
 using vecStr = std::vector<std::string>;
-using funcPtr = std::function<bool(const std::string &str)>;
+using argsIterator = std::map<std::string, int>::const_iterator;
 
 namespace App
 {
@@ -47,8 +45,8 @@ namespace App
 		std::vector<std::string> _argv;
 
 	private:
-		const std::map<std::string, funcPtr> _cmdList = {
-			{"test", nullptr}
+		std::map<std::string, int> _cmdList = {
+			{"start", CLI::CMD_START}
 		};
 	};
 }
