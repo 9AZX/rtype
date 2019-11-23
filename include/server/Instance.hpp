@@ -6,18 +6,26 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 13:59:43
+** @Last Modified time: 23-11-2019 15:14:03
 */
 
 #ifndef	_INSTANCE_HPP_
 #define	_INSTANCE_HPP_
 
+#if	!defined(_WIN32) && !defined(_WIN64)
 #include "Fork.hpp"
+#else
+#include <thread>
+#endif
 
 #define	SERVER_NEW_INSTANCE	"New server instance run (on pid: "
 #define	SERVER_PORT_NULL	0
 
+#if	defined(_WIN32) || defined(_WIN64)
+class Instance
+#else
 class Instance: public Fork
+#endif
 {
 public:
 	Instance() = default;
@@ -29,9 +37,15 @@ public:
 	unsigned short getPort() const noexcept;
 	void run();
 	void loop();
+#if	defined(_WIN32) || defined(_WIN64)
+	unsigned int countInstances() const noexcept;
+#endif
 
 private:
 	unsigned short _port = 0;
+#if	defined(_WIN32) || defined(_WIN64)
+	std::vector<std::thread> _instances;
+#endif
 };
 
 #endif	/* !_INSTANCE_HPP_ */

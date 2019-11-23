@@ -36,7 +36,6 @@ set(R_TYPE_CLIENT
 	./src/client/Network.cpp
 	./src/client/Entity.cpp
 )
-
 set(R_TYPE_SERVER
 	# Main file.
 	./src/server/main.cpp
@@ -49,10 +48,16 @@ set(R_TYPE_SERVER
 	./src/server/Server.cpp
 	# Other(s).
 	./src/server/Instance.cpp
-	./src/server/Fork.cpp
 	# Network.
 	./src/NetworkUDP.cpp
 )
+
+if (NOT WIN32)
+	set(R_TYPE_SERVER
+		${R_TYPE_SERVER}
+		./src/server/Fork.cpp
+	)
+endif()
 
 # Find packages.
 find_package(SFML 2 REQUIRED network audio graphics window system)

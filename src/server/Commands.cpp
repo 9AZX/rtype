@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 13:59:47
+** @Last Modified time: 23-11-2019 15:13:12
 */
 
 #include <iostream>
@@ -56,6 +56,7 @@ bool Commands::start(const std::vector<std::string> &args)
 	return true;
 }
 
+#if	!defined(_WIN32) && !defined(_WIN64)
 bool Commands::state() noexcept
 {
 	CLI *cli = dynamic_cast<CLI *>(this);
@@ -66,6 +67,16 @@ bool Commands::state() noexcept
 	}
 	return true;
 }
+#else
+bool Commands::state() noexcept
+{
+	CLI *cli = dynamic_cast<CLI *>(this);
+
+	std::cout << "Number of instance: " << cli->_instance->countInstances();
+	std::cout << std::endl;
+	return true;
+}
+#endif
 
 bool Commands::help() const noexcept
 {
