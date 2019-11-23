@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 15:14:03
+** @Last Modified time: 23-11-2019 15:50:17
 */
 
 #ifndef	_INSTANCE_HPP_
@@ -36,10 +36,10 @@ public:
 	void setPort(unsigned short port) noexcept;
 	unsigned short getPort() const noexcept;
 	void run();
-	void loop();
 #if	defined(_WIN32) || defined(_WIN64)
 	unsigned int countInstances() const noexcept;
 #endif
+	void instance();
 
 private:
 	unsigned short _port = 0;
