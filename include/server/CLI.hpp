@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 23:42:03
+** @Last Modified time: 23-11-2019 13:55:21
 */
 
 #ifndef	_CLI_HPP_
@@ -43,7 +43,7 @@ namespace App
 		bool callCommand(const std::string &str);
 
 	public:
-		std::unique_ptr<Instance> _server = nullptr;
+		std::unique_ptr<Instance> _instance = nullptr;
 
 	private:
 		int _argc = 0;

@@ -6,13 +6,14 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:42:50
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 17:29:18
+** @Last Modified time: 23-11-2019 13:51:14
 */
 
 #ifndef	_FORK_HPP_
 #define	_FORK_HPP_
 
 #include <vector>
+#include <sys/types.h>
 
 #define	FORK_DEBUG	true
 

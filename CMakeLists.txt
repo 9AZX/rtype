@@ -48,7 +48,10 @@ set(R_TYPE_SERVER
 	# Server files.
 	./src/server/Server.cpp
 	# Other(s).
+	./src/server/Instance.cpp
 	./src/server/Fork.cpp
+	# Network.
+	./src/NetworkUDP.cpp
 )
 
 # Find packages.
@@ -82,10 +85,8 @@ add_executable(r-type_server ${R_TYPE_SERVER})
 # Include headers.
 target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}")
 target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}/client")
-target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}/client/render")
 target_include_directories(r-type_server PRIVATE "${INCLUDE_DIR}")
 target_include_directories(r-type_server PRIVATE "${INCLUDE_DIR}/server")
-
 # Link librarie(s).
 target_link_libraries(r-type_client PRIVATE ${CONAN_LIBS})
 target_link_libraries(r-type_server PRIVATE ${CONAN_LIBS})

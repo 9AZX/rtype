@@ -6,10 +6,9 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:58:43
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 17:29:22
+** @Last Modified time: 23-11-2019 13:51:11
 */
 
-#include <sys/types.h>
 #include <unistd.h>
 #include <signal.h>
 #include <iostream>

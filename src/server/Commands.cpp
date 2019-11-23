@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-11-2019 18:01:34
+** @Last Modified time: 23-11-2019 13:59:47
 */
 
 #include <iostream>
@@ -48,16 +48,18 @@ bool Commands::start(const std::vector<std::string> &args)
 		return true;
 	}
 	port = static_cast<unsigned short>(std::atoi(args.front().c_str()));
-	cli->_server->run();
-	std::cout << SERVER_NEW_INSTANCE << cli->_server->getLastPid();
+	cli->_instance->setPort(port);
+	cli->_instance->run();
+	std::cout << SERVER_NEW_INSTANCE << cli->_instance->getLastPid();
 	std::cout << ')' << std::endl;
+	cli->_instance->setPort(SERVER_PORT_NULL);
 	return true;
 }
 
 bool Commands::state() noexcept
 {
 	CLI *cli = dynamic_cast<CLI *>(this);
-	std::vector<pid_t> process = cli->_server->getProcess();
+	std::vector<pid_t> process = cli->_instance->getProcess();
 
 	for (const auto &pid : process) {
 		std::cout << "Server instance: [" << pid << ']' << std::endl;
