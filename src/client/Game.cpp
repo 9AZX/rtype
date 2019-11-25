@@ -32,7 +32,7 @@ void Game::unpack()
 void Game::renderEntities()
 {
     for (size_t i = 0; i < this->_entities.size(); i++) {
-        this->_entities[i]->render(this->_window);        
+        this->_entities[i]->render(this->_window);
     }
 }
 
@@ -44,13 +44,16 @@ void Game::startLoop()
     while (this->_window.isOpen()) {
         // this->_network->receiveData();
         this->unpack();
-        this->renderEntities();
 		while (this->_window.pollEvent(event)) {
+            if (event.type == sf::Event::KeyPressed) {
+                this->_gameEngine->TreatmentEvent(event);
+            }
 			if (event.type == sf::Event::Closed) {
 				this->_window.close();
 			}
             // process events...
 		}
+        this->renderEntities();
         // send events to server...
 	    this->_window.display();
 		this->_window.clear();

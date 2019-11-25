@@ -10,11 +10,15 @@
 
 #include <memory>
 #include <iostream>
+#include <SFML/Graphics.hpp>
+#include <SFML/Window/Keyboard.hpp>
+
 
 class GameEngine {
 	public:
 		GameEngine();
 		~GameEngine();
+		void TreatmentEvent(sf::Event event);
 
 	protected:
 	private:
