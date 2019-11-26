@@ -20,6 +20,10 @@
 #include "Network.hpp"
 #include "Entity.hpp"
 
+
+#define BACKGROUND "assets/background.png"
+
+
 class Game
 {
 public:
@@ -31,6 +35,8 @@ public:
         void unpack();
         void renderEntities();
         void renderMenu();
+        void eventMenu();
+        void displayMenuString();
         std::shared_ptr<GameEngine> getGameEngine() const { return this->_gameEngine; }
 
 protected:
@@ -41,8 +47,10 @@ protected:
         bool _isMenu = true;
         std::string _ip;
         std::string _port;
-
+        std::vector<std::string> gameName;
 private:
+        unsigned int position = 0;
+
 };
 
 #endif /* !GAME_HPP_ */

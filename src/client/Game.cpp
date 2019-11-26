@@ -11,6 +11,9 @@ Game::Game() : _window(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type")
 {
     this->_gameEngine = std::make_shared<GameEngine>();
     this->_window.setFramerateLimit(FRAMERATE_LIMIT);
+    this->gameName.push_back("Start");
+    this->gameName.push_back("Option");
+    this->gameName.push_back("Exit");
 }
 
 Game::~Game()
@@ -37,12 +40,76 @@ void Game::renderEntities()
     }
 }
 
+void Game::eventMenu()
+{
+    sf::Event event;
+
+    while (this->_window.pollEvent(event))
+    {
+        if (event.type == sf::Event::Closed)
+        {
+            this->_window.close();
+        }
+        if (event.type == sf::Event::KeyPressed) {
+            switch(event.key.code) {
+            case sf::Keyboard::W:
+                position = position - 1;
+                if (position == -1)
+                    position = 2;
+                break;
+            case sf::Keyboard::S:
+                position = position + 1;
+                if (position == 3)
+                    position = 0;
+                break;
+            default:
+            break;
+            }
+        }
+    }
+}
+
+void Game::displayMenuString()
+{
+    sf::Font font;
+    unsigned int y = 800;
+
+    if (!font.loadFromFile("assets/font/arial.ttf"))
+    {
+        return;
+    }
+    for (unsigned int idx = 0; idx != gameName.size(); ++idx) {
+        std::string name = gameName[idx].substr(0, gameName[idx].size());
+		sf::Text text(name.c_str(), font, 50);
+		if (idx == position) {
+			text.setFillColor(sf::Color::Red);
+		}
+		text.setPosition(900, y);
+		this->_window.draw(text);
+		y += 70;
+    }
+}
+
 void Game::renderMenu()
 {
-    // Afficher background
-    // Gerer event menu
-    // Afficher boutons
-    // Recuperer inputs (ip, port)
+    sf::Texture texture;
+    sf::Sprite background;
+    //     sf::Sprite sprite2;
+    //     sf::Vector2u test;
+
+    if (!texture.loadFromFile(BACKGROUND))
+    {
+        return;
+    }
+    background.setTexture(texture);
+    background.setPosition(0, 0);
+    _window.draw(background);
+    this->displayMenuString();
+    this->eventMenu();
+    //     // Afficher background
+    //     // Gerer event menu
+    //     // Afficher boutons
+    //     // Recuperer inputs (ip, port)
 }
 
 void Game::startLoop()
