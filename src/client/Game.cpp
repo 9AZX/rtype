@@ -40,48 +40,73 @@ void Game::renderEntities()
     }
 }
 
+void Game::eventPressed()
+{
+    if (event.type == sf::Event::KeyPressed)
+    {
+        switch (event.key.code)
+        {
+        case sf::Keyboard::W:
+            position = position - 1;
+            if (position == -1)
+                position = gameName.size();
+            break;
+        case sf::Keyboard::S:
+            position = position + 1;
+            if (position == gameName.size())
+                position = 0;
+            break;
+        case sf::Keyboard::Return:
+            if (position == 0)
+            {
+                this->_isPlay = true;
+                if (this->_ip.empty() == false)
+                {
+                    this->_isMenu = false;
+                    this->_isPlay = false;
+                }
+            }
+            else if (position == 1)
+                break;
+            if (position == 2)
+                this->_window.close();
+            break;
+        case sf::Keyboard::Escape:
+            this->_window.close();
+            break;
+        default:
+            break;
+        }
+    }
+}
+
+void Game::eventInput()
+{
+    sf::Text playerText;
+
+    if (event.type == sf::Event::TextEntered)
+    {
+        std::cout << "test3" << std::endl;
+        this->_playerInput += event.text.unicode;
+        playerText.setString(this->_playerInput);
+    }
+    this->_ip = this->_playerInput.toAnsiString();
+    playerText.setPosition(100, 100);
+    this->_window.draw(playerText);
+}
+
 void Game::eventMenu()
 {
-    sf::Event event;
-
     while (this->_window.pollEvent(event))
     {
         if (event.type == sf::Event::Closed)
         {
             this->_window.close();
         }
-        if (event.type == sf::Event::KeyPressed)
-        {
-            switch (event.key.code)
-            {
-            case sf::Keyboard::W:
-                position = position - 1;
-                if (position == -1)
-                    position = gameName.size();
-                break;
-            case sf::Keyboard::S:
-                position = position + 1;
-                if (position == gameName.size())
-                    position = 0;
-                break;
-            case sf::Keyboard::Return:
-                if (position == 0)
-                {
-                    this->_isPlay = true;
-                    break;
-                }
-                else if (position == 1)
-                    break;
-                if (position == 2)
-                    this->_window.close();
-                break;
-            case sf::Keyboard::Escape:
-                this->_window.close();
-                break;
-            default:
-                break;
-            }
-        }
+        this->eventPressed();
+        this->eventInput();
+        if (this->_isMenu == false)
+            return;
     }
 }
 
@@ -110,21 +135,9 @@ void Game::displayMenuString()
 
 void Game::displayConnect()
 {
-    sf::Text playerText;
-    sf::Event Input;
 
-    if (Input.type == sf::Event::TextEntered)
-    {
-        if (Input.text.unicode < 128)
-        {
-            playerInput += Input.text.unicode;
-            playerText.setString(playerInput);
-        }
-    }
+    this->eventMenu();
     // _window.draw(playerText);
-    playerText.setPosition(100, 100);
-    playerText.setCharacterSize(50);
-    _window.draw(playerText);
 }
 
 void Game::renderMenu()
@@ -144,7 +157,9 @@ void Game::renderMenu()
     if (!this->_isPlay)
         this->displayMenuString();
     else
+    {
         this->displayConnect();
+    }
     this->eventMenu();
     //     // Afficher background
     //     // Gerer event menu
