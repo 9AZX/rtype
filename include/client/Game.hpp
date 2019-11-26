@@ -20,22 +20,29 @@
 #include "Network.hpp"
 #include "Entity.hpp"
 
-class Game {
-	public:
-		Game();
-		~Game();
+class Game
+{
+public:
+        Game();
+        ~Game();
 
         void initNetwork();
         void startLoop();
         void unpack();
         void renderEntities();
-        std::shared_ptr<GameEngine> getGameEngine() const {return this->_gameEngine;}
-	protected:
+        void renderMenu();
+        std::shared_ptr<GameEngine> getGameEngine() const { return this->_gameEngine; }
+
+protected:
         std::shared_ptr<GameEngine> _gameEngine;
         sf::RenderWindow _window;
         std::unique_ptr<Network> _network;
         std::vector<Entity *> _entities;
-	private:
+        bool _isMenu = true;
+        std::string _ip;
+        std::string _port;
+
+private:
 };
 
 #endif /* !GAME_HPP_ */
