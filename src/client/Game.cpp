@@ -86,9 +86,11 @@ void Game::eventInput()
 
     if (event.type == sf::Event::TextEntered)
     {
-        std::cout << "test3" << std::endl;
-        this->_playerInput += event.text.unicode;
-        playerText.setString(this->_playerInput);
+        if (event.text.unicode < 128)
+        {
+            this->_playerInput += event.text.unicode;
+            playerText.setString(this->_playerInput);
+        }
     }
     this->_ip = this->_playerInput.toAnsiString();
     playerText.setPosition(100, 100);
@@ -144,6 +146,8 @@ void Game::renderMenu()
 {
     sf::Texture texture;
     sf::Sprite background;
+    sf::Texture texture2;
+    sf::Sprite background2;
     //     sf::Sprite sprite2;
     //     sf::Vector2u test;
 
@@ -151,9 +155,17 @@ void Game::renderMenu()
     {
         return;
     }
+    if (!texture2.loadFromFile(LOGO))
+    {
+        return;
+    }
     background.setTexture(texture);
     background.setPosition(0, 0);
+    background2.setTexture(texture2);
+    background2.setPosition(600, 200);
     _window.draw(background);
+    _window.draw(background2);
+
     if (!this->_isPlay)
         this->displayMenuString();
     else

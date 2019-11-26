@@ -21,7 +21,7 @@
 #include "Entity.hpp"
 
 #define BACKGROUND "assets/background.png"
-
+#define LOGO "assets/r_type_logo.png"
 class Game
 {
 public:
@@ -47,7 +47,7 @@ protected:
         std::vector<Entity *> _entities;
         bool _isMenu = true;
         bool _isPlay = false;
-        std::string _ip;
+        std::string _ip = "";
         std::vector<std::string> gameName;
         sf::Event event;
         sf::String _playerInput;
