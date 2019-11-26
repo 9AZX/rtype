@@ -55,11 +55,11 @@ void Game::eventMenu()
             case sf::Keyboard::W:
                 position = position - 1;
                 if (position == -1)
-                    position = 2;
+                    position = gameName.size();
                 break;
             case sf::Keyboard::S:
                 position = position + 1;
-                if (position == 3)
+                if (position == gameName.size())
                     position = 0;
                 break;
             default:
