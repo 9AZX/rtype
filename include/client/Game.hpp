@@ -20,9 +20,7 @@
 #include "Network.hpp"
 #include "Entity.hpp"
 
-
 #define BACKGROUND "assets/background.png"
-
 
 class Game
 {
@@ -37,6 +35,7 @@ public:
         void renderMenu();
         void eventMenu();
         void displayMenuString();
+        void displayConnect();
         std::shared_ptr<GameEngine> getGameEngine() const { return this->_gameEngine; }
 
 protected:
@@ -45,12 +44,14 @@ protected:
         std::unique_ptr<Network> _network;
         std::vector<Entity *> _entities;
         bool _isMenu = true;
+        bool _isPlay = false;
         std::string _ip;
         std::string _port;
         std::vector<std::string> gameName;
+
 private:
         unsigned int position = 0;
-
+        sf::String playerInput;
 };
 
 #endif /* !GAME_HPP_ */

@@ -50,8 +50,10 @@ void Game::eventMenu()
         {
             this->_window.close();
         }
-        if (event.type == sf::Event::KeyPressed) {
-            switch(event.key.code) {
+        if (event.type == sf::Event::KeyPressed)
+        {
+            switch (event.key.code)
+            {
             case sf::Keyboard::W:
                 position = position - 1;
                 if (position == -1)
@@ -62,8 +64,12 @@ void Game::eventMenu()
                 if (position == gameName.size())
                     position = 0;
                 break;
+            case sf::Keyboard::Return:
+                this->_isPlay = true;
+            case sf::Keyboard::Escape:
+                this->_window.close();
             default:
-            break;
+                break;
             }
         }
     }
@@ -78,16 +84,37 @@ void Game::displayMenuString()
     {
         return;
     }
-    for (unsigned int idx = 0; idx != gameName.size(); ++idx) {
+    for (unsigned int idx = 0; idx != gameName.size(); ++idx)
+    {
         std::string name = gameName[idx].substr(0, gameName[idx].size());
-		sf::Text text(name.c_str(), font, 50);
-		if (idx == position) {
-			text.setFillColor(sf::Color::Red);
-		}
-		text.setPosition(900, y);
-		this->_window.draw(text);
-		y += 70;
+        sf::Text text(name.c_str(), font, 50);
+        if (idx == position)
+        {
+            text.setFillColor(sf::Color::Red);
+        }
+        text.setPosition(900, y);
+        this->_window.draw(text);
+        y += 70;
     }
+}
+
+void Game::displayConnect()
+{
+    sf::Text playerText;
+    sf::Event Input;
+
+    if (Input.type == sf::Event::TextEntered)
+    {
+        if (Input.text.unicode < 128)
+        {
+            playerInput += Input.text.unicode;
+            playerText.setString(playerInput);
+        }
+    }
+    // _window.draw(playerText);
+    playerText.setPosition(100, 100);
+    playerText.setCharacterSize(50);
+    _window.draw(playerText);
 }
 
 void Game::renderMenu()
@@ -104,7 +131,10 @@ void Game::renderMenu()
     background.setTexture(texture);
     background.setPosition(0, 0);
     _window.draw(background);
-    this->displayMenuString();
+    if (!this->_isPlay)
+        this->displayMenuString();
+    else
+        this->displayConnect();
     this->eventMenu();
     //     // Afficher background
     //     // Gerer event menu
