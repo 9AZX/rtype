@@ -65,9 +65,19 @@ void Game::eventMenu()
                     position = 0;
                 break;
             case sf::Keyboard::Return:
-                this->_isPlay = true;
+                if (position == 0)
+                {
+                    this->_isPlay = true;
+                    break;
+                }
+                else if (position == 1)
+                    break;
+                if (position == 2)
+                    this->_window.close();
+                break;
             case sf::Keyboard::Escape:
                 this->_window.close();
+                break;
             default:
                 break;
             }
