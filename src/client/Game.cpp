@@ -43,20 +43,19 @@ void Game::renderEntities()
 
 void Game::eventPressed()
 {
+    int size = gameName.size();
     if (event.type == sf::Event::KeyPressed)
     {
         switch (event.key.code)
         {
-        case sf::Keyboard::W:
+        case sf::Keyboard::Up:
             position = position - 1;
-            /* TODO: PAS POSSIBLE D'AVOIR -1 POUR UN "UNSIGNED INT" !
-            if (position == -1)
-                position = gameName.size();
-            */
+            if (position < 0)
+                position = size - 1;
             break;
-        case sf::Keyboard::S:
+        case sf::Keyboard::Down:
             position = position + 1;
-            if (position == gameName.size())
+            if (position == size)
                 position = 0;
             break;
         case sf::Keyboard::Return:
@@ -120,9 +119,10 @@ void Game::eventMenu()
 
 void Game::displayMenuString()
 {
-    unsigned int y = 800;
+    int y = 800;
+    int size = gameName.size();
 
-    for (unsigned int idx = 0; idx != gameName.size(); ++idx)
+    for (int idx = 0; idx != size; ++idx)
     {
         std::string name = gameName[idx].substr(0, gameName[idx].size());
         sf::Text text(name.c_str(), _font, 50);

@@ -54,7 +54,7 @@ protected:
         sf::Font _font;
 
 private:
-        unsigned int position = 0;
+        int position = 0;
 };
 
 #endif /* !GAME_HPP_ */
