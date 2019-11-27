@@ -94,6 +94,8 @@ void Game::eventInput()
                 this->_playerInput += event.text.unicode;
                 playerText.setString(this->_playerInput);
             }
+            if (event.key.code == sf::Keyboard::Return)
+                return;
         }
         this->_ip = this->_playerInput.toAnsiString();
     }
