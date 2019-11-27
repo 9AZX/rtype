@@ -14,6 +14,7 @@ Game::Game() : _window(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type")
     this->gameName.push_back("Start");
     this->gameName.push_back("Option");
     this->gameName.push_back("Exit");
+    this->_font.loadFromFile("assets/font/arial.ttf");
 }
 
 Game::~Game()
@@ -82,19 +83,20 @@ void Game::eventPressed()
 
 void Game::eventInput()
 {
-    sf::Text playerText;
-
-    if (event.type == sf::Event::TextEntered)
+    if (this->_isPlay)
     {
-        if (event.text.unicode < 128)
+        sf::Text playerText(this->_ip, this->_font, 50);
+
+        if (event.type == sf::Event::TextEntered)
         {
-            this->_playerInput += event.text.unicode;
-            playerText.setString(this->_playerInput);
+            if (event.text.unicode < 128)
+            {
+                this->_playerInput += event.text.unicode;
+                playerText.setString(this->_playerInput);
+            }
         }
+        this->_ip = this->_playerInput.toAnsiString();
     }
-    this->_ip = this->_playerInput.toAnsiString();
-    playerText.setPosition(100, 100);
-    this->_window.draw(playerText);
 }
 
 void Game::eventMenu()
@@ -114,17 +116,12 @@ void Game::eventMenu()
 
 void Game::displayMenuString()
 {
-    sf::Font font;
     unsigned int y = 800;
 
-    if (!font.loadFromFile("assets/font/arial.ttf"))
-    {
-        return;
-    }
     for (unsigned int idx = 0; idx != gameName.size(); ++idx)
     {
         std::string name = gameName[idx].substr(0, gameName[idx].size());
-        sf::Text text(name.c_str(), font, 50);
+        sf::Text text(name.c_str(), _font, 50);
         if (idx == position)
         {
             text.setFillColor(sf::Color::Red);
@@ -148,8 +145,7 @@ void Game::renderMenu()
     sf::Sprite background;
     sf::Texture texture2;
     sf::Sprite background2;
-    //     sf::Sprite sprite2;
-    //     sf::Vector2u test;
+    sf::Text playerText(this->_ip, this->_font, 50);
 
     if (!texture.loadFromFile(BACKGROUND))
     {
@@ -166,6 +162,9 @@ void Game::renderMenu()
     _window.draw(background);
     _window.draw(background2);
 
+    playerText.setString(this->_playerInput);
+    playerText.setPosition(800, 600);
+    this->_window.draw(playerText);
     if (!this->_isPlay)
         this->displayMenuString();
     else

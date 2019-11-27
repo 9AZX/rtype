@@ -51,6 +51,7 @@ protected:
         std::vector<std::string> gameName;
         sf::Event event;
         sf::String _playerInput;
+        sf::Font _font;
 
 private:
         unsigned int position = 0;
