@@ -49,8 +49,10 @@ void Game::eventPressed()
         {
         case sf::Keyboard::W:
             position = position - 1;
+            /* TODO: PAS POSSIBLE D'AVOIR -1 POUR UN "UNSIGNED INT" !
             if (position == -1)
                 position = gameName.size();
+            */
             break;
         case sf::Keyboard::S:
             position = position + 1;
