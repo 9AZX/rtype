@@ -6,11 +6,11 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 14:04:38
+** @Last Modified time: 28-11-2019 16:18:04
 */
 
 #include "Server.hpp"
 
-Server::Server(unsigned short port): _port(port)
+Server::Server(unsigned short port) : NetworkUDP(port)
 {
 }

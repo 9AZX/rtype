@@ -52,6 +52,19 @@ set(R_TYPE_SERVER
 	./src/NetworkUDP.cpp
 )
 
+# Class shared between client and server.
+set(R_TYPE_CLIENT
+	${R_TYPE_CLIENT}
+	./src/share/Player.cpp
+	./src/share/Pos.cpp
+)
+set(R_TYPE_SERVER
+	${R_TYPE_SERVER}
+	./src/share/Player.cpp
+	./src/share/Pos.cpp
+)
+
+# Class load only on Linux and Darwin.
 if (NOT WIN32)
 	set(R_TYPE_SERVER
 		${R_TYPE_SERVER}
@@ -90,8 +103,10 @@ add_executable(r-type_server ${R_TYPE_SERVER})
 # Include headers.
 target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}")
 target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}/client")
+target_include_directories(r-type_client PRIVATE "${INCLUDE_DIR}/entity")
 target_include_directories(r-type_server PRIVATE "${INCLUDE_DIR}")
 target_include_directories(r-type_server PRIVATE "${INCLUDE_DIR}/server")
+target_include_directories(r-type_server PRIVATE "${INCLUDE_DIR}/entity")
 # Link librarie(s).
 target_link_libraries(r-type_client PRIVATE ${CONAN_LIBS})
 target_link_libraries(r-type_server PRIVATE ${CONAN_LIBS})

@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-11-2019 00:36:07
+** @Last Modified time: 28-11-2019 16:07:18
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -21,12 +21,13 @@ class NetworkUDP
 public:
 	NetworkUDP() = default;
 	NetworkUDP(unsigned short port);
-	~NetworkUDP();
+	virtual ~NetworkUDP();
 
 public:
 	void setPort(unsigned short port) noexcept;
 	unsigned short getPort() const noexcept;
 	void bind();
+	void listen();
 
 private:
 	sf::UdpSocket _socket;

@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:44:41
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 14:04:57
+** @Last Modified time: 28-11-2019 16:36:19
 */
 
 #ifndef	_SERVER_HPP_
@@ -14,8 +14,9 @@
 
 #include <vector>
 #include <thread>
+#include "NetworkUDP.hpp"
 
-class Server
+class Server: public NetworkUDP
 {
 public:
 	Server() = default;
@@ -23,7 +24,6 @@ public:
 	~Server() = default;
 
 private:
-	unsigned short _port = 0;
 	std::vector<std::thread> _threads;
 };
 

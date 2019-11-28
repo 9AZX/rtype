@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:18:37
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-11-2019 00:56:33
+** @Last Modified time: 28-11-2019 16:17:59
 */
 
 #include <iostream>
@@ -40,4 +40,9 @@ void NetworkUDP::bind()
 	if (this->_status != sf::Socket::Done) {
 		throw Exception(NETWORK_BIND_ERR);
 	}
+}
+
+void NetworkUDP::listen()
+{
+	//NTD
 }
