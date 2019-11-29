@@ -13,7 +13,7 @@
 class Entity
 {
 public:
-	Entity(std::string imgPath, sf::Vector2f pos);
+	Entity(std::string imgPath, float posX, float posY);
 	~Entity();
 
 	void render(sf::RenderWindow &window);
@@ -21,6 +21,8 @@ public:
 protected:
 	std::string _imgPath;
 	sf::Vector2f _pos;
+	int _id;
+
 private:
 };
 

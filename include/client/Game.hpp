@@ -12,6 +12,7 @@
 #define WIN_HEIGHT 1080
 #define FRAMERATE_LIMIT 60
 
+#include <utility>
 #include <memory>
 #include <iostream>
 #include <vector>
@@ -22,15 +23,32 @@
 
 #define BACKGROUND "assets/background.png"
 #define LOGO "assets/r_type_logo.png"
+#define PLAYER1_TEXT "assets/r-typesheet42.gif"
+
 class Game
 {
 public:
         Game();
         ~Game();
 
+        typedef enum entities
+        {
+                PLAYER1,
+                PLAYER2,
+                PLAYER3,
+                PLAYER4,
+                PLAYER_MISSILE,
+                MOB1,
+                MOB2,
+                MOB3,
+                MOB4,
+                ENTITIES_NUMBER
+        } EEntities;
+
         void initNetwork();
         void startLoop();
         void unpack();
+        void initSprites();
         void renderEntities();
         void renderMenu();
         void eventMenu();
@@ -38,13 +56,14 @@ public:
         void displayConnect();
         void eventPressed();
         void eventInput();
-        std::shared_ptr<GameEngine> getGameEngine() const { return this->_gameEngine; }
+        std::shared_ptr<GameEngine> getGameEngine() const;
 
 protected:
         std::shared_ptr<GameEngine> _gameEngine;
         sf::RenderWindow _window;
         std::unique_ptr<Network> _network;
-        std::vector<Entity *> _entities;
+        std::vector<std::unique_ptr<Entity>> _entities;
+        std::vector<std::pair<int, sf::Sprite>> _sprites;
         bool _isMenu = true;
         bool _isPlay = false;
         std::string _ip = "";

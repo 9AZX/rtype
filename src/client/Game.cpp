@@ -21,6 +21,11 @@ Game::~Game()
 {
 }
 
+std::shared_ptr<GameEngine> Game::getGameEngine() const
+{
+    return this->_gameEngine;
+}
+
 void Game::initNetwork()
 {
     this->_network = std::make_unique<Network>();
@@ -30,7 +35,36 @@ void Game::initNetwork()
 void Game::unpack()
 {
     this->_entities
-        .push_back(new Entity("assets/r-typesheet42.gif", sf::Vector2f(100, 100)));
+        .push_back(std::make_unique<Entity>(PLAYER1_TEXT, 100, 100));
+    this->_entities
+        .push_back(std::make_unique<Entity>(PLAYER1_TEXT, 200, 200));
+}
+
+void Game::initSprites()
+{
+    sf::Texture texture;
+    sf::Sprite sprite;
+    std::vector<std::string> _paths = {
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+    };
+
+    for (int i = 0; i < ENTITIES_NUMBER; i++)
+    {
+        if (!texture.loadFromFile(_paths[i]))
+            return;
+        sprite.setTexture(texture);
+        std::cout << "enter " << i << std::endl;
+        this->_sprites.push_back(std::make_pair(i, sprite));
+        std::cout << "out " << i << std::endl;
+    }
 }
 
 void Game::renderEntities()

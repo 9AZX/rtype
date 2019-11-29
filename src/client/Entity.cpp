@@ -7,9 +7,11 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(std::string imgPath, sf::Vector2f pos)
-: _imgPath(imgPath), _pos(pos)
+Entity::Entity(std::string imgPath, float posX, float posY)
+    : _imgPath(imgPath)
 {
+    this->_pos.x = posX;
+    this->_pos.x = posY;
 }
 
 Entity::~Entity()
@@ -25,11 +27,10 @@ void Entity::render(sf::RenderWindow &window)
     if (!texture.loadFromFile(this->_imgPath))
         return;
     test = texture.getSize();
-    sf::IntRect r2(0, 0, test.x/5, test.y/5);
+    sf::IntRect r2(0, 0, test.x / 5, test.y / 5);
     sprite.setTexture(texture);
     sprite.setTextureRect(r2);
     sprite.setScale(2, 2);
     sprite.setPosition(this->_pos.x, this->_pos.y);
-
     window.draw(sprite);
 }
