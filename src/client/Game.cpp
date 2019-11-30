@@ -149,13 +149,24 @@ void Game::displayConnect()
     // _window.draw(playerText);
 }
 
-void Game::renderMenu()
+void Game::playSong()
+{
+    if (!this->_isSong)
+    {
+        if (!this->_music.openFromFile(SONG))
+            return; // erreur
+        this->_music.play();
+        this->_isSong = true;
+        this->_music.setLoop(true);
+    }
+}
+
+void Game::renderEntitiesMenu()
 {
     sf::Texture texture;
     sf::Sprite background;
     sf::Texture texture2;
     sf::Sprite background2;
-    sf::Text playerText(this->_ip, this->_font, 50);
 
     if (!texture.loadFromFile(BACKGROUND))
     {
@@ -171,7 +182,15 @@ void Game::renderMenu()
     background2.setPosition(600, 200);
     _window.draw(background);
     _window.draw(background2);
+}
 
+void Game::renderMenu()
+{
+
+    sf::Text playerText(this->_ip, this->_font, 50);
+
+    this->playSong();
+    this->renderEntitiesMenu();
     playerText.setString(this->_playerInput);
     playerText.setPosition(800, 600);
     this->_window.draw(playerText);
