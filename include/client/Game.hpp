@@ -24,6 +24,7 @@
 #define BACKGROUND "assets/background.png"
 #define LOGO "assets/r_type_logo.png"
 #define SONG "assets/songs/r-type_song.ogg"
+#define FONT "assets/font/arial.ttf"
 class Game
 {
 public:
@@ -57,6 +58,7 @@ protected:
         sf::String _playerInput;
         sf::Font _font;
         bool _isSong = false;
+        std::vector<std::string> _strMenu{"Start", "Exit"};
 
 private:
         int position = 0;
