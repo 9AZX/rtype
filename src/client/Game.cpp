@@ -35,7 +35,6 @@ void Game::unpack()
     static int newUniqueId = 0; // mock entity creation
     if (newUniqueId == 1)
         return;
-    std::cout << newUniqueId << std::endl;
     this->_entities.push_back(std::make_unique<Entity>(PLAYER1, newUniqueId, 100, 100));
     newUniqueId++;
 }
