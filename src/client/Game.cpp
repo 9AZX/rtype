@@ -90,12 +90,19 @@ void Game::eventInput()
 
         if (event.type == sf::Event::TextEntered)
         {
+            if (event.text.unicode == '\b')
+            {
+                std::cout << "test" << std::endl;
+                _playerInput.erase(_playerInput.getSize() - 1);
+                this->_ip = this->_playerInput.toAnsiString();
+                return;
+            }
             if (event.text.unicode < 128)
             {
                 this->_playerInput += event.text.unicode;
                 playerText.setString(this->_playerInput);
             }
-            if (event.key.code == sf::Keyboard::Return)
+            if (event.key.code == sf::Keyboard::BackSpace)
                 return;
         }
         this->_ip = this->_playerInput.toAnsiString();
