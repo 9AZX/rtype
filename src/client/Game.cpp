@@ -92,7 +92,6 @@ void Game::eventInput()
         {
             if (event.text.unicode == '\b')
             {
-                std::cout << "test" << std::endl;
                 _playerInput.erase(_playerInput.getSize() - 1);
                 this->_ip = this->_playerInput.toAnsiString();
                 return;
