@@ -34,10 +34,13 @@ void Game::initNetwork()
 
 void Game::unpack()
 {
-    this->_entities
-        .push_back(std::make_unique<Entity>(PLAYER1_TEXT, 100, 100));
-    this->_entities
-        .push_back(std::make_unique<Entity>(PLAYER1_TEXT, 200, 200));
+    // create
+    static int newUniqueId = 0; // mock entity creation
+    if (newUniqueId == 1)
+        return;
+    std::cout << newUniqueId << std::endl;
+    this->_entities.push_back(std::make_unique<Entity>(PLAYER1, newUniqueId, 100, 100));
+    newUniqueId++;
 }
 
 void Game::initSprites()
@@ -56,22 +59,21 @@ void Game::initSprites()
         PLAYER1_TEXT,
     };
 
-    for (int i = 0; i < ENTITIES_NUMBER; i++)
+    for (int i = 0; i < _paths.size(); i++)
     {
-        if (!texture.loadFromFile(_paths[i]))
+        this->_sprites.insert({i, std::make_pair(texture, sprite)});
+        if (!this->_sprites[i].first.loadFromFile(_paths[i]))
             return;
-        sprite.setTexture(texture);
-        std::cout << "enter " << i << std::endl;
-        this->_sprites.push_back(std::make_pair(i, sprite));
-        std::cout << "out " << i << std::endl;
+        this->_sprites[i].second.setTexture(this->_sprites[i].first);
     }
 }
 
 void Game::renderEntities()
 {
+    std::cout << this->_entities.size() << std::endl;
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
-        this->_entities[i]->render(this->_window);
+        this->_window.draw(this->_sprites[this->_entities[i]->getEntityId()].second);
     }
 }
 
@@ -174,7 +176,6 @@ void Game::displayConnect()
 {
 
     this->eventMenu();
-    // _window.draw(playerText);
 }
 
 void Game::renderMenu()
@@ -246,6 +247,5 @@ void Game::startLoop()
         // send events to server...
         this->_window.display();
         this->_window.clear();
-        this->_entities.clear();
     }
 }

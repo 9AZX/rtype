@@ -16,6 +16,7 @@
 #include <memory>
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 #include <SFML/Graphics.hpp>
 #include "GameEngine.hpp"
 #include "Network.hpp"
@@ -63,7 +64,7 @@ protected:
         sf::RenderWindow _window;
         std::unique_ptr<Network> _network;
         std::vector<std::unique_ptr<Entity>> _entities;
-        std::vector<std::pair<int, sf::Sprite>> _sprites;
+        std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;
         bool _isMenu = true;
         bool _isPlay = false;
         std::string _ip = "";

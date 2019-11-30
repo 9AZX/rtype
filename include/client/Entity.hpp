@@ -13,15 +13,15 @@
 class Entity
 {
 public:
-	Entity(std::string imgPath, float posX, float posY);
+	Entity(int entityId, int uniqueId, float posX, float posY);
 	~Entity();
 
-	void render(sf::RenderWindow &window);
+	int getEntityId() const;
 
 protected:
-	std::string _imgPath;
 	sf::Vector2f _pos;
-	int _id;
+	int _entityId;
+	int _uniqueId;
 
 private:
 };
