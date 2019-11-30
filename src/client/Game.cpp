@@ -11,10 +11,7 @@ Game::Game() : _window(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type")
 {
     this->_gameEngine = std::make_shared<GameEngine>();
     this->_window.setFramerateLimit(FRAMERATE_LIMIT);
-    this->gameName.push_back("Start");
-    this->gameName.push_back("Option");
-    this->gameName.push_back("Exit");
-    this->_font.loadFromFile("assets/font/arial.ttf");
+    this->_font.loadFromFile(FONT);
 }
 
 Game::~Game()
@@ -79,7 +76,7 @@ void Game::renderEntities()
 
 void Game::eventPressed()
 {
-    int size = gameName.size();
+    int size = this->_strMenu.size();
     if (event.type == sf::Event::KeyPressed)
     {
         switch (event.key.code)
@@ -126,12 +123,18 @@ void Game::eventInput()
 
         if (event.type == sf::Event::TextEntered)
         {
+            if (event.text.unicode == '\b')
+            {
+                _playerInput.erase(_playerInput.getSize() - 1);
+                this->_ip = this->_playerInput.toAnsiString();
+                return;
+            }
             if (event.text.unicode < 128)
             {
                 this->_playerInput += event.text.unicode;
                 playerText.setString(this->_playerInput);
             }
-            if (event.key.code == sf::Keyboard::Return)
+            if (event.key.code == sf::Keyboard::BackSpace)
                 return;
         }
         this->_ip = this->_playerInput.toAnsiString();
@@ -156,11 +159,11 @@ void Game::eventMenu()
 void Game::displayMenuString()
 {
     int y = 800;
-    int size = gameName.size();
+    int size = this->_strMenu.size();
 
     for (int idx = 0; idx != size; ++idx)
     {
-        std::string name = gameName[idx].substr(0, gameName[idx].size());
+        std::string name = this->_strMenu[idx].substr(0, this->_strMenu[idx].size());
         sf::Text text(name.c_str(), _font, 50);
         if (idx == position)
         {
@@ -178,13 +181,24 @@ void Game::displayConnect()
     this->eventMenu();
 }
 
-void Game::renderMenu()
+void Game::playSong()
+{
+    if (!this->_isSong)
+    {
+        if (!this->_music.openFromFile(SONG))
+            return;
+        this->_music.play();
+        this->_isSong = true;
+        this->_music.setLoop(true);
+    }
+}
+
+void Game::renderEntitiesMenu()
 {
     sf::Texture texture;
     sf::Sprite background;
     sf::Texture texture2;
     sf::Sprite background2;
-    sf::Text playerText(this->_ip, this->_font, 50);
 
     if (!texture.loadFromFile(BACKGROUND))
     {
@@ -200,7 +214,14 @@ void Game::renderMenu()
     background2.setPosition(600, 200);
     _window.draw(background);
     _window.draw(background2);
+}
 
+void Game::renderMenu()
+{
+
+    sf::Text playerText(this->_ip, this->_font, 50);
+
+    this->renderEntitiesMenu();
     playerText.setString(this->_playerInput);
     playerText.setPosition(800, 600);
     this->_window.draw(playerText);
@@ -224,6 +245,7 @@ void Game::startLoop()
 
     while (this->_window.isOpen())
     {
+        this->playSong();
         if (this->_isMenu)
             this->renderMenu();
         // this->_network->receiveData();

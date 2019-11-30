@@ -21,11 +21,14 @@
 #include "GameEngine.hpp"
 #include "Network.hpp"
 #include "Entity.hpp"
+#include "SFML/Audio.hpp"
 
 #define BACKGROUND "assets/background.png"
 #define LOGO "assets/r_type_logo.png"
 #define PLAYER1_TEXT "assets/r-typesheet42.gif"
 
+#define SONG "assets/songs/r-type_song.ogg"
+#define FONT "assets/font/arial.ttf"
 class Game
 {
 public:
@@ -58,6 +61,8 @@ public:
         void eventPressed();
         void eventInput();
         std::shared_ptr<GameEngine> getGameEngine() const;
+        void renderEntitiesMenu();
+        void playSong();
 
 protected:
         std::shared_ptr<GameEngine> _gameEngine;
@@ -72,9 +77,12 @@ protected:
         sf::Event event;
         sf::String _playerInput;
         sf::Font _font;
+        bool _isSong = false;
+        std::vector<std::string> _strMenu{"Start", "Exit"};
 
 private:
         int position = 0;
+        sf::Music _music;
 };
 
 #endif /* !GAME_HPP_ */
