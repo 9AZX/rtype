@@ -22,3 +22,14 @@ int Entity::getEntityId() const
 {
     return this->_entityId;
 }
+
+void Entity::updatePosition(float x, float y)
+{
+    this->_pos.x = x;
+    this->_pos.y = y;
+}
+
+sf::Vector2f Entity::getPosition() const
+{
+    return this->_pos;
+}

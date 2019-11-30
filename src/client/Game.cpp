@@ -33,10 +33,14 @@ void Game::unpack()
 {
     // create
     static int newUniqueId = 0; // mock entity creation
-    if (newUniqueId == 1)
-        return;
-    this->_entities.push_back(std::make_unique<Entity>(PLAYER1, newUniqueId, 100, 100));
-    newUniqueId++;
+    if (newUniqueId != 2)
+    {
+        this->_entities.push_back(std::make_unique<Entity>(PLAYER1, newUniqueId, 0, 0));
+        newUniqueId++;
+    }
+
+    // update
+    this->_entities[0]->updatePosition(300, 300);
 }
 
 void Game::initSprites()
@@ -55,7 +59,7 @@ void Game::initSprites()
         PLAYER1_TEXT,
     };
 
-    for (int i = 0; i < _paths.size(); i++)
+    for (int i = 0; i < static_cast<int>(_paths.size()); i++)
     {
         this->_sprites.insert({i, std::make_pair(texture, sprite)});
         if (!this->_sprites[i].first.loadFromFile(_paths[i]))
@@ -66,9 +70,15 @@ void Game::initSprites()
 
 void Game::renderEntities()
 {
-    std::cout << this->_entities.size() << std::endl;
+    int entityId;
+    sf::Vector2f pos;
+
+    std::cout << "Number of entities: " << this->_entities.size() << std::endl;
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
+        entityId = this->_entities[i]->getEntityId();
+        pos = this->_entities[i]->getPosition();
+        this->_sprites[entityId].second.setPosition(pos);
         this->_window.draw(this->_sprites[this->_entities[i]->getEntityId()].second);
     }
 }
