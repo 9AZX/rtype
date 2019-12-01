@@ -7,11 +7,11 @@
 
 #include "Game.hpp"
 
-Game::Game() : _window(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type")
+Game::Game() : _window(std::make_shared<sf::RenderWindow>(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type"))
 {
     this->_gameEngine = std::make_shared<GameEngine>();
-    this->_window.setFramerateLimit(FRAMERATE_LIMIT);
-    this->_menu = std::make_unique<Menu>();
+    this->_window->setFramerateLimit(FRAMERATE_LIMIT);
+    this->_menu = std::make_unique<Menu>(this->_window, this->_isMenu);
 }
 
 Game::~Game()
@@ -104,7 +104,7 @@ void Game::renderEntities()
         entityId = this->_entities[i]->getEntityId();
         pos = this->_entities[i]->getPosition();
         this->_sprites[entityId].second.setPosition(pos);
-        this->_window.draw(this->_sprites[this->_entities[i]->getEntityId()].second);
+        this->_window->draw(this->_sprites[this->_entities[i]->getEntityId()].second);
     }
 }
 
@@ -125,19 +125,19 @@ void Game::startLoop()
     std::cout << "Start window" << std::endl;
     sf::Event event;
 
-    while (this->_window.isOpen())
+    while (this->_window->isOpen())
     {
         this->playSong();
         if (this->_isMenu)
         {
-            this->_menu->renderMenu(this->_window, event, this->_isMenu);
+            this->_menu->renderMenu();
         }
         // this->_network->receiveData();
         if (!this->_isMenu)
         {
             this->unpack();
             this->renderEntities();
-            while (this->_window.pollEvent(event))
+            while (this->_window->pollEvent(event))
             {
                 if (event.type == sf::Event::KeyPressed)
                 {
@@ -145,13 +145,13 @@ void Game::startLoop()
                 }
                 if (event.type == sf::Event::Closed)
                 {
-                    this->_window.close();
+                    this->_window->close();
                 }
                 // process events...
             }
         }
         // send events to server...
-        this->_window.display();
-        this->_window.clear();
+        this->_window->display();
+        this->_window->clear();
     }
 }

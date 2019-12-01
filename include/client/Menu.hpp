@@ -20,17 +20,19 @@
 class Menu
 {
 public:
-    Menu();
+    Menu(std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<bool> isMenu);
     ~Menu();
-    void renderMenu(sf::RenderWindow &window, sf::Event &event, bool &isMenu);
-    void eventMenu(sf::RenderWindow &window, sf::Event &event, bool &isMenu);
-    void displayMenuString(sf::RenderWindow &window);
-    void displayConnect(sf::RenderWindow &window, sf::Event &event, bool &isMenu);
-    void eventPressed(sf::RenderWindow &window, sf::Event &event, bool &isMenu);
-    void eventInput(sf::RenderWindow &window, sf::Event &event);
-    void renderEntitiesMenu(sf::RenderWindow &window);
+    void renderMenu();
+    void eventMenu();
+    void displayMenuString();
+    void eventPressed();
+    void eventInput();
+    void renderEntitiesMenu();
 
 protected:
+    std::shared_ptr<sf::RenderWindow> _window;
+    sf::Event _event;
+    std::shared_ptr<bool> _isMenu;
     bool _isPlay = false;
     std::string _ip = "";
     std::vector<std::string> gameName;

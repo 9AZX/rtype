@@ -7,7 +7,8 @@
 
 #include "Menu.hpp"
 
-Menu::Menu()
+Menu::Menu(std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<bool> isMenu)
+    : _window(window), _isMenu(isMenu)
 {
     this->_font.loadFromFile(FONT);
 }
@@ -16,7 +17,7 @@ Menu::~Menu()
 {
 }
 
-void Menu::renderEntitiesMenu(sf::RenderWindow &window)
+void Menu::renderEntitiesMenu()
 {
     sf::Texture texture;
     sf::Sprite background;
@@ -35,11 +36,11 @@ void Menu::renderEntitiesMenu(sf::RenderWindow &window)
     background.setPosition(0, 0);
     logo.setTexture(texture2);
     logo.setPosition(600, 200);
-    window.draw(background);
-    window.draw(logo);
+    this->_window->draw(background);
+    this->_window->draw(logo);
 }
 
-void Menu::displayMenuString(sf::RenderWindow &window)
+void Menu::displayMenuString()
 {
     int y = 800;
     int size = this->_strMenu.size();
@@ -53,64 +54,58 @@ void Menu::displayMenuString(sf::RenderWindow &window)
             text.setFillColor(sf::Color::Red);
         }
         text.setPosition(900, y);
-        window.draw(text);
+        this->_window->draw(text);
         y += 70;
     }
 }
 
-void Menu::displayConnect(sf::RenderWindow &window, sf::Event &event, bool &isMenu)
-{
-
-    this->eventMenu(window, event, isMenu);
-}
-
-void Menu::eventInput(sf::RenderWindow &window, sf::Event &event)
+void Menu::eventInput()
 {
     if (this->_isPlay)
     {
         sf::Text playerText(this->_ip, this->_font, 50);
 
-        if (event.type == sf::Event::TextEntered)
+        if (this->_event.type == sf::Event::TextEntered)
         {
-            if (event.text.unicode == '\b')
+            if (this->_event.text.unicode == '\b')
             {
                 _playerInput.erase(_playerInput.getSize() - 1);
                 this->_ip = this->_playerInput.toAnsiString();
                 return;
             }
-            if (event.text.unicode < 128)
+            if (this->_event.text.unicode < 128)
             {
-                this->_playerInput += event.text.unicode;
+                this->_playerInput += this->_event.text.unicode;
                 playerText.setString(this->_playerInput);
             }
-            if (event.key.code == sf::Keyboard::BackSpace)
+            if (this->_event.key.code == sf::Keyboard::BackSpace)
                 return;
         }
         this->_ip = this->_playerInput.toAnsiString();
     }
 }
 
-void Menu::eventMenu(sf::RenderWindow &window, sf::Event &event, bool &isMenu)
+void Menu::eventMenu()
 {
-    while (window.pollEvent(event))
+    while (this->_window->pollEvent(this->_event))
     {
-        if (event.type == sf::Event::Closed)
+        if (this->_event.type == sf::Event::Closed)
         {
-            window.close();
+            this->_window->close();
         }
-        this->eventPressed(window, event, isMenu);
-        this->eventInput(window, event);
-        if (isMenu == false)
+        this->eventPressed();
+        this->eventInput();
+        if (!this->_isMenu)
             return;
     }
 }
 
-void Menu::eventPressed(sf::RenderWindow &window, sf::Event &event, bool &isMenu)
+void Menu::eventPressed()
 {
     int size = this->_strMenu.size();
-    if (event.type == sf::Event::KeyPressed)
+    if (this->_event.type == sf::Event::KeyPressed)
     {
-        switch (event.key.code)
+        switch (this->_event.key.code)
         {
         case sf::Keyboard::Up:
             position = position - 1;
@@ -128,17 +123,17 @@ void Menu::eventPressed(sf::RenderWindow &window, sf::Event &event, bool &isMenu
                 this->_isPlay = true;
                 if (this->_ip.empty() == false)
                 {
-                    isMenu = false;
+                    this->_isMenu = std::make_shared<bool>(false);
                     this->_isPlay = false;
                 }
             }
             else if (position == 1)
                 break;
             if (position == 2)
-                window.close();
+                this->_window->close();
             break;
         case sf::Keyboard::Escape:
-            window.close();
+            this->_window->close();
             break;
         default:
             break;
@@ -146,19 +141,19 @@ void Menu::eventPressed(sf::RenderWindow &window, sf::Event &event, bool &isMenu
     }
 }
 
-void Menu::renderMenu(sf::RenderWindow &window, sf::Event &event, bool &isMenu)
+void Menu::renderMenu()
 {
     sf::Text playerText(this->_ip, this->_font, 50);
 
-    this->renderEntitiesMenu(window);
+    this->renderEntitiesMenu();
     playerText.setString(this->_playerInput);
     playerText.setPosition(800, 600);
-    window.draw(playerText);
+    this->_window->draw(playerText);
     if (!this->_isPlay)
-        this->displayMenuString(window);
+        this->displayMenuString();
     else
     {
-        this->displayConnect(window, event, isMenu);
+        this->eventMenu();
     }
-    this->eventMenu(window, event, isMenu);
+    this->eventMenu();
 }

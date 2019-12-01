@@ -62,12 +62,12 @@ public:
 
 protected:
         std::shared_ptr<GameEngine> _gameEngine;
-        sf::RenderWindow _window;
+        std::shared_ptr<sf::RenderWindow> _window;
         std::unique_ptr<Network> _network;
         std::unique_ptr<Menu> _menu;
         std::vector<std::unique_ptr<Entity>> _entities;
         std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;
-        bool _isMenu = true;
+        std::shared_ptr<bool> _isMenu = std::make_shared<bool>(true);
         sf::Event event;
         bool _isSong = false;
 
