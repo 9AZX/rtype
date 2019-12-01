@@ -21,7 +21,7 @@ void Menu::renderEntitiesMenu(sf::RenderWindow &window)
     sf::Texture texture;
     sf::Sprite background;
     sf::Texture texture2;
-    sf::Sprite background2;
+    sf::Sprite logo;
 
     if (!texture.loadFromFile(BACKGROUND))
     {
@@ -33,10 +33,10 @@ void Menu::renderEntitiesMenu(sf::RenderWindow &window)
     }
     background.setTexture(texture);
     background.setPosition(0, 0);
-    background2.setTexture(texture2);
-    background2.setPosition(600, 200);
+    logo.setTexture(texture2);
+    logo.setPosition(600, 200);
     window.draw(background);
-    window.draw(background2);
+    window.draw(logo);
 }
 
 void Menu::displayMenuString(sf::RenderWindow &window)
