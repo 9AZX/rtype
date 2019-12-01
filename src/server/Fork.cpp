@@ -6,12 +6,13 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 12:58:43
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 13:51:11
+** @Last Modified time: 01-12-2019 14:03:22
 */
 
 #include <unistd.h>
 #include <signal.h>
 #include <iostream>
+#include <cstring>
 #include <cerrno>
 #include "Fork.hpp"
 #include "Exception.hpp"

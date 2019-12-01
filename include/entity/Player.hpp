@@ -4,9 +4,9 @@
 ** File description:
 ** description
 ** @Author: Cédric Hennequin
-** @Date: 28-11-2019 17:28:06
+** @Date:   28-11-2019 17:28:06
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-11-2019 17:51:59
+** @Last Modified time: 01-12-2019 14:02:01
 */
 
 #ifndef	_PLAYER_HPP_
