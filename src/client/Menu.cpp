@@ -10,34 +10,30 @@
 Menu::Menu(std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<bool> isMenu)
     : _window(window), _isMenu(isMenu)
 {
-    this->_font.loadFromFile(FONT);
+    this->initAssets();
 }
 
 Menu::~Menu()
 {
 }
 
+void Menu::initAssets()
+{
+    if (!this->_font.loadFromFile(FONT)) return;
+    if (!this->_text_background.loadFromFile(BACKGROUND))
+        return;
+    if (!this->_text_logo.loadFromFile(LOGO))
+        return;
+    this->_background.setTexture(this->_text_background);
+    this->_logo.setTexture(this->_text_logo);
+}
+
 void Menu::renderEntitiesMenu()
 {
-    sf::Texture texture;
-    sf::Sprite background;
-    sf::Texture texture2;
-    sf::Sprite logo;
-
-    if (!texture.loadFromFile(BACKGROUND))
-    {
-        return;
-    }
-    if (!texture2.loadFromFile(LOGO))
-    {
-        return;
-    }
-    background.setTexture(texture);
-    background.setPosition(0, 0);
-    logo.setTexture(texture2);
-    logo.setPosition(600, 200);
-    this->_window->draw(background);
-    this->_window->draw(logo);
+    this->_background.setPosition(0, 0);
+    this->_logo.setPosition(600, 200);
+    this->_window->draw(this->_background);
+    this->_window->draw(this->_logo);
 }
 
 void Menu::displayMenuString()

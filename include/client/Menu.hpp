@@ -22,6 +22,8 @@ class Menu
 public:
     Menu(std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<bool> isMenu);
     ~Menu();
+
+    void initAssets();
     void renderMenu();
     void eventMenu();
     void displayMenuString();
@@ -30,6 +32,11 @@ public:
     void renderEntitiesMenu();
 
 protected:
+    sf::Texture _text_background;
+    sf::Sprite _background;
+    sf::Texture _text_logo;
+    sf::Sprite _logo;
+
     std::shared_ptr<sf::RenderWindow> _window;
     sf::Event _event;
     std::shared_ptr<bool> _isMenu;
