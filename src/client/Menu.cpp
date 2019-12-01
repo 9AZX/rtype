@@ -19,7 +19,8 @@ Menu::~Menu()
 
 void Menu::initAssets()
 {
-    if (!this->_font.loadFromFile(FONT)) return;
+    if (!this->_font.loadFromFile(FONT))
+        return;
     if (!this->_text_background.loadFromFile(BACKGROUND))
         return;
     if (!this->_text_logo.loadFromFile(LOGO))
@@ -123,9 +124,10 @@ void Menu::eventPressed()
                 this->_isPlay = false;
             }
             else if (position == 1)
-                break;
-            if (position == 2)
+            {
                 this->_window->close();
+                break;
+            }
             break;
         case sf::Keyboard::Escape:
             this->_window->close();
