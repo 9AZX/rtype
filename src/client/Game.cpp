@@ -128,13 +128,11 @@ void Game::startLoop()
     while (this->_window->isOpen())
     {
         this->playSong();
-        if (this->_isMenu)
-        {
+        if (*(this->_isMenu))
             this->_menu->renderMenu();
-        }
-        // this->_network->receiveData();
-        if (!this->_isMenu)
+        else
         {
+            // this->_network->receiveData();
             this->unpack();
             this->renderEntities();
             while (this->_window->pollEvent(event))

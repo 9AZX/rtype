@@ -103,6 +103,7 @@ void Menu::eventMenu()
 void Menu::eventPressed()
 {
     int size = this->_strMenu.size();
+
     if (this->_event.type == sf::Event::KeyPressed)
     {
         switch (this->_event.key.code)
@@ -119,13 +120,11 @@ void Menu::eventPressed()
             break;
         case sf::Keyboard::Return:
             if (position == 0)
-            {
                 this->_isPlay = true;
-                if (this->_ip.empty() == false)
-                {
-                    this->_isMenu = std::make_shared<bool>(false);
-                    this->_isPlay = false;
-                }
+            if (this->_ip.empty() == false)
+            {
+                *(this->_isMenu) = false;
+                this->_isPlay = false;
             }
             else if (position == 1)
                 break;
