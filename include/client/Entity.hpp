@@ -17,7 +17,7 @@ public:
 	~Entity();
 
 	int getEntityId() const;
-	void updatePosition(float x, float y);
+	void updatePosition(float &x, float &y);
 	sf::Vector2f getPosition() const;
 
 protected:

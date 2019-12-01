@@ -31,16 +31,41 @@ void Game::initNetwork()
 
 void Game::unpack()
 {
-    // create
-    static int newUniqueId = 0; // mock entity creation
-    if (newUniqueId != 2)
-    {
-        this->_entities.push_back(std::make_unique<Entity>(PLAYER1, newUniqueId, 0, 0));
-        newUniqueId++;
-    }
+    // create entity
+    // update entity
+    // delete entity
+}
 
-    // update
-    this->_entities[0]->updatePosition(300, 300);
+void Game::createEntity(int &uniqueId, float &posX, float &posY)
+{
+    this->_entities.push_back(std::make_unique<Entity>(PLAYER1, uniqueId, posX, posY));
+    std::cout << "Entity " << uniqueId << " created." << std::endl;
+}
+
+void Game::updateEntity(int &uniqueId, float &posX, float &posY)
+{
+    for (size_t i = 0; i < this->_entities.size(); i++)
+    {
+        if (this->_entities[i]->getEntityId() == uniqueId)
+        {
+            this->_entities[static_cast<int>(i)]->updatePosition(posX, posY);
+            std::cout << "Entity " << uniqueId << " updated." << std::endl;
+            i = this->_entities.size(); // stop unecessary loop
+        }
+    }
+}
+
+void Game::deleteEntity(int &uniqueId)
+{
+    for (size_t i = 0; i < this->_entities.size(); i++)
+    {
+        if (this->_entities[i]->getEntityId() == uniqueId)
+        {
+            this->_entities.erase(this->_entities.begin() + static_cast<int>(i));
+            std::cout << "Entity " << uniqueId << " deleted." << std::endl;
+            i = this->_entities.size(); // stop unecessary loop
+        }
+    }
 }
 
 void Game::initSprites()

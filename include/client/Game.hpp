@@ -52,6 +52,11 @@ public:
         void initNetwork();
         void startLoop();
         void unpack();
+
+        void createEntity(int &uniqueId, float &posX, float &posY);
+        void updateEntity(int &id, float &posX, float &posY);
+        void deleteEntity(int &id);
+
         void initSprites();
         void renderEntities();
         void renderMenu();
