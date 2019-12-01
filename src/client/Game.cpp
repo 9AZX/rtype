@@ -11,7 +11,7 @@ Game::Game() : _window(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type")
 {
     this->_gameEngine = std::make_shared<GameEngine>();
     this->_window.setFramerateLimit(FRAMERATE_LIMIT);
-    this->_font.loadFromFile(FONT);
+    this->_menu = std::make_unique<Menu>();
 }
 
 Game::~Game()
@@ -108,113 +108,6 @@ void Game::renderEntities()
     }
 }
 
-void Game::eventPressed()
-{
-    int size = this->_strMenu.size();
-    if (event.type == sf::Event::KeyPressed)
-    {
-        switch (event.key.code)
-        {
-        case sf::Keyboard::Up:
-            position = position - 1;
-            if (position < 0)
-                position = size - 1;
-            break;
-        case sf::Keyboard::Down:
-            position = position + 1;
-            if (position == size)
-                position = 0;
-            break;
-        case sf::Keyboard::Return:
-            if (position == 0)
-            {
-                this->_isPlay = true;
-                if (this->_ip.empty() == false)
-                {
-                    this->_isMenu = false;
-                    this->_isPlay = false;
-                }
-            }
-            else if (position == 1)
-                break;
-            if (position == 2)
-                this->_window.close();
-            break;
-        case sf::Keyboard::Escape:
-            this->_window.close();
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-void Game::eventInput()
-{
-    if (this->_isPlay)
-    {
-        sf::Text playerText(this->_ip, this->_font, 50);
-
-        if (event.type == sf::Event::TextEntered)
-        {
-            if (event.text.unicode == '\b')
-            {
-                _playerInput.erase(_playerInput.getSize() - 1);
-                this->_ip = this->_playerInput.toAnsiString();
-                return;
-            }
-            if (event.text.unicode < 128)
-            {
-                this->_playerInput += event.text.unicode;
-                playerText.setString(this->_playerInput);
-            }
-            if (event.key.code == sf::Keyboard::BackSpace)
-                return;
-        }
-        this->_ip = this->_playerInput.toAnsiString();
-    }
-}
-
-void Game::eventMenu()
-{
-    while (this->_window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-        {
-            this->_window.close();
-        }
-        this->eventPressed();
-        this->eventInput();
-        if (this->_isMenu == false)
-            return;
-    }
-}
-
-void Game::displayMenuString()
-{
-    int y = 800;
-    int size = this->_strMenu.size();
-
-    for (int idx = 0; idx != size; ++idx)
-    {
-        std::string name = this->_strMenu[idx].substr(0, this->_strMenu[idx].size());
-        sf::Text text(name.c_str(), _font, 50);
-        if (idx == position)
-        {
-            text.setFillColor(sf::Color::Red);
-        }
-        text.setPosition(900, y);
-        this->_window.draw(text);
-        y += 70;
-    }
-}
-
-void Game::displayConnect()
-{
-
-    this->eventMenu();
-}
-
 void Game::playSong()
 {
     if (!this->_isSong)
@@ -227,51 +120,6 @@ void Game::playSong()
     }
 }
 
-void Game::renderEntitiesMenu()
-{
-    sf::Texture texture;
-    sf::Sprite background;
-    sf::Texture texture2;
-    sf::Sprite background2;
-
-    if (!texture.loadFromFile(BACKGROUND))
-    {
-        return;
-    }
-    if (!texture2.loadFromFile(LOGO))
-    {
-        return;
-    }
-    background.setTexture(texture);
-    background.setPosition(0, 0);
-    background2.setTexture(texture2);
-    background2.setPosition(600, 200);
-    _window.draw(background);
-    _window.draw(background2);
-}
-
-void Game::renderMenu()
-{
-
-    sf::Text playerText(this->_ip, this->_font, 50);
-
-    this->renderEntitiesMenu();
-    playerText.setString(this->_playerInput);
-    playerText.setPosition(800, 600);
-    this->_window.draw(playerText);
-    if (!this->_isPlay)
-        this->displayMenuString();
-    else
-    {
-        this->displayConnect();
-    }
-    this->eventMenu();
-    //     // Afficher background
-    //     // Gerer event menu
-    //     // Afficher boutons
-    //     // Recuperer inputs (ip, port)
-}
-
 void Game::startLoop()
 {
     std::cout << "Start window" << std::endl;
@@ -281,7 +129,9 @@ void Game::startLoop()
     {
         this->playSong();
         if (this->_isMenu)
-            this->renderMenu();
+        {
+            this->_menu->renderMenu(this->_window, event, this->_isMenu);
+        }
         // this->_network->receiveData();
         if (!this->_isMenu)
         {
