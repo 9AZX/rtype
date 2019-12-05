@@ -21,12 +21,10 @@
 #include "GameEngine.hpp"
 #include "Network.hpp"
 #include "Entity.hpp"
-#include "SFML/Audio.hpp"
 #include "Menu.hpp"
 
 #define PLAYER1_TEXT "assets/r-typesheet42.gif"
 
-#define SONG "assets/songs/r-type_song.ogg"
 class Game
 {
 public:
@@ -58,7 +56,6 @@ public:
 
         void initSprites();
         std::shared_ptr<GameEngine> getGameEngine() const;
-        void playSong();
 
 protected:
         std::shared_ptr<GameEngine> _gameEngine;
@@ -69,10 +66,8 @@ protected:
         std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;
         std::shared_ptr<bool> _isMenu = std::make_shared<bool>(true);
         sf::Event event;
-        bool _isSong = false;
 
 private:
-        sf::Music _music;
 };
 
 #endif /* !GAME_HPP_ */

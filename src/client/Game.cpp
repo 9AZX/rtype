@@ -108,18 +108,6 @@ void Game::renderEntities()
     }
 }
 
-void Game::playSong()
-{
-    if (!this->_isSong)
-    {
-        if (!this->_music.openFromFile(SONG))
-            return;
-        this->_music.play();
-        this->_isSong = true;
-        this->_music.setLoop(true);
-    }
-}
-
 void Game::startLoop()
 {
     std::cout << "Start window" << std::endl;
@@ -127,11 +115,11 @@ void Game::startLoop()
 
     while (this->_window->isOpen())
     {
-        this->playSong();
         if (*(this->_isMenu))
             this->_menu->renderMenu();
         else
         {
+            this->_gameEngine->playSong();
             // this->_network->receiveData();
             this->unpack();
             this->renderEntities();
