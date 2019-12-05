@@ -24,10 +24,12 @@ public:
 	void TreatmentEvent(sf::Event event);
 	void songLevel(bool level);
 	void playSong();
+	void songPause();
 
 protected:
 	bool _isSong = false;
 	int _volumeSong = 50;
+	bool _songStatus = true;
 	sf::Music _music;
 
 private:
