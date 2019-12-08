@@ -7,18 +7,20 @@
 
 #include "Game.hpp"
 
-Game::Game() : _window(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type")
+Game::Game() : _window(std::make_shared<sf::RenderWindow>(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type"))
 {
     this->_gameEngine = std::make_shared<GameEngine>();
-    this->_window.setFramerateLimit(FRAMERATE_LIMIT);
-    this->gameName.push_back("Start");
-    this->gameName.push_back("Option");
-    this->gameName.push_back("Exit");
-    this->_font.loadFromFile("assets/font/arial.ttf");
+    this->_window->setFramerateLimit(FRAMERATE_LIMIT);
+    this->_menu = std::make_unique<Menu>(this->_window, this->_isMenu);
 }
 
 Game::~Game()
 {
+}
+
+std::shared_ptr<GameEngine> Game::getGameEngine() const
+{
+    return this->_gameEngine;
 }
 
 void Game::initNetwork()
@@ -29,157 +31,81 @@ void Game::initNetwork()
 
 void Game::unpack()
 {
-    this->_entities
-        .push_back(new Entity("assets/r-typesheet42.gif", sf::Vector2f(100, 100)));
+    // create entity
+    // update entity
+    // delete entity
+}
+
+void Game::createEntity(int &uniqueId, float &posX, float &posY)
+{
+    this->_entities.push_back(std::make_unique<Entity>(PLAYER1, uniqueId, posX, posY));
+    std::cout << "Entity " << uniqueId << " created." << std::endl;
+}
+
+void Game::updateEntity(int &uniqueId, float &posX, float &posY)
+{
+    for (size_t i = 0; i < this->_entities.size(); i++)
+    {
+        if (this->_entities[i]->getEntityId() == uniqueId)
+        {
+            this->_entities[static_cast<int>(i)]->updatePosition(posX, posY);
+            std::cout << "Entity " << uniqueId << " updated." << std::endl;
+            i = this->_entities.size(); // stop unecessary loop
+        }
+    }
+}
+
+void Game::deleteEntity(int &uniqueId)
+{
+    for (size_t i = 0; i < this->_entities.size(); i++)
+    {
+        if (this->_entities[i]->getEntityId() == uniqueId)
+        {
+            this->_entities.erase(this->_entities.begin() + static_cast<int>(i));
+            std::cout << "Entity " << uniqueId << " deleted." << std::endl;
+            i = this->_entities.size(); // stop unecessary loop
+        }
+    }
+}
+
+void Game::initSprites()
+{
+    sf::Texture texture;
+    sf::Sprite sprite;
+    std::vector<std::string> _paths = {
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+        PLAYER1_TEXT,
+    };
+
+    for (int i = 0; i < static_cast<int>(_paths.size()); i++)
+    {
+        this->_sprites.insert({i, std::make_pair(texture, sprite)});
+        if (!this->_sprites[i].first.loadFromFile(_paths[i]))
+            return;
+        this->_sprites[i].second.setTexture(this->_sprites[i].first);
+    }
 }
 
 void Game::renderEntities()
 {
+    int entityId;
+    sf::Vector2f pos;
+
+    std::cout << "Number of entities: " << this->_entities.size() << std::endl;
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
-        this->_entities[i]->render(this->_window);
+        entityId = this->_entities[i]->getEntityId();
+        pos = this->_entities[i]->getPosition();
+        this->_sprites[entityId].second.setPosition(pos);
+        this->_window->draw(this->_sprites[this->_entities[i]->getEntityId()].second);
     }
-}
-
-void Game::eventPressed()
-{
-    if (event.type == sf::Event::KeyPressed)
-    {
-        switch (event.key.code)
-        {
-        case sf::Keyboard::W:
-            position = position - 1;
-            /* TODO: PAS POSSIBLE D'AVOIR -1 POUR UN "UNSIGNED INT" !
-            if (position == -1)
-                position = gameName.size();
-            */
-            break;
-        case sf::Keyboard::S:
-            position = position + 1;
-            if (position == gameName.size())
-                position = 0;
-            break;
-        case sf::Keyboard::Return:
-            if (position == 0)
-            {
-                this->_isPlay = true;
-                if (this->_ip.empty() == false)
-                {
-                    this->_isMenu = false;
-                    this->_isPlay = false;
-                }
-            }
-            else if (position == 1)
-                break;
-            if (position == 2)
-                this->_window.close();
-            break;
-        case sf::Keyboard::Escape:
-            this->_window.close();
-            break;
-        default:
-            break;
-        }
-    }
-}
-
-void Game::eventInput()
-{
-    if (this->_isPlay)
-    {
-        sf::Text playerText(this->_ip, this->_font, 50);
-
-        if (event.type == sf::Event::TextEntered)
-        {
-            if (event.text.unicode < 128)
-            {
-                this->_playerInput += event.text.unicode;
-                playerText.setString(this->_playerInput);
-            }
-            if (event.key.code == sf::Keyboard::Return)
-                return;
-        }
-        this->_ip = this->_playerInput.toAnsiString();
-    }
-}
-
-void Game::eventMenu()
-{
-    while (this->_window.pollEvent(event))
-    {
-        if (event.type == sf::Event::Closed)
-        {
-            this->_window.close();
-        }
-        this->eventPressed();
-        this->eventInput();
-        if (this->_isMenu == false)
-            return;
-    }
-}
-
-void Game::displayMenuString()
-{
-    unsigned int y = 800;
-
-    for (unsigned int idx = 0; idx != gameName.size(); ++idx)
-    {
-        std::string name = gameName[idx].substr(0, gameName[idx].size());
-        sf::Text text(name.c_str(), _font, 50);
-        if (idx == position)
-        {
-            text.setFillColor(sf::Color::Red);
-        }
-        text.setPosition(900, y);
-        this->_window.draw(text);
-        y += 70;
-    }
-}
-
-void Game::displayConnect()
-{
-
-    this->eventMenu();
-    // _window.draw(playerText);
-}
-
-void Game::renderMenu()
-{
-    sf::Texture texture;
-    sf::Sprite background;
-    sf::Texture texture2;
-    sf::Sprite background2;
-    sf::Text playerText(this->_ip, this->_font, 50);
-
-    if (!texture.loadFromFile(BACKGROUND))
-    {
-        return;
-    }
-    if (!texture2.loadFromFile(LOGO))
-    {
-        return;
-    }
-    background.setTexture(texture);
-    background.setPosition(0, 0);
-    background2.setTexture(texture2);
-    background2.setPosition(600, 200);
-    _window.draw(background);
-    _window.draw(background2);
-
-    playerText.setString(this->_playerInput);
-    playerText.setPosition(800, 600);
-    this->_window.draw(playerText);
-    if (!this->_isPlay)
-        this->displayMenuString();
-    else
-    {
-        this->displayConnect();
-    }
-    this->eventMenu();
-    //     // Afficher background
-    //     // Gerer event menu
-    //     // Afficher boutons
-    //     // Recuperer inputs (ip, port)
 }
 
 void Game::startLoop()
@@ -187,16 +113,17 @@ void Game::startLoop()
     std::cout << "Start window" << std::endl;
     sf::Event event;
 
-    while (this->_window.isOpen())
+    while (this->_window->isOpen())
     {
-        if (this->_isMenu)
-            this->renderMenu();
-        // this->_network->receiveData();
-        if (!this->_isMenu)
+        if (*(this->_isMenu))
+            this->_menu->renderMenu();
+        else
         {
+            this->_gameEngine->playSong();
+            // this->_network->receiveData();
             this->unpack();
             this->renderEntities();
-            while (this->_window.pollEvent(event))
+            while (this->_window->pollEvent(event))
             {
                 if (event.type == sf::Event::KeyPressed)
                 {
@@ -204,14 +131,13 @@ void Game::startLoop()
                 }
                 if (event.type == sf::Event::Closed)
                 {
-                    this->_window.close();
+                    this->_window->close();
                 }
                 // process events...
             }
         }
         // send events to server...
-        this->_window.display();
-        this->_window.clear();
-        this->_entities.clear();
+        this->_window->display();
+        this->_window->clear();
     }
 }

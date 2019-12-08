@@ -7,29 +7,29 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(std::string imgPath, sf::Vector2f pos)
-: _imgPath(imgPath), _pos(pos)
+Entity::Entity(int entityId, int uniqueId, float posX, float posY)
+    : _entityId(entityId), _uniqueId(uniqueId)
 {
+    this->_pos.x = posX;
+    this->_pos.y = posY;
 }
 
 Entity::~Entity()
 {
 }
 
-void Entity::render(sf::RenderWindow &window)
+int Entity::getEntityId() const
 {
-    sf::Texture texture;
-    sf::Sprite sprite;
-    sf::Vector2u test;
+    return this->_entityId;
+}
 
-    if (!texture.loadFromFile(this->_imgPath))
-        return;
-    test = texture.getSize();
-    sf::IntRect r2(0, 0, test.x/5, test.y/5);
-    sprite.setTexture(texture);
-    sprite.setTextureRect(r2);
-    sprite.setScale(2, 2);
-    sprite.setPosition(this->_pos.x, this->_pos.y);
+void Entity::updatePosition(float &x, float &y)
+{
+    this->_pos.x = x;
+    this->_pos.y = y;
+}
 
-    window.draw(sprite);
+sf::Vector2f Entity::getPosition() const
+{
+    return this->_pos;
 }

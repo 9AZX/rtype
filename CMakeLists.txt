@@ -35,6 +35,7 @@ set(R_TYPE_CLIENT
 	./src/client/GameEngine.cpp
 	./src/client/Network.cpp
 	./src/client/Entity.cpp
+	./src/client/Menu.cpp
 )
 set(R_TYPE_SERVER
 	# Main file.

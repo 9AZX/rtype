@@ -20,5 +20,6 @@ void App::run()
     std::cout << "Client started." << std::endl;
     this->_game = std::make_unique<Game>();
     this->_game->initNetwork();
+    this->_game->initSprites();
     this->_game->startLoop();
 }
