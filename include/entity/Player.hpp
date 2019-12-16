@@ -13,21 +13,22 @@
 #define _PLAYER_HPP_
 
 #include <string>
-#include "Pos.hpp"
+#include "IEntity.hpp"
 
 using namespace Entity;
 
-namespace Entity
+class Player : public IEntity
 {
-	class Player : public Pos
-	{
-	public:
-		Player();
-		~Player() = default;
+public:
+	Player();
+	~Player();
 
-	private:
-		std::string _ip = "";
-		std::atomic<bool> _connected;
-	};
-}
+private:
+	std::string _ip = "";
+	std::atomic<bool> _connected;
+	std::string _name;
+
+    std::atomic<int> _healthPoints;
+};
+
 #endif	/* !_PLAYER_HPP_ */

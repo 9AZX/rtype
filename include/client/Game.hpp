@@ -37,7 +37,7 @@ public:
                 PLAYER2,
                 PLAYER3,
                 PLAYER4,
-                PLAYER_MISSILE,
+                MISSILE,
                 MOB1,
                 MOB2,
                 MOB3,

@@ -56,13 +56,15 @@ set(R_TYPE_SERVER
 # Class shared between client and server.
 set(R_TYPE_CLIENT
 	${R_TYPE_CLIENT}
-	./src/share/Player.cpp
-	./src/share/Pos.cpp
+	./src/entity/Missile.cpp
+	./src/entity/Mob.cpp
+	./src/entity/Player.cpp
 )
 set(R_TYPE_SERVER
 	${R_TYPE_SERVER}
-	./src/share/Player.cpp
-	./src/share/Pos.cpp
+	./src/entity/Missile.cpp
+	./src/entity/Mob.cpp
+	./src/entity/Player.cpp
 )
 
 # Class load only on Linux and Darwin.
