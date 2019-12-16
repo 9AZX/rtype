@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 15:50:26
+** @Last Modified time: 16-12-2019 14:50:27
 */
 
 #include <memory>
@@ -66,7 +66,11 @@ void Instance::run()
 void Instance::instance()
 {
 	std::unique_ptr<Server> server(new Server(this->_port));
+	std::thread threadNetwork(&Server::network, server.get());
 
+	server->_run = true;
+	server->_threads.push_back(std::move(threadNetwork));
+	server->_threads.back().detach();
 	while (true) {
 		//NTD
 	}

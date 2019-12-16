@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:18:37
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-11-2019 16:17:59
+** @Last Modified time: 16-12-2019 14:46:56
 */
 
 #include <iostream>
@@ -42,7 +42,12 @@ void NetworkUDP::bind()
 	}
 }
 
-void NetworkUDP::listen()
+void NetworkUDP::listen(sf::Packet &packet, sf::IpAddress &remoteAddress, unsigned short &remotePort)
 {
-	//NTD
+	enum sf::Socket::Status type;
+
+	type = this->_socket.receive(packet, remoteAddress, remotePort);
+	if (type != sf::Socket::Done) {
+		return;
+	}
 }
