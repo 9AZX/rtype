@@ -6,12 +6,13 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-11-2019 16:07:18
+** @Last Modified time: 16-12-2019 14:44:07
 */
 
 #ifndef	_NETWORK_UDP_HPP_
 #define	_NETWORK_UDP_HPP_
 
+#include <utility>
 #include <SFML/Network.hpp>
 
 #define NETWORK_BIND_ERR	"An error occured during the bind."
@@ -27,7 +28,7 @@ public:
 	void setPort(unsigned short port) noexcept;
 	unsigned short getPort() const noexcept;
 	void bind();
-	void listen();
+	void listen(sf::Packet &packet, sf::IpAddress &remoteAddress, unsigned short &remotePort);
 
 private:
 	sf::UdpSocket _socket;
