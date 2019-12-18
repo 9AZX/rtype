@@ -47,6 +47,7 @@ set(R_TYPE_SERVER
 	./src/server/Commands.cpp
 	# Server files.
 	./src/server/Server.cpp
+	./src/server/GameServer.cpp
 	# Other(s).
 	./src/server/Instance.cpp
 	# Network.

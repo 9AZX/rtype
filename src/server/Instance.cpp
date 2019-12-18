@@ -13,14 +13,15 @@
 #include "Instance.hpp"
 #include "Server.hpp"
 
-Instance::Instance(unsigned short port): _port(port)
+Instance::Instance(unsigned short port) : _port(port)
 {
 }
 
-#if	!defined(_WIN32) && !defined(_WIN64)
+#if !defined(_WIN32) && !defined(_WIN64)
 Instance::~Instance()
 {
-	if (this->isParent()) {
+	if (this->isParent())
+	{
 		this->kill();
 	}
 }
@@ -40,7 +41,7 @@ unsigned short Instance::getPort() const noexcept
 	return this->_port;
 }
 
-#if	defined(_WIN32) || defined(_WIN64)
+#if defined(_WIN32) || defined(_WIN64)
 void Instance::run()
 {
 	std::thread threadServer(&Instance::instance, this);
@@ -57,7 +58,8 @@ unsigned int Instance::countInstances() const noexcept
 void Instance::run()
 {
 	this->fork();
-	if (!this->isParent()) {
+	if (!this->isParent())
+	{
 		this->instance();
 	}
 }
@@ -71,7 +73,5 @@ void Instance::instance()
 	server->_run = true;
 	server->_threads.push_back(std::move(threadNetwork));
 	server->_threads.back().detach();
-	while (true) {
-		//NTD
-	}
+	this->gameServ.gameLoop();
 }
