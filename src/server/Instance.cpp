@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 16-12-2019 14:50:27
+** @Last Modified time: 18-12-2019 14:38:34
 */
 
 #include <memory>
@@ -69,6 +69,7 @@ void Instance::instance()
 	std::thread threadNetwork(&Server::network, server.get());
 
 	server->_run = true;
+	server->bind();
 	server->_threads.push_back(std::move(threadNetwork));
 	server->_threads.back().detach();
 	while (true) {

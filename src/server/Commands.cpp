@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   20-11-2019 12:27:45
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 15:13:12
+** @Last Modified time: 18-12-2019 14:51:31
 */
 
 #include <iostream>
@@ -89,8 +89,7 @@ bool Commands::help() const noexcept
 {
 	std::cout << CMD_HELP__1 << std::endl;
 	std::cout << CMD_HELP__2 << std::endl;
-	std::cout << std::endl
-			  << CMD_HELP__3 << std::endl;
+	std::cout << std::endl << CMD_HELP__3 << std::endl;
 	std::cout << CMD_HELP__4 << std::endl;
 	std::cout << CMD_HELP__5 << std::endl;
 	std::cout << CMD_HELP__6 << std::endl;

@@ -6,10 +6,9 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:18:37
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 16-12-2019 14:46:56
+** @Last Modified time: 18-12-2019 14:59:58
 */
 
-#include <iostream>
 #include "NetworkUDP.hpp"
 #include "Exception.hpp"
 
@@ -37,12 +36,17 @@ void NetworkUDP::bind()
 	this->_status = this->_socket.bind(
 		this->_port == 0 ? sf::Socket::AnyPort : this->_port
 	);
+	if (NETWORK_AUTOMATIC_PORT && this->_status == sf::Socket::Error) {
+		this->_status = this->_socket.bind(sf::Socket::AnyPort);
+	}
 	if (this->_status != sf::Socket::Done) {
 		throw Exception(NETWORK_BIND_ERR);
 	}
+	this->_port = this->_socket.getLocalPort();
 }
 
-void NetworkUDP::listen(sf::Packet &packet, sf::IpAddress &remoteAddress, unsigned short &remotePort)
+void NetworkUDP::listen(sf::Packet &packet, sf::IpAddress &remoteAddress,
+	unsigned short &remotePort) noexcept
 {
 	enum sf::Socket::Status type;
 
