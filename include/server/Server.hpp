@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:44:41
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 16-12-2019 14:49:54
+** @Last Modified time: 18-12-2019 15:07:11
 */
 
 #ifndef	_SERVER_HPP_
@@ -18,6 +18,7 @@
 #include <utility>
 
 #include "NetworkUDP.hpp"
+#include "GameServer.hpp"
 
 class Server: public NetworkUDP
 {
@@ -32,6 +33,7 @@ public:
 public:
 	std::vector< std::thread> _threads;
 	std::atomic<bool> _run;
+	GameServer _game;
 };
 
 #endif	/* !_SERVER_HPP_ */

@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 18-12-2019 15:02:50
+** @Last Modified time: 18-12-2019 15:07:32
 */
 
 #include <memory>
@@ -73,5 +73,5 @@ void Instance::instance()
 	server->bind();
 	server->_threads.push_back(std::move(threadNetwork));
 	server->_threads.back().detach();
-	this->gameServ.gameLoop();
+	server->_game.gameLoop();
 }

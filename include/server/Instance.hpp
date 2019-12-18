@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 15:50:17
+** @Last Modified time: 18-12-2019 15:04:37
 */
 
 #ifndef _INSTANCE_HPP_
@@ -18,8 +18,6 @@
 #include <thread>
 #include <vector>
 #endif
-
-#include "GameServer.hpp"
 
 #define SERVER_NEW_INSTANCE "New server instance run (on pid: "
 #define SERVER_PORT_NULL 0
@@ -49,7 +47,6 @@ private:
 #if defined(_WIN32) || defined(_WIN64)
 	std::vector<std::thread> _instances;
 #endif
-	GameServer gameServ;
 };
 
 #endif /* !_INSTANCE_HPP_ */
