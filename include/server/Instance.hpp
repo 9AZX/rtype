@@ -19,6 +19,8 @@
 #include <vector>
 #endif
 
+#include "GameServer.hpp"
+
 #define SERVER_NEW_INSTANCE "New server instance run (on pid: "
 #define SERVER_PORT_NULL 0
 
@@ -47,6 +49,7 @@ private:
 #if defined(_WIN32) || defined(_WIN64)
 	std::vector<std::thread> _instances;
 #endif
+	GameServer gameServ;
 };
 
 #endif /* !_INSTANCE_HPP_ */
