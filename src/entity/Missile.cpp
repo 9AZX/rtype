@@ -7,8 +7,6 @@
 
 #include "Missile.hpp"
 
-using namespace Entity;
-
 Missile::Missile()
 {
 }

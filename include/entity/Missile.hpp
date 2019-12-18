@@ -10,6 +10,8 @@
 
 #include "IEntity.hpp"
 
+using namespace Entity;
+
 class Missile : public IEntity
 {
 public:
@@ -18,6 +20,7 @@ public:
 
 protected:
     bool _isAlly;
+
 private:
 };
 

@@ -7,8 +7,6 @@
 
 #include "Player.hpp"
 
-using namespace Entity;
-
 Player::Player()
 {
 }

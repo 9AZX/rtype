@@ -7,8 +7,6 @@
 
 #include "Mob.hpp"
 
-using namespace Entity;
-
 Mob::Mob()
 {
 }
