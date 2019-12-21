@@ -16,7 +16,7 @@ class Missile : public IEntity
 {
 public:
     Missile();
-    ~Missile();
+    ~Missile() = default;
 
 protected:
     bool _isAlly;

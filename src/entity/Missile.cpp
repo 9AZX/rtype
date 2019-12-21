@@ -10,7 +10,3 @@
 Missile::Missile()
 {
 }
-
-Missile::~Missile()
-{
-}

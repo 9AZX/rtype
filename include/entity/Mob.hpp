@@ -19,7 +19,7 @@ public:
     ~Mob();
 
 protected:
-    std::atomic<int> _healthPoints;
+    int _healthPoints;
 
 private:
 };
