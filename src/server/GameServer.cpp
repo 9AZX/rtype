@@ -30,7 +30,7 @@ void GameServer::gameLoop()
         // Begin GameLoop
 
         // GameEngine
-        this->checkCollisions();
+        this->_gameEngine->checkCollisions(this->_entities);
 
         // Mob IA
     
@@ -43,20 +43,5 @@ void GameServer::gameLoop()
         ms d = std::chrono::duration_cast<ms>(elapsed_seconds);
         std::this_thread::sleep_for(std::chrono::milliseconds(40) - d);
         std::cout << "finished loop elapsed time: " << d.count() << "ms\n";
-    }
-}
-
-void GameServer::checkCollisions()
-{
-    for (size_t i = 0; i < this->_entities.size(); i++)
-    {
-        for (size_t j = 0; j < this->_entities.size(); j++)
-        {
-            if (i == j) break;
-            if (this->_gameEngine->checkPosition(this->_entities[i], this->_entities[j]) &&
-                this->_gameEngine->checkEntityType(this->_entities[i], this->_entities[j])) {
-                std::cout << "Collision" << std::endl;
-            }
-        }
     }
 }

@@ -28,7 +28,7 @@ private:
 	std::atomic<bool> _connected;
 	std::string _name;
 
-    std::atomic<int> _healthPoints;
+    std::atomic<int> _livesNb;
 };
 
 #endif	/* !_PLAYER_HPP_ */

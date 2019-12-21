@@ -9,6 +9,7 @@
 #define GAMEENGINE_HPP_
 
 #include <iostream>
+#include <vector>
 #include "GameEntity.hpp"
 
 using namespace Entity;
@@ -18,6 +19,7 @@ public:
     GameEngine();
     ~GameEngine() = default;
 
+    void checkCollisions(std::vector<GameEntity> entities);
     bool checkPosition(GameEntity a, GameEntity b) const;
     bool checkEntityType(GameEntity a, GameEntity b) const;
 

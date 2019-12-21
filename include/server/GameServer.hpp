@@ -27,7 +27,6 @@ public:
     ~GameServer();
 
     void gameLoop();
-    void checkCollisions();
 
 protected:
     std::unique_ptr<GameEngine> _gameEngine;
