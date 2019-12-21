@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 16:01:03
+** @Last Modified time: 21-12-2019 17:14:47
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -18,7 +18,17 @@
 #define NETWORK_BIND_ERR	"An error occured during the bind."
 #define	NETWORK_AUTOMATIC_PORT	false
 
-class NetworkUDP
+class NetworkMethods
+{
+public:
+	enum {
+		PACKET_PLAYER,
+		PACKET_ENTITY,
+		PACKET_END
+	};
+};
+
+class NetworkUDP : public NetworkMethods
 {
 public:
 	NetworkUDP() = default;
