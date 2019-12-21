@@ -6,6 +6,7 @@
 */
 
 #include "GameServer.hpp"
+#include "Mob.hpp"
 
 #include <iostream>
 #include <numeric>
@@ -23,12 +24,12 @@ GameServer::~GameServer()
 
 void GameServer::gameLoop()
 {
+    Mob *mob;
     while (true)
     {
         auto start = std::chrono::system_clock::now();
-
         // Begin GameLoop
-
+        mob->Ia();
         // GameEngine
         this->_gameEngine->checkCollisions(this->_entities);
 
