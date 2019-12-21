@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:18:37
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 18-12-2019 14:59:58
+** @Last Modified time: 21-12-2019 16:01:16
 */
 
 #include "NetworkUDP.hpp"
@@ -43,6 +43,11 @@ void NetworkUDP::bind()
 		throw Exception(NETWORK_BIND_ERR);
 	}
 	this->_port = this->_socket.getLocalPort();
+}
+
+void NetworkUDP::block(const bool state)
+{
+	this->_socket.setBlocking(state);
 }
 
 void NetworkUDP::listen(sf::Packet &packet, sf::IpAddress &remoteAddress,

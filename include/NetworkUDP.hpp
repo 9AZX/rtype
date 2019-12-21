@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 18-12-2019 14:58:18
+** @Last Modified time: 21-12-2019 16:01:03
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -29,6 +29,7 @@ public:
 	void setPort(unsigned short port) noexcept;
 	unsigned short getPort() const noexcept;
 	void bind();
+	void block(const bool state);
 	void listen(sf::Packet &packet, sf::IpAddress &remoteAddress,
 		unsigned short &remotePort) noexcept;
 

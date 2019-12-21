@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 18-12-2019 15:07:32
+** @Last Modified time: 21-12-2019 16:57:43
 */
 
 #include <memory>
@@ -69,8 +69,6 @@ void Instance::instance()
 	std::unique_ptr<Server> server(new Server(this->_port));
 	std::thread threadNetwork(&Server::network, server.get());
 
-	server->_run = true;
-	server->bind();
 	server->_threads.push_back(std::move(threadNetwork));
 	server->_threads.back().detach();
 	server->_game.gameLoop();

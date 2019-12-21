@@ -6,17 +6,21 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:44:41
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 18-12-2019 15:07:11
+** @Last Modified time: 21-12-2019 17:09:00
 */
 
 #ifndef	_SERVER_HPP_
 #define	_SERVER_HPP_
 
+#define	SERVER_DEBUG_RECV	false
+
 #include <vector>
 #include <thread>
 #include <atomic>
 #include <utility>
-
+#if defined(SERVER_DEBUG_RECV) && SERVER_DEBUG_RECV == true
+#include <iostream>
+#endif
 #include "NetworkUDP.hpp"
 #include "GameServer.hpp"
 
@@ -29,6 +33,9 @@ public:
 
 public:
 	void network();
+#if defined(SERVER_DEBUG_RECV) && SERVER_DEBUG_RECV == true
+	void networkDebug(const sf::IpAddress &addr, const unsigned short port);
+#endif
 
 public:
 	std::vector< std::thread> _threads;

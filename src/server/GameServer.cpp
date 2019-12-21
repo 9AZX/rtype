@@ -33,7 +33,7 @@ void GameServer::gameLoop()
         this->_gameEngine->checkCollisions(this->_entities);
 
         // Mob IA
-    
+
         // Check game over
 
         // End GameLoop
@@ -42,6 +42,6 @@ void GameServer::gameLoop()
         std::chrono::duration<double> elapsed_seconds = end - start;
         ms d = std::chrono::duration_cast<ms>(elapsed_seconds);
         std::this_thread::sleep_for(std::chrono::milliseconds(40) - d);
-        std::cout << "finished loop elapsed time: " << d.count() << "ms\n";
+        //std::cout << "finished loop elapsed time: " << d.count() << "ms\n";
     }
 }
