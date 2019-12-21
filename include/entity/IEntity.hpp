@@ -9,6 +9,7 @@
 #define IENTITY_HPP_
 
 #include <atomic>
+#include <iostream>
 
 namespace Entity
 {
