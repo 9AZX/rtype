@@ -13,7 +13,8 @@
 #include <ctime>
 #include <thread>
 #include <vector>
-#include "IEntity.hpp"
+#include "GameEntity.hpp"
+#include "GameEngine.hpp"
 
 typedef std::chrono::milliseconds ms;
 
@@ -27,11 +28,10 @@ public:
 
     void gameLoop();
     void checkCollisions();
-    bool checkPosition(size_t i, size_t j) const;
-    bool checkEntityType(size_t i, size_t j) const;
 
 protected:
-    std::vector<IEntity> _entities;
+    std::unique_ptr<GameEngine> _gameEngine;
+    std::vector<GameEntity> _entities;
 private:
 };
 

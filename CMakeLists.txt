@@ -50,6 +50,7 @@ set(R_TYPE_SERVER
 	./src/server/GameServer.cpp
 	# Other(s).
 	./src/server/Instance.cpp
+	./src/server/GameEngine.cpp
 	# Network.
 	./src/NetworkUDP.cpp
 )

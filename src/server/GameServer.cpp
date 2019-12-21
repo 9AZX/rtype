@@ -14,6 +14,7 @@ using namespace Entity;
 
 GameServer::GameServer()
 {
+    this->_gameEngine = std::make_unique<GameEngine>();
 }
 
 GameServer::~GameServer()
@@ -26,9 +27,16 @@ void GameServer::gameLoop()
     {
         auto start = std::chrono::system_clock::now();
 
-        // <GameLoop>
+        // Begin GameLoop
+
+        // GameEngine
         this->checkCollisions();
-        // </GameLoop>
+
+        // Mob IA
+    
+        // Check game over
+
+        // End GameLoop
 
         auto end = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsed_seconds = end - start;
@@ -45,24 +53,10 @@ void GameServer::checkCollisions()
         for (size_t j = 0; j < this->_entities.size(); j++)
         {
             if (i == j) break;
-            if (this->checkPosition(i, j)) {
+            if (this->_gameEngine->checkPosition(this->_entities[i], this->_entities[j]) &&
+                this->_gameEngine->checkEntityType(this->_entities[i], this->_entities[j])) {
                 std::cout << "Collision" << std::endl;
             }
         }
     }
-}
-
-bool GameServer::checkPosition(size_t i, size_t j) const
-{
-    if (this->_entities[i].getPosX() == this->_entities[j].getPosY()
-        && this->_entities[i].getPosY() == this->_entities[j].getPosY()) {
-            return true;
-    } else return false;
-}
-
-bool GameServer::checkEntityType(size_t i, size_t j) const
-{
-    if (this->_entities[i].getType() == this->_entities[j].getType()) {
-                return true;
-    } else return false;
 }
