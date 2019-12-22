@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 17:15:05
+** @Last Modified time: 22-12-2019 17:18:17
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -22,6 +22,7 @@ class NetworkMethods
 {
 public:
 	enum {
+		PACKET_PLAYER_NEW,
 		PACKET_PLAYER,
 		PACKET_ENTITY,
 		PACKET_END

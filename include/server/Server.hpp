@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:44:41
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 17:09:00
+** @Last Modified time: 22-12-2019 17:42:09
 */
 
 #ifndef	_SERVER_HPP_
@@ -36,6 +36,9 @@ public:
 #if defined(SERVER_DEBUG_RECV) && SERVER_DEBUG_RECV == true
 	void networkDebug(const sf::IpAddress &addr, const unsigned short port);
 #endif
+
+private:
+	void extract(sf::Packet &packet);
 
 public:
 	std::vector< std::thread> _threads;

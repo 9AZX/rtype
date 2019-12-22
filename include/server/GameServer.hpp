@@ -15,23 +15,25 @@
 #include <vector>
 #include "GameEntity.hpp"
 #include "GameEngine.hpp"
-
-typedef std::chrono::milliseconds ms;
+#include "Player.hpp"
 
 using namespace Entity;
+
+using ms = std::chrono::milliseconds;
 
 class GameServer
 {
 public:
-    GameServer();
-    ~GameServer();
+	GameServer();
+	~GameServer();
 
-    void gameLoop();
+public:
+	void gameLoop();
 
-protected:
-    std::unique_ptr<GameEngine> _gameEngine;
-    std::vector<GameEntity> _entities;
-private:
+public:
+	std::unique_ptr<GameEngine> _gameEngine;
+	std::vector<Player> _players;
+	std::vector<GameEntity> _entities;
 };
 
 #endif /* !GAMESERVER_HPP_ */
