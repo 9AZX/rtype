@@ -31,9 +31,11 @@ void Mob::Ia()
 
 void Mob::shootingTime()
 {
+    int num;
+
     if (this->_movements >= this->_lastShoot + 100)
     {
-        int num = rand() % 2;
+        num = rand() % 2;
         if (num == 1)
         {
             std::cout << "shoot" << std::endl;
@@ -49,11 +51,8 @@ void Mob::path(int path)
         if (this->_posY <= 1080)
             this->_posY += 10;
     }
-    else
-    {
-        if (this->_posY >= 0)
-            this->_posY -= 10;
-    }
+    if (this->_posY >= 0)
+        this->_posY -= 10;
 }
 
 void Mob::move(float x, float y)
