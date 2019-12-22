@@ -13,10 +13,17 @@ GameEntity::GameEntity()
 
 void GameEntity::move(float x, float y)
 {
-    std::cout << "Move entity " << this->_id << std::endl;
+    if (!this->positionLimits(this->_posX + x, this->_posY)) {
+        this->_posX += x;
+        this->_posY += y;
+    }
+}
 
-    this->_posX += x;
-    this->_posY += y;
+bool GameEntity::positionLimits(float x, float y) const
+{
+    if (x > 1920 || x < 0 || y > 1920 || y < 0)
+        return true;
+    return false;
 }
 
 float GameEntity::getPosX() const

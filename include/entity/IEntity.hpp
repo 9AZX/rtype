@@ -35,6 +35,7 @@ class IEntity
         virtual ~IEntity() = default;
 
         virtual void move(float, float) = 0;
+        virtual bool positionLimits(float x, float y) const = 0;
 
         virtual float getPosX() const = 0;
         virtual float getPosY() const = 0;
@@ -45,6 +46,7 @@ class IEntity
         float _posY;
         int _id;
         e_type _type;
+        bool _removeEntity = false;
 
     private:
 };

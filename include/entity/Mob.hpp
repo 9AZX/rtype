@@ -16,22 +16,20 @@ class Mob : public IEntity
 {
 public:
     Mob();
-    ~Mob();
-    void Ia();
+    ~Mob() = default;
+
+    void ia();
 
     void move(float x, float y) final;
-    void path(int path);
-    void shootingTime();
+    bool positionLimits(float x, float y) const final;
 
     float getPosX() const final;
     float getPosY() const final;
     e_type getType() const final;
 
 protected:
-    int _healthPoints;
-    int _movements = 0;
-    int _lastMovements = 0;
-    int _lastShoot = 0;
+    int _loopCount = 0;
+    bool _isShooting = false;
 
 private:
 };

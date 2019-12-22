@@ -19,6 +19,7 @@ public:
 	~GameEntity() = default;
 
     void move(float x, float y) final;
+    bool positionLimits(float x, float y) const override;
 
     float getPosX() const final;
     float getPosY() const final;
