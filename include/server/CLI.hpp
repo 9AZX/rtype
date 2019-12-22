@@ -6,15 +6,15 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:15:28
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-11-2019 13:55:21
+** @Last Modified time: 22-12-2019 17:24:30
 */
 
 #ifndef	_CLI_HPP_
 #define	_CLI_HPP_
 
-#include <functional>
-#include <memory>
 #include <map>
+#include <memory>
+#include <functional>
 #include "Commands.hpp"
 #include "Instance.hpp"
 

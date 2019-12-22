@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 17:14:47
+** @Last Modified time: 22-12-2019 17:59:22
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -16,12 +16,14 @@
 #include <SFML/Network.hpp>
 
 #define NETWORK_BIND_ERR	"An error occured during the bind."
+#define	NETWORK_MIN_SIZE	4
 #define	NETWORK_AUTOMATIC_PORT	false
 
 class NetworkMethods
 {
 public:
 	enum {
+		PACKET_PLAYER_NEW,
 		PACKET_PLAYER,
 		PACKET_ENTITY,
 		PACKET_END
@@ -42,6 +44,8 @@ public:
 	void block(const bool state);
 	void listen(sf::Packet &packet, sf::IpAddress &remoteAddress,
 		unsigned short &remotePort) noexcept;
+	bool send(sf::Packet &packet, sf::IpAddress &remoteAddress,
+		unsigned short &remotePort);
 
 private:
 	sf::UdpSocket _socket;

@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 16:57:43
+** @Last Modified time: 21-12-2019 23:56:08
 */
 
 #include <memory>
@@ -20,8 +20,7 @@ Instance::Instance(unsigned short port) : _port(port)
 #if !defined(_WIN32) && !defined(_WIN64)
 Instance::~Instance()
 {
-	if (this->isParent())
-	{
+	if (this->isParent()) {
 		this->kill();
 	}
 }
