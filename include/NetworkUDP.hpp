@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 17:18:17
+** @Last Modified time: 22-12-2019 17:46:18
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -17,6 +17,7 @@
 
 #define NETWORK_BIND_ERR	"An error occured during the bind."
 #define	NETWORK_AUTOMATIC_PORT	false
+#define	NETWORK_MIN_SIZE	4
 
 class NetworkMethods
 {

@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 17:43:28
+** @Last Modified time: 22-12-2019 17:46:31
 */
 
 #include <iostream>
@@ -30,7 +30,7 @@ void Server::network()
 		#if defined(SERVER_DEBUG_RECV) && SERVER_DEBUG_RECV == true
 		this->networkDebug(remoteAddress, remotePort);
 		#endif
-		if (packet.getDataSize() <= 4) {
+		if (packet.getDataSize() <= NETWORK_MIN_SIZE) {
 			continue;
 		}
 		this->extract(packet);
