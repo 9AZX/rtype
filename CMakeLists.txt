@@ -63,7 +63,7 @@ set(R_TYPE_CLIENT
 	./src/entity/Mob.cpp
 	./src/entity/Player.cpp
 	)
-	set(R_TYPE_SERVER
+set(R_TYPE_SERVER
 	${R_TYPE_SERVER}
 	./src/entity/GameEntity.cpp
 	./src/entity/Missile.cpp

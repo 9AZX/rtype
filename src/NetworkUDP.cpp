@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:18:37
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 16:01:16
+** @Last Modified time: 22-12-2019 17:15:01
 */
 
 #include "NetworkUDP.hpp"
@@ -59,4 +59,16 @@ void NetworkUDP::listen(sf::Packet &packet, sf::IpAddress &remoteAddress,
 	if (type != sf::Socket::Done) {
 		return;
 	}
+}
+
+bool NetworkUDP::send(sf::Packet &packet, sf::IpAddress &remoteAddress,
+	unsigned short &remotePort)
+{
+	enum sf::Socket::Status type = this->_socket.send(
+		packet,
+		remoteAddress,
+		remotePort
+	);
+
+	return type == sf::Socket::Done ? true : false;
 }

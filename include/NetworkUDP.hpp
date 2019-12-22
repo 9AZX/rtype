@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 17:14:47
+** @Last Modified time: 22-12-2019 17:15:05
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -42,6 +42,8 @@ public:
 	void block(const bool state);
 	void listen(sf::Packet &packet, sf::IpAddress &remoteAddress,
 		unsigned short &remotePort) noexcept;
+	bool send(sf::Packet &packet, sf::IpAddress &remoteAddress,
+		unsigned short &remotePort);
 
 private:
 	sf::UdpSocket _socket;
