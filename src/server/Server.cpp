@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 17:46:31
+** @Last Modified time: 22-12-2019 18:00:15
 */
 
 #include <iostream>
@@ -31,9 +31,11 @@ void Server::network()
 		this->networkDebug(remoteAddress, remotePort);
 		#endif
 		if (packet.getDataSize() <= NETWORK_MIN_SIZE) {
+			packet.clear();
 			continue;
 		}
 		this->extract(packet);
+		packet.clear();
 	} while (this->_run);
 }
 
@@ -52,9 +54,12 @@ void Server::extract(sf::Packet &packet)
 	do {
 		packet >> type;
 		switch (type) {
+			case NetworkMethods::PACKET_PLAYER_NEW:
+				break;
 			case NetworkMethods::PACKET_END:
 				break;
 			default:
+				type = NetworkMethods::PACKET_END;
 				break;
 		};
 	} while (type != NetworkMethods::PACKET_END);
