@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 18:00:15
+** @Last Modified time: 22-12-2019 18:10:50
 */
 
 #include <iostream>
@@ -55,6 +55,7 @@ void Server::extract(sf::Packet &packet)
 		packet >> type;
 		switch (type) {
 			case NetworkMethods::PACKET_PLAYER_NEW:
+				this->_game.addPlayer(packet);
 				break;
 			case NetworkMethods::PACKET_END:
 				break;

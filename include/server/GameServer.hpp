@@ -13,6 +13,7 @@
 #include <ctime>
 #include <thread>
 #include <vector>
+#include <SFML/Network.hpp>
 #include "GameEntity.hpp"
 #include "GameEngine.hpp"
 #include "Player.hpp"
@@ -25,10 +26,11 @@ class GameServer
 {
 public:
 	GameServer();
-	~GameServer();
+	~GameServer() = default;
 
 public:
 	void gameLoop();
+	void addPlayer(sf::Packet &packet) noexcept;
 
 public:
 	std::unique_ptr<GameEngine> _gameEngine;
