@@ -19,13 +19,14 @@ public:
 	~GameEntity() = default;
 
 public:
-	void move(const float x, const float y) noexcept final;
 	const std::atomic<float> &getPosX() const noexcept final;
 	void setPosX(const float x) noexcept final;
 	const std::atomic<float> &getPosY() const noexcept final;
 	void setPosY(const float y) noexcept final;
 	const std::atomic<int> &getType() const noexcept final;
 	void setType(type type) noexcept final;
+	void move(const float x, const float y) noexcept final;
+	bool limits(const float x, const float y) const noexcept final;
 
 private:
 	std::atomic<float> _posX;

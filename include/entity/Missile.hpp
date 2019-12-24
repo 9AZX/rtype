@@ -15,8 +15,10 @@ using namespace Entity;
 class Missile : public IEntity
 {
 public:
-    Missile();
+    Missile(bool isAlly);
     ~Missile() = default;
+
+    bool positionLimits(float x, float y) const final;
 
 protected:
     bool _isAlly;

@@ -9,20 +9,21 @@
 #define	_GAME_ENGINE_HPP_
 
 #include <vector>
-#include "GameEntity.hpp"
+#include "GameServer.hpp"
 
 using namespace Entity;
 
-class GameEngine
+class GameEngine : public GameServer
 {
 public:
 	GameEngine();
 	~GameEngine() = default;
 
 public:
-	void checkCollisions(std::vector<GameEntity> &entities);
-	bool checkPosition(GameEntity &a, GameEntity &b) const;
-	bool checkEntityType(GameEntity &a, GameEntity &b) const;
+	void checkCollisions();
+	bool checkPosition(size_t i, size_t j) const;
+	bool checkEntityType(size_t i, size_t j) const;
+	void mobIA(size_t i);
 };
 
 #endif	/* !_GAME_ENGINE_HPP_ */

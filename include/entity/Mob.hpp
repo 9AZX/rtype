@@ -28,6 +28,8 @@ private:
 	int _movements = 0;
 	int _lastMovements = 0;
 	int _lastShoot = 0;
+	int _loopCount = 0;
+	bool _isShooting = false;
 };
 
 #endif /* !MOB_HPP_ */

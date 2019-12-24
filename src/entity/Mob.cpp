@@ -10,17 +10,12 @@
 
 void Mob::Ia()
 {
-	int num = std::rand() % 2;
-
-	if (this->_lastMovements + 15 == this->_movements) {
-		if (this->getPosY() <= 0) {
-			this->setPosY(500);
-		}
-		this->_lastMovements = this->_movements;
-		this->path(num);
-		this->shootingTime();
+	if (this->_loopCount % 10 == 0) {
+		this->move(0, std::rand() % 2 == 0 ? 15 : -15);
 	}
-	_movements += 1;
+	if (this->_loopCount % 5 == 0) {
+		this->_isShooting = std::rand() % 2 == 0 ? true : false;
+	}
 }
 
 void Mob::shootingTime()

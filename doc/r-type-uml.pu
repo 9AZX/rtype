@@ -1,0 +1,355 @@
+
+class App {
+    +App();
+	+~App();
+	+void run();
+    #std::unique_ptr<Game> _game;
+}
+
+class Entity{
+	+ Entity(int entityId, int uniqueId, float posX, float posY);;
+	+ ~Entity();
+    +int getEntityId() const;
+	+void updatePosition(float &x, float &y);
+	+sf::Vector2f getPosition() const;
+    #sf::Vector2f _pos;
+	#int _entityId;
+	#int _uniqueId;
+
+}
+
+class Game{
+	+void initNetwork();
+    +void startLoop();
+    +void unpack();
+    +void renderEntities();
+    +void createEntity(int &uniqueId, float &posX, float &posY);
+    +void updateEntity(int &id, float &posX, float &posY);
+    +void deleteEntity(int &id);
+    +void initSprites();
+    +std::shared_ptr<GameEngine> getGameEngine() const;
+
+    #std::shared_ptr<GameEngine> _gameEngine;
+    #std::shared_ptr<sf::RenderWindow> _window;
+    #std::unique_ptr<Network> _network;
+    #std::unique_ptr<Menu> _menu;
+    #std::vector<std::unique_ptr<Entity>> _entities;
+    #std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;
+    #std::shared_ptr<bool> _isMenu = std::make_shared<bool>(true);
+    #sf::Event event;
+
+}
+enum EEntities{
+    PLAYER1
+    PLAYER2
+    PLAYER3
+    PLAYER4
+    MISSILE
+    MOB1
+    MOB2
+    MOB3
+    MOB4
+    ENTITIES_NUMBER
+}
+
+class GameEngine{
+    +GameEngine();
+	+~GameEngine();
+	+void TreatmentEvent(sf::Event event);
+	+void songLevel(bool level);
+	+void playSong();
+	+void songPause();
+
+    #bool _isSong = false;
+	#int _volumeSong = 50;
+	#bool _songStatus = true;
+	#sf::Music _music;
+}
+
+class Menu{
+    +Menu(std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<bool> isMenu);
+    +~Menu();
+    +void initAssets();
+    +void renderMenu();
+    +void eventMenu();
+    +void displayMenuString();
+    +void eventPressed();
+    +void eventInput();
+    +void renderEntitiesMenu();
+    #sf::Texture _text_background;
+    #sf::Sprite _background;
+    #sf::Texture _text_logo;
+    #sf::Sprite _logo;
+    #std::shared_ptr<sf::RenderWindow> _window;
+    #sf::Event _event;
+    #std::shared_ptr<bool> _isMenu;
+    #bool _isPlay = false;
+    #std::string _ip = "";
+    #std::vector<std::string> gameName;
+    #sf::String _playerInput;
+    #sf::Font _font;
+    #std::vector<std::string> _strMenu{"Start", "Exit"};
+    #int position = 0;
+}
+
+class Network {
+    +Network();
+    +~Network();
+
+    +void bindSocket();
+    +void sendData(const char data[]);
+    +char *receiveData();
+    #sf::UdpSocket _socket;
+}
+
+namespace Entity{
+enum e_type{
+    PLAYER1,
+    PLAYER2,
+    PLAYER3,
+    PLAYER4,
+    MISSILE_ALLY,
+    MISSILE_MOB,
+    MOB1,
+    MOB2,
+    MOB3,
+    MOB4,
+    ENUM_SIZE
+}
+
+class IEntity{
+        +IEntity() = default;
+        +virtual ~IEntity() = default;
+        +virtual void move(float, float) = 0;
+        +virtual bool positionLimits(float x, float y) const = 0;
+        +virtual float getPosX() const = 0;
+        +virtual float getPosY() const = 0;
+        +virtual e_type getType() const = 0;
+
+        #float _posX;
+        #float _posY;
+        #int _id;
+        #e_type _type;
+        #bool _removeEntity = false;
+}
+class GameServer{
+	+GameServer();
+	+~GameServer() = default;
+	+void gameLoop();
+	+void addPlayer(sf::Packet &packet) noexcept;
+	+std::unique_ptr<GameEngine> _gameEngine;
+	+std::vector<Player> _players;
+	+std::vector<GameEntity> _entities;
+}
+
+class GameEngine{
+    +GameEngine();
+    +~GameEngine() = default;
+
+    +void checkCollisions();
+    +bool checkPosition(size_t i, size_t j) const;
+    +bool checkEntityType(size_t i, size_t j) const;
+    +void mobIA(size_t i);
+}
+
+GameServer --|> GameEngine
+}
+
+class GameEntity{
+	+GameEntity();
+	+~GameEntity() = default;
+
+    +void move(float x, float y) final;
+    +bool positionLimits(float x, float y) const override;
+
+    +float getPosX() const final;
+    +float getPosY() const final;
+    +e_type getType() const final;
+}
+
+
+Entity --|> GameEntity
+
+class Missile{
+    +Missile(bool isAlly);
+    +~Missile() = default;
+    +bool positionLimits(float x, float y) const final;
+    #bool _isAlly;
+}
+Entity --|> Missile
+
+class Mob {
+    +Mob();
+    +~Mob() = default;
+    +void ia();
+    +void move(float x, float y) final;
+    +bool positionLimits(float x, float y) const final;
+    +float getPosX() const final;
+    +float getPosY() const final;
+    +e_type getType() const final;
+    #int _loopCount = 0;
+    #bool _isShooting = false;
+}
+Entity --|> Mob
+
+class Player{
+	+Player();
+	+Player(const std::string &ip, const unsigned short port);
+	+~Player() = default;
+
+	#void setIpAddress(const std::string &address) noexcept;
+	#const std::string &getIpAddress() const noexcept;
+	#void setPort(const unsigned short port) noexcept;
+	#const std::atomic<unsigned short> &getPort() const noexcept;
+	#void setConnected(const bool connected) noexcept;
+	#const std::atomic<bool> &isConnected() const noexcept;
+	#void setId(const int id) noexcept;
+	#const std::atomic<int> &getId() const noexcept;
+	#void setLives(const int lives) noexcept;
+	#const std::atomic<int> &getLives() const noexcept;
+
+	-std::string _ip = "127.0.0.1";
+	-std::atomic<unsigned short> _port;
+	-std::atomic<bool> _connected;
+	-std::atomic<int> _id;
+	-std::atomic<int> _lives;
+}
+
+Entity --|> Player
+
+
+namespace NetworkMethods{
+    enum e_type{
+        PACKET_PLAYER_NEW
+		PACKET_PLAYER
+		PACKET_ENTITY
+		PACKET_END
+        }
+}
+
+class NetworkUDP{
+	+NetworkUDP() = default;
+	+NetworkUDP(unsigned short port);
+	+virtual ~NetworkUDP();
+
+	+void setPort(unsigned short port) noexcept;
+	+unsigned short getPort() const noexcept;
+	+void bind();
+	+void block(const bool state);
+	+void listen(sf::Packet &packet, sf::IpAddress &remoteAddress,unsigned short &remotePort) noexcept;
+	+bool send(sf::Packet &packet, sf::IpAddress &remoteAddress,unsigned short &remotePort);
+
+	-sf::UdpSocket _socket;
+	-unsigned short _port = 0;
+	-sf::Socket::Status _status = sf::Socket::Status::NotReady;
+}
+
+NetworkMethods --|> NetworkUDP
+
+class std::exception {
+
+}
+
+class Exception{
+	+Exception() = default;
+	+Exception(const std::string &msg);
+	+~Exception() = default;
+
+	+const char *what() const noexcept;
+
+	-std::string _msg = "An internal error occured.";
+}
+
+std::exception --|> Exception
+
+
+namespace App{
+	class CLI{
+		+CLI() = default;
+		+CLI(int argc, char **argv);
+		+~CLI() = default;
+		+void launchCLI();
+		+static vecStr explode(const std::string &str, const char delim);
+		-bool callCommand(const std::string &str);
+		+std::unique_ptr<Instance> _instance = nullptr;
+		-int _argc = 0;
+		-std::vector<std::string> _args;
+		-std::vector<std::string> _argv;
+		-const std::map<std::string, int> _cmdList = {
+			{"start", CLI::CMD_START},
+			{"state", CLI::CMD_STATE},
+			{"help", CLI::CMD_HELP},
+			{"exit", CLI::CMD_EXIT}
+		};
+	}
+    class Commands
+	{
+		enum Enum{
+			CMD_START,
+			CMD_STATE,
+			CMD_HELP,
+			CMD_EXIT
+		};
+		+Commands() = default;
+		+virtual ~Commands() = default;
+		+bool dispatcher(const int type, const std::vector<std::string> &args);
+		-bool start(const std::vector<std::string> &args);
+		-bool state() noexcept;
+		-bool help() const noexcept;
+		-bool exit() const noexcept;
+	}
+    Commands --|> CLI
+}
+
+class Fork{
+	Enum{
+		FORK_PARENT
+		FORK_CHILD
+	};
+
+	+Fork() = default;
+	+virtual ~Fork() = default;
+
+	+void fork();
+	+void kill() const;
+	+constexpr void killDebug(const bool state, const pid_t pid) const noexcept;
+	+bool isParent() const noexcept;
+	+std::vector<pid_t> &getProcess() noexcept;
+	+pid_t getLastPid() const noexcept;
+
+	-pid_t _last = 0;
+	-int _fork = FORK_PARENT;
+	-std::vector<pid_t> _process_id;
+}
+
+class Instance{
+	+Instance() = default;
+	+Instance(unsigned short port);
+	+~Instance();
+
+	+void setPort(unsigned short port) noexcept;
+	+unsigned short getPort() const noexcept;
+	+void run();
+	+unsigned int countInstances() const noexcept;
+	+void instance();
+
+	-unsigned short _port = 0;
+	-std::vector<std::thread> _instances;
+}
+
+Fork --|> Instance
+
+
+class Server{
+	+Server() = default;
+	+Server(unsigned short port);
+	+~Server() = default;
+	+void network();
+	+void networkDebug(const sf::IpAddress &addr, const unsigned short port);
+	-void extract(sf::Packet &packet);
+	+std::vector< std::thread> _threads;
+	+std::atomic<bool> _run;
+	+GameServer _game;
+}
+
+NetworkUDP --|> Server
