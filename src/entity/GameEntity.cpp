@@ -9,27 +9,42 @@
 
 GameEntity::GameEntity()
 {
+	this->_posX = 0;
+	this->_posY = 0;
 }
 
-void GameEntity::move(float x, float y)
+void GameEntity::move(const float x, const float y) noexcept
 {
-    std::cout << "Move entity " << this->_id << std::endl;
-
-    this->_posX += x;
-    this->_posY += y;
+	this->_posX = this->_posX + x;
+	this->_posY = this->_posY + y;
 }
 
-float GameEntity::getPosX() const
+const std::atomic<float> &GameEntity::getPosX() const noexcept
 {
-    return this->_posX;
+	return this->_posX;
 }
 
-float GameEntity::getPosY() const
+void GameEntity::setPosX(const float x) noexcept
 {
-    return this->_posY;
+	this->_posX = x;
 }
 
-e_type GameEntity::getType() const
+const std::atomic<float> &GameEntity::getPosY() const noexcept
 {
-    return this->_type;
+	return this->_posY;
+}
+
+void GameEntity::setPosY(const float y) noexcept
+{
+	this->_posY = y;
+}
+
+const std::atomic<int> &GameEntity::getType() const noexcept
+{
+	return this->_type;
+}
+
+void GameEntity::setType(type type) noexcept
+{
+	this->_type = type;
 }

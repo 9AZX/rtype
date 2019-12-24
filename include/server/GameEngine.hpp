@@ -5,26 +5,24 @@
 ** GameEngine
 */
 
-#ifndef GAMEENGINE_HPP_
-#define GAMEENGINE_HPP_
+#ifndef	_GAME_ENGINE_HPP_
+#define	_GAME_ENGINE_HPP_
 
-#include <iostream>
 #include <vector>
 #include "GameEntity.hpp"
 
 using namespace Entity;
 
-class GameEngine {
+class GameEngine
+{
 public:
-    GameEngine();
-    ~GameEngine() = default;
+	GameEngine();
+	~GameEngine() = default;
 
-    void checkCollisions(std::vector<GameEntity> entities);
-    bool checkPosition(GameEntity a, GameEntity b) const;
-    bool checkEntityType(GameEntity a, GameEntity b) const;
-
-protected:
-private:
+public:
+	void checkCollisions(std::vector<GameEntity> &entities);
+	bool checkPosition(GameEntity &a, GameEntity &b) const;
+	bool checkEntityType(GameEntity &a, GameEntity &b) const;
 };
 
-#endif /* !GAMEENGINE_HPP_ */
+#endif	/* !_GAME_ENGINE_HPP_ */

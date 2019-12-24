@@ -5,11 +5,9 @@
 ** GameServer
 */
 
+#include <numeric>
 #include "GameServer.hpp"
 #include "Mob.hpp"
-
-#include <iostream>
-#include <numeric>
 
 using namespace Entity;
 
@@ -44,5 +42,5 @@ void GameServer::gameLoop()
 
 void GameServer::addPlayer(__attribute__((unused)) sf::Packet &packet) noexcept
 {
-	//NTD
+	//this->_players.push_back(Player());
 }

@@ -5,27 +5,33 @@
 ** GameEntity
 */
 
-#ifndef GAME_ENTITY_HPP_
-#define GAME_ENTITY_HPP_
+#ifndef	_GAME_ENTITY_HPP_
+#define	_GAME_ENTITY_HPP_
 
-#include <iostream>
 #include "IEntity.hpp"
 
 using namespace Entity;
 
-class GameEntity : public IEntity {
+class GameEntity : public IEntity
+{
 public:
 	GameEntity();
 	~GameEntity() = default;
 
-    void move(float x, float y) final;
+public:
+	void move(const float x, const float y) noexcept final;
+	const std::atomic<float> &getPosX() const noexcept final;
+	void setPosX(const float x) noexcept final;
+	const std::atomic<float> &getPosY() const noexcept final;
+	void setPosY(const float y) noexcept final;
+	const std::atomic<int> &getType() const noexcept final;
+	void setType(type type) noexcept final;
 
-    float getPosX() const final;
-    float getPosY() const final;
-    e_type getType() const final;
-
-protected:
 private:
+	std::atomic<float> _posX;
+	std::atomic<float> _posY;
+	std::atomic<int> _entityId;
+	std::atomic<int> _type;
 };
 
-#endif /* !GAME_ENTITY_HPP_ */
+#endif	/* !_GAME_ENTITY_HPP_ */

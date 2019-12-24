@@ -5,49 +5,43 @@
 ** IEntity
 */
 
-#ifndef IENTITY_HPP_
-#define IENTITY_HPP_
+#ifndef	_IENTITY_HPP_
+#define	_IENTITY_HPP_
 
 #include <atomic>
-#include <iostream>
 
 namespace Entity
 {
-typedef enum type
-{
-    PLAYER1,
-    PLAYER2,
-    PLAYER3,
-    PLAYER4,
-    MISSILE_ALLY,
-    MISSILE_MOB,
-    MOB1,
-    MOB2,
-    MOB3,
-    MOB4,
-    ENUM_SIZE
-} e_type;
+	enum type
+	{
+		PLAYER1,
+		PLAYER2,
+		PLAYER3,
+		PLAYER4,
+		MISSILE_ALLY,
+		MISSILE_MOB,
+		MOB1,
+		MOB2,
+		MOB3,
+		MOB4,
+		ENUM_SIZE
+	};
 
-class IEntity
-{
-    public:
-        IEntity() = default;
-        virtual ~IEntity() = default;
+	class IEntity
+	{
+	public:
+		IEntity() = default;
+		virtual ~IEntity() = default;
 
-        virtual void move(float, float) = 0;
-
-        virtual float getPosX() const = 0;
-        virtual float getPosY() const = 0;
-        virtual e_type getType() const = 0;
-
-    protected:
-        float _posX;
-        float _posY;
-        int _id;
-        e_type _type;
-
-    private:
-};
+	public:
+		virtual void move(const float x, const float y) noexcept = 0;
+		virtual const std::atomic<float> &getPosX() const noexcept = 0;
+		virtual void setPosX(const float x) noexcept = 0;
+		virtual const std::atomic<float> &getPosY() const noexcept = 0;
+		virtual void setPosY(const float y) noexcept = 0;
+		virtual const std::atomic<int> &getType() const noexcept = 0;
+		virtual void setType(type type) noexcept = 0;
+	};
 }
 
-#endif /* !IENTITY_HPP_ */
+#endif	/* !_IENTITY_HPP_ */

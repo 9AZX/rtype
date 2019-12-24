@@ -9,10 +9,10 @@
 
 Player::Player()
 {
+	this->setPort(PLAYER_DEFAULT_PORT);
 	std::atomic_init(&this->_connected, false);
 	std::atomic_init(&this->_id, -1);
 	std::atomic_init(&this->_lives, PLAYER_DEFAULT_LIVES);
-	this->setPort(PLAYER_DEFAULT_PORT);
 }
 
 Player::Player(const std::string &ip, const unsigned short port)

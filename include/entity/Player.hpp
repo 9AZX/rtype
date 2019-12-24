@@ -6,21 +6,21 @@
 ** @Author: Cédric Hennequin
 ** @Date:   28-11-2019 17:28:06
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 17:27:55
+** @Last Modified time: 23-12-2019 16:58:38
 */
 
 #ifndef	_PLAYER_HPP_
 #define _PLAYER_HPP_
 
 #include <string>
-#include "IEntity.hpp"
+#include "GameEntity.hpp"
 
 #define	PLAYER_DEFAULT_PORT	7777
 #define	PLAYER_DEFAULT_LIVES	4
 
 using namespace Entity;
 
-class Player : public IEntity
+class Player : public GameEntity
 {
 public:
 	Player();
