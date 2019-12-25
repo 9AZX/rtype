@@ -5,8 +5,8 @@
 ** Game
 */
 
-#ifndef GAMESERVER_HPP_
-#define GAMESERVER_HPP_
+#ifndef	_GAME_SERVER_HPP_
+#define	_GAME_SERVER_HPP_
 
 #include <time.h>
 #include <chrono>
@@ -15,7 +15,6 @@
 #include <vector>
 #include <SFML/Network.hpp>
 #include "GameEntity.hpp"
-#include "GameEngine.hpp"
 #include "Player.hpp"
 
 using namespace Entity;
@@ -38,4 +37,4 @@ public:
 	std::vector<GameEntity> _entities;
 };
 
-#endif /* !GAMESERVER_HPP_ */
+#endif	/* !_GAME_SERVER_HPP_ */

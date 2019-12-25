@@ -8,7 +8,6 @@
 #ifndef	_GAME_ENGINE_HPP_
 #define	_GAME_ENGINE_HPP_
 
-#include <vector>
 #include "GameServer.hpp"
 
 using namespace Entity;
