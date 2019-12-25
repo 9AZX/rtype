@@ -5,25 +5,26 @@
 ** Missile
 */
 
-#ifndef MISSILE_HPP_
-#define MISSILE_HPP_
+#ifndef	_MISSILE_HPP_
+#define	_MISSILE_HPP_
 
-#include "IEntity.hpp"
+#include "GameEntity.hpp"
 
 using namespace Entity;
 
-class Missile : public IEntity
+class Missile : public GameEntity
 {
 public:
-    Missile(bool isAlly);
-    ~Missile() = default;
+	Missile() = default;
+	Missile(const bool ally);
+	~Missile() = default;
 
-    bool positionLimits(float x, float y) const final;
-
-protected:
-    bool _isAlly;
+public:
+	void setAlly(const bool ally) noexcept;
+	const std::atomic<bool> &getAlly() const noexcept;
 
 private:
+	std::atomic<bool> _ally;
 };
 
-#endif /* !MISSILE_HPP_ */
+#endif	/* !_MISSILE_HPP_ */

@@ -7,15 +7,17 @@
 
 #include "Missile.hpp"
 
-Missile::Missile(bool isAlly) : _isAlly(isAlly)
+Missile::Missile(const bool ally)
 {
+	std::atomic_init(&this->_ally, ally);
 }
 
-bool GameEntity::positionLimits(float x, float y) const
+void Missile::setAlly(const bool ally) noexcept
 {
-    if (x > 1920 || x < 0 || y > 1920 || y < 0) {
-        this->_removeEntity = true;
-        return true;
-    }
-    return false;
+	this->_ally = ally;
+}
+
+const std::atomic<bool> &Missile::getAlly() const noexcept
+{
+	return this->_ally;
 }
