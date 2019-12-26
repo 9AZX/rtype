@@ -6,6 +6,7 @@
 */
 
 #include "GameEngine.hpp"
+#include <iostream>
 
 using namespace Entity;
 
@@ -15,14 +16,18 @@ GameEngine::GameEngine()
 
 void GameEngine::checkCollisions(std::vector<GameEntity> &entities) noexcept
 {
-	for (size_t i = 0; i < entities.size(); i++) {
-		for (size_t j = 0; j < entities.size(); j++) {
-			if (i == j) break;
+	for (size_t i = 0; i < entities.size(); i++)
+	{
+		for (size_t j = 0; j < entities.size(); j++)
+		{
+			if (i == j)
+				break;
 			if (this->checkPosition(entities[i], entities[j]) &&
-				this->checkEntityType(entities[i], entities[j])) {
+				this->checkEntityType(entities[i], entities[j]))
+			{
 				std::cout << "Collision" << std::endl;
-				entities[i]._removeEntity = true;
-				entities[j]._removeEntity = true;
+				entities[i].setRemoveEntity();
+				entities[j].setRemoveEntity();
 			}
 		}
 	}
@@ -31,8 +36,9 @@ void GameEngine::checkCollisions(std::vector<GameEntity> &entities) noexcept
 bool GameEngine::checkPosition(GameEntity &a, GameEntity &b) const noexcept
 {
 	if (a.getPosX() == b.getPosY() && a.getPosY() == b.getPosY())
-        return true;
-	else return false;
+		return true;
+	else
+		return false;
 }
 
 bool GameEngine::checkEntityType(GameEntity &a, GameEntity &b) const noexcept

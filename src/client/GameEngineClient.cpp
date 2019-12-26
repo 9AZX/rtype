@@ -2,20 +2,20 @@
 ** EPITECH PROJECT, 2019
 ** CPP_rtype_2019
 ** File description:
-** GameEngine
+** GameEngineClient
 */
 
-#include "GameEngine.hpp"
+#include "GameEngineClient.hpp"
 
-GameEngine::GameEngine()
+GameEngineClient::GameEngineClient()
 {
 }
 
-GameEngine::~GameEngine()
+GameEngineClient::~GameEngineClient()
 {
 }
 
-void GameEngine::TreatmentEvent(sf::Event event)
+void GameEngineClient::TreatmentEvent(sf::Event event)
 {
     std::cout << "hol" << std::endl;
     switch (event.key.code)
@@ -52,7 +52,7 @@ void GameEngine::TreatmentEvent(sf::Event event)
     }
 }
 
-void GameEngine::playSong()
+void GameEngineClient::playSong()
 {
     if (!this->_isSong)
     {
@@ -64,7 +64,7 @@ void GameEngine::playSong()
     }
 }
 
-void GameEngine::songLevel(bool level)
+void GameEngineClient::songLevel(bool level)
 {
     if (level && _volumeSong < 100)
         _volumeSong += 10;
@@ -73,7 +73,7 @@ void GameEngine::songLevel(bool level)
     this->_music.setVolume(_volumeSong);
 }
 
-void GameEngine::songPause()
+void GameEngineClient::songPause()
 {
     if (this->_songStatus)
     {

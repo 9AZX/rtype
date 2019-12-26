@@ -18,7 +18,7 @@ GameServer::GameServer()
 void GameServer::gameLoop()
 {
 	while (true)
-    {
+	{
 		// Begin GameLoop
 		auto start = std::chrono::system_clock::now();
 
@@ -26,7 +26,8 @@ void GameServer::gameLoop()
 		this->_gameEngine->checkCollisions(this->_entities);
 
 		// Loop over entities
-		for (size_t i = 0; i < this->_entities.size(); i++) {
+		for (size_t i = 0; i < this->_entities.size(); i++)
+		{
 			// Remove destroyed entities
 			this->removeDestroyedEntities(i);
 
@@ -55,8 +56,9 @@ void GameServer::addPlayer(__attribute__((unused)) sf::Packet &packet) noexcept
 
 void GameServer::removeDestroyedEntities(size_t i)
 {
-	if (this->_entities[i].getRemoveEntity()) {
+	if (this->_entities[i].getRemoveEntity())
+	{
 		// delete this->_entities[i];
-		this->_entities.erase(this->_entities.begin() + i);
+		//this->_entities.erase(this->_entities.begin() + i);
 	}
 }

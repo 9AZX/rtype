@@ -5,11 +5,11 @@
 ** GameEngine
 */
 
-#ifndef	_GAME_ENGINE_HPP_
-#define	_GAME_ENGINE_HPP_
+#ifndef _GAME_ENGINE_HPP_
+#define _GAME_ENGINE_HPP_
 
 #include "GameEntity.hpp"
-#include "GameServer.hpp"
+#include <vector>
 
 using namespace Entity;
 
@@ -23,7 +23,7 @@ public:
 	void checkCollisions(std::vector<GameEntity> &) noexcept;
 	bool checkPosition(GameEntity &, GameEntity &) const noexcept;
 	bool checkEntityType(GameEntity &, GameEntity &) const noexcept;
-	void mobIA(GameEntity &);
+	void mobIA(GameEntity &) noexcept;
 };
 
-#endif	/* !_GAME_ENGINE_HPP_ */
+#endif /* !_GAME_ENGINE_HPP_ */

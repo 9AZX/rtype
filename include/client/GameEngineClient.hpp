@@ -16,11 +16,11 @@
 
 #define SONG "assets/songs/r-type_song.ogg"
 
-class GameEngine
+class GameEngineClient
 {
 public:
-	GameEngine();
-	~GameEngine();
+	GameEngineClient();
+	~GameEngineClient();
 	void TreatmentEvent(sf::Event event);
 	void songLevel(bool level);
 	void playSong();

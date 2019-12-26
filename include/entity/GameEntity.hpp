@@ -5,8 +5,8 @@
 ** GameEntity
 */
 
-#ifndef	_GAME_ENTITY_HPP_
-#define	_GAME_ENTITY_HPP_
+#ifndef _GAME_ENTITY_HPP_
+#define _GAME_ENTITY_HPP_
 
 #include "IEntity.hpp"
 
@@ -28,6 +28,8 @@ public:
 	void move(const float x, const float y) noexcept final;
 	bool limits(const float x, const float y) const noexcept final;
 	bool getRemoveEntity() const noexcept;
+	void setRemoveEntity() noexcept;
+	void virtual ia() = 0;
 
 private:
 	std::atomic<float> _posX;
@@ -37,4 +39,4 @@ private:
 	std::atomic<bool> _removeEntity;
 };
 
-#endif	/* !_GAME_ENTITY_HPP_ */
+#endif /* !_GAME_ENTITY_HPP_ */

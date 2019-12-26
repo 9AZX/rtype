@@ -50,7 +50,8 @@ bool GameEntity::getRemoveEntity() const noexcept
 
 void GameEntity::move(const float x, const float y) noexcept
 {
-	if (this->limits(this->_posX + x, this->_posY + y)) {
+	if (this->limits(this->_posX + x, this->_posY + y))
+	{
 		return;
 	}
 	this->_posX = this->_posX + x;
@@ -60,4 +61,9 @@ void GameEntity::move(const float x, const float y) noexcept
 bool GameEntity::limits(const float x, const float y) const noexcept
 {
 	return (x > 1920 || x < 0) || (y > 1080 || y < 0);
+}
+
+void GameEntity::setRemoveEntity() noexcept
+{
+	this->_removeEntity = true;
 }

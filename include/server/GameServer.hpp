@@ -5,8 +5,8 @@
 ** Game
 */
 
-#ifndef	_GAME_SERVER_HPP_
-#define	_GAME_SERVER_HPP_
+#ifndef _GAME_SERVER_HPP_
+#define _GAME_SERVER_HPP_
 
 #include <time.h>
 #include <chrono>
@@ -15,10 +15,7 @@
 #include <vector>
 #include <SFML/Network.hpp>
 #include "GameEngine.hpp"
-// #include "GameEntity.hpp"
 #include "Player.hpp"
-
-using namespace Entity;
 
 using ms = std::chrono::milliseconds;
 
@@ -31,7 +28,7 @@ public:
 public:
 	void gameLoop();
 	void addPlayer(sf::Packet &packet) noexcept;
-    void removeDestroyedEntities(size_t);
+	void removeDestroyedEntities(size_t);
 
 public:
 	std::unique_ptr<GameEngine> _gameEngine = std::make_unique<GameEngine>();
@@ -39,4 +36,4 @@ public:
 	std::vector<GameEntity> _entities = {};
 };
 
-#endif	/* !_GAME_SERVER_HPP_ */
+#endif /* !_GAME_SERVER_HPP_ */

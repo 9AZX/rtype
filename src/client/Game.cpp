@@ -9,7 +9,7 @@
 
 Game::Game() : _window(std::make_shared<sf::RenderWindow>(sf::VideoMode(WIN_WIDTH, WIN_HEIGHT), "R-Type"))
 {
-    this->_gameEngine = std::make_shared<GameEngine>();
+    this->_gameEngine = std::make_shared<GameEngineClient>();
     this->_window->setFramerateLimit(FRAMERATE_LIMIT);
     this->_menu = std::make_unique<Menu>(this->_window, this->_isMenu);
 }
@@ -18,7 +18,7 @@ Game::~Game()
 {
 }
 
-std::shared_ptr<GameEngine> Game::getGameEngine() const
+std::shared_ptr<GameEngineClient> Game::getGameEngine() const
 {
     return this->_gameEngine;
 }

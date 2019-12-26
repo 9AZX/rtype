@@ -32,7 +32,7 @@ set(R_TYPE_CLIENT
 	# Other(s).
 	./src/client/App.cpp
 	./src/client/Game.cpp
-	./src/client/GameEngine.cpp
+	./src/client/GameEngineClient.cpp
 	./src/client/Network.cpp
 	./src/client/Entity.cpp
 	./src/client/Menu.cpp

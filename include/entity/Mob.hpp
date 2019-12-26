@@ -19,7 +19,7 @@ public:
 	~Mob() = default;
 
 public:
-	void Ia();
+	void ia() override;
 	void path(int path);
 	void shootingTime();
 

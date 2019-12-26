@@ -18,7 +18,7 @@
 #include <vector>
 #include <unordered_map>
 #include <SFML/Graphics.hpp>
-#include "GameEngine.hpp"
+#include "GameEngineClient.hpp"
 #include "Network.hpp"
 #include "Entity.hpp"
 #include "Menu.hpp"
@@ -55,10 +55,10 @@ public:
         void deleteEntity(int &id);
 
         void initSprites();
-        std::shared_ptr<GameEngine> getGameEngine() const;
+        std::shared_ptr<GameEngineClient> getGameEngine() const;
 
 protected:
-        std::shared_ptr<GameEngine> _gameEngine;
+        std::shared_ptr<GameEngineClient> _gameEngine;
         std::shared_ptr<sf::RenderWindow> _window;
         std::unique_ptr<Network> _network;
         std::unique_ptr<Menu> _menu;
