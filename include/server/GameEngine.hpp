@@ -20,9 +20,9 @@ public:
 	~GameEngine() = default;
 
 public:
-	void checkCollisions(std::vector<GameEntity> &);
-	bool checkPosition(GameEntity &, GameEntity &) const;
-	bool checkEntityType(GameEntity &, GameEntity &) const;
+	void checkCollisions(std::vector<GameEntity> &) noexcept;
+	bool checkPosition(GameEntity &, GameEntity &) const noexcept;
+	bool checkEntityType(GameEntity &, GameEntity &) const noexcept;
 	void mobIA(GameEntity &);
 };
 
