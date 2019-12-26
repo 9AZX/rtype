@@ -43,6 +43,11 @@ void GameEntity::setType(type type) noexcept
 	this->_type = type;
 }
 
+bool GameEntity::getRemoveEntity() const noexcept
+{
+	return this->_removeEntity;
+}
+
 void GameEntity::move(const float x, const float y) noexcept
 {
 	if (this->limits(this->_posX + x, this->_posY + y)) {

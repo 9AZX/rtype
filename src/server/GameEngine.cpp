@@ -13,39 +13,37 @@ GameEngine::GameEngine()
 {
 }
 
-void GameEngine::checkCollisions()
+void GameEngine::checkCollisions(std::vector<GameEntity> &entities)
 {
-	for (size_t i = 0; i < this->_entities.size(); i++) {
-		for (size_t j = 0; j < this->_entities.size(); j++) {
+	for (size_t i = 0; i < entities.size(); i++) {
+		for (size_t j = 0; j < entities.size(); j++) {
 			if (i == j) break;
-			if (this->checkPosition(i, j) &&
-				this->checkEntityType(i, j)) {
+			if (this->checkPosition(entities[i], entities[j]) &&
+				this->checkEntityType(entities[i], entities[j])) {
 				std::cout << "Collision" << std::endl;
-				this->_entities[i]._removeEntity = true;
-				this->_entities[j]._removeEntity = true;
+				entities[i]._removeEntity = true;
+				entities[j]._removeEntity = true;
 			}
 		}
 	}
 }
 
-bool GameEngine::checkPosition(size_t i, size_t j) const
+bool GameEngine::checkPosition(GameEntity &a, GameEntity &b) const
 {
-	if (this->_entities[i].getPosX() == this->_entities[j].getPosY()
-		&& this->_entities[i].getPosY() == this->_entities[j].getPosY()) {
-			return true;
-	} else return false;
+	if (a.getPosX() == b.getPosY() && a.getPosY() == b.getPosY())
+        return true;
+	else return false;
 }
 
-bool GameEngine::checkEntityType(size_t i, size_t j) const
+bool GameEngine::checkEntityType(GameEntity &a, GameEntity &b) const
 {
-	if (this->_entities[i].getType() != this->_entities[j].getType())
+	if (a.getType() != b.getType())
 		return true;
 	return false;
 }
 
-void GameEngine::mobIA(size_t i)
+void GameEngine::mobIA(GameEntity &a)
 {
-	if (this->_entities[i].getType() >= type::MOB1) {
-		this->_entities[i].ia();
-	}
+	if (a.getType() >= type::MOB1)
+		a.ia();
 }

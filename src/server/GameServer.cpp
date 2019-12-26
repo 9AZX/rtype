@@ -13,18 +13,17 @@ using namespace Entity;
 
 GameServer::GameServer()
 {
-	this->_gameEngine = std::make_unique<GameEngine>();
 }
 
 void GameServer::gameLoop()
 {
 	while (true)
-	{
+    {
 		// Begin GameLoop
 		auto start = std::chrono::system_clock::now();
 
 		// GameEngine
-		this->_gameEngine->checkCollisions();
+		this->_gameEngine->checkCollisions(this->_entities);
 
 		// Loop over entities
 		for (size_t i = 0; i < this->_entities.size(); i++) {
@@ -32,7 +31,7 @@ void GameServer::gameLoop()
 			this->removeDestroyedEntities(i);
 
 			// Mob IA
-			this->_gameEngine->mobIA(i);
+			this->_gameEngine->mobIA(this->_entities[i]);
 		}
 
 		// Players movements
@@ -56,8 +55,8 @@ void GameServer::addPlayer(__attribute__((unused)) sf::Packet &packet) noexcept
 
 void GameServer::removeDestroyedEntities(size_t i)
 {
-	if (this->_entities[i]._removeEntity) {
-		delete this->_entities[i];
-		this->_entities[i].erase(vec.begin() + i);
+	if (this->_entities[i].getRemoveEntity()) {
+		// delete this->_entities[i];
+		this->_entities.erase(this->_entities.begin() + i);
 	}
 }

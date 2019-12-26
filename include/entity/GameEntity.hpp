@@ -27,12 +27,14 @@ public:
 	void setType(type type) noexcept final;
 	void move(const float x, const float y) noexcept final;
 	bool limits(const float x, const float y) const noexcept final;
+	bool getRemoveEntity() const noexcept;
 
 private:
 	std::atomic<float> _posX;
 	std::atomic<float> _posY;
 	std::atomic<int> _entityId;
 	std::atomic<int> _type;
+	std::atomic<bool> _removeEntity;
 };
 
 #endif	/* !_GAME_ENTITY_HPP_ */

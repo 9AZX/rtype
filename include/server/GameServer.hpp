@@ -14,7 +14,8 @@
 #include <thread>
 #include <vector>
 #include <SFML/Network.hpp>
-#include "GameEntity.hpp"
+#include "GameEngine.hpp"
+// #include "GameEntity.hpp"
 #include "Player.hpp"
 
 using namespace Entity;
@@ -30,11 +31,12 @@ public:
 public:
 	void gameLoop();
 	void addPlayer(sf::Packet &packet) noexcept;
+    void removeDestroyedEntities(size_t);
 
 public:
-	std::unique_ptr<GameEngine> _gameEngine;
-	std::vector<Player> _players;
-	std::vector<GameEntity> _entities;
+	std::unique_ptr<GameEngine> _gameEngine = std::make_unique<GameEngine>();
+	std::vector<Player> _players = {};
+	std::vector<GameEntity> _entities = {};
 };
 
 #endif	/* !_GAME_SERVER_HPP_ */
