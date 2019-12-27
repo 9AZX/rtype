@@ -24,6 +24,13 @@
 #include "Menu.hpp"
 
 #define PLAYER1_TEXT "assets/r-typesheet42.gif"
+#define PLAYER2 "assets/r-typesheet42_2.gif"
+#define PLAYER2 "assets/r-typesheet42_3.gif"
+#define PLAYER2 "assets/r-typesheet42_4.gif"
+#define PLAYER2 "assets/r-typesheet42_5.gif"
+#define MOB "assets/r-typesheet23a_enemy.gif"
+#define PLAYER_MISSILE "assets/r-typesheet1a_shoot_player.gif"
+#define MOB_MISSILE "assets/r-typesheet37a.gif"
 
 class Game
 {
