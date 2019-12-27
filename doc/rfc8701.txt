@@ -1,0 +1,16 @@
+Network Working Group                                         J. Ihlas
+Request for Comments: 8701                            G. De Lataillade
+Category: Standard                                          R. Gautiez
+                                                          C. Hennequin
+                                                      Epitech Bordeaux
+                                                         December 2019
+
+                        R-Type Protocol
+
+Abstract
+
+    This document describes the R-Type Protocol, a network protocol
+    client/server for the game engine of R-Type.
+    The protocol allows the connection of a player, the sending of
+    inputs, the creation and movement of entities such as mobs or
+    missiles but also information about the current game.
