@@ -11,8 +11,8 @@
 #include "GameEntity.hpp"
 #include <vector>
 
-#define SPRITE_DIM_X 200
-#define SPRITE_DIM_Y 150
+#define SPRITE_DIM_X 34
+#define SPRITE_DIM_Y 17
 
 using namespace Entity;
 
