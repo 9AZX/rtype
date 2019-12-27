@@ -28,44 +28,44 @@
 class Game
 {
 public:
-        Game();
-        ~Game();
+    Game();
+    ~Game();
 
-        typedef enum entities
-        {
-                PLAYER1,
-                PLAYER2,
-                PLAYER3,
-                PLAYER4,
-                MISSILE,
-                MOB1,
-                MOB2,
-                MOB3,
-                MOB4,
-                ENTITIES_NUMBER
-        } EEntities;
+    typedef enum entities
+    {
+        PLAYER1,
+        PLAYER2,
+        PLAYER3,
+        PLAYER4,
+        MISSILE,
+        MOB1,
+        MOB2,
+        MOB3,
+        MOB4,
+        ENTITIES_NUMBER
+    } EEntities;
 
-        void initNetwork();
-        void startLoop();
-        void unpack();
+    void initNetwork();
+    void startLoop();
+    void unpack();
 
-        void renderEntities();
-        void createEntity(int &uniqueId, float &posX, float &posY);
-        void updateEntity(int &id, float &posX, float &posY);
-        void deleteEntity(int &id);
+    void renderEntities();
+    void createEntity(int &uniqueId, float &posX, float &posY);
+    void updateEntity(int &id, float &posX, float &posY);
+    void deleteEntity(int &id);
 
-        void initSprites();
-        std::shared_ptr<GameEngineClient> getGameEngine() const;
+    void initSprites();
+    std::shared_ptr<GameEngineClient> getGameEngine() const;
 
 protected:
-        std::shared_ptr<GameEngineClient> _gameEngine;
-        std::shared_ptr<sf::RenderWindow> _window;
-        std::unique_ptr<Network> _network;
-        std::unique_ptr<Menu> _menu;
-        std::vector<std::unique_ptr<Entity>> _entities;
-        std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;
-        std::shared_ptr<bool> _isMenu = std::make_shared<bool>(true);
-        sf::Event event;
+    std::shared_ptr<GameEngineClient> _gameEngine;
+    std::shared_ptr<sf::RenderWindow> _window;
+    std::unique_ptr<Network> _network;
+    std::unique_ptr<Menu> _menu;
+    std::vector<std::unique_ptr<Entity>> _entities;
+    std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;
+    std::shared_ptr<bool> _isMenu = std::make_shared<bool>(true);
+    sf::Event event;
 
 private:
 };
