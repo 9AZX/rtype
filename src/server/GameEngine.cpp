@@ -35,14 +35,20 @@ void GameEngine::checkCollisions(std::vector<GameEntity> &entities) noexcept
 
 bool GameEngine::checkPosition(GameEntity &a, GameEntity &b) const noexcept
 {
-	if (a.getPosX() == b.getPosY() && a.getPosY() == b.getPosY())
+	float ax = a.getPosX();
+	float ay = a.getPosY();
+	float bPosX = b.getPosX();
+	float bPosY = b.getPosY();
+
+	if (bx >= ax && bx <= ax + SPRITE_DIM_X &&
+		by >= ay && by <= ay + SPRITE_DIM_Y)
 		return true;
 	else
 		return false;
 }
 
 bool GameEngine::checkEntityType(GameEntity &a, GameEntity &b) const noexcept
-{
+
 	if (a.getType() != b.getType())
 		return true;
 	return false;
