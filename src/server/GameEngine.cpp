@@ -40,15 +40,15 @@ bool GameEngine::checkPosition(GameEntity &a, GameEntity &b) const noexcept
 	float bPosX = b.getPosX();
 	float bPosY = b.getPosY();
 
-	if (bx >= ax && bx <= ax + SPRITE_DIM_X &&
-		by >= ay && by <= ay + SPRITE_DIM_Y)
+	if (bPosX >= ax && bPosX <= ax + SPRITE_DIM_X &&
+		bPosY >= ay && bPosY <= ay + SPRITE_DIM_Y)
 		return true;
 	else
 		return false;
 }
 
 bool GameEngine::checkEntityType(GameEntity &a, GameEntity &b) const noexcept
-
+{
 	if (a.getType() != b.getType())
 		return true;
 	return false;

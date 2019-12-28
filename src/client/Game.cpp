@@ -74,10 +74,10 @@ void Game::initSprites()
     sf::Sprite sprite;
     std::vector<std::string> _paths = {
         PLAYER1_TEXT,
-        PLAYER1_TEXT,
-        PLAYER1_TEXT,
-        PLAYER1_TEXT,
-        PLAYER1_TEXT,
+        PLAYER2_TEXT,
+        PLAYER3_TEXT,
+        PLAYER4_TEXT,
+        PLAYER5_TEXT,
         PLAYER1_TEXT,
         PLAYER1_TEXT,
         PLAYER1_TEXT,
