@@ -23,7 +23,7 @@ public:
 	~GameEngine() = default;
 
 public:
-	void checkCollisions(std::vector<GameEntity> &) noexcept;
+	void checkCollisions(std::vector<std::shared_ptr<GameEntity>> &) noexcept;
 	bool checkPosition(GameEntity &, GameEntity &) const noexcept;
 	bool checkEntityType(GameEntity &, GameEntity &) const noexcept;
 	void mobIA(GameEntity &) noexcept;

@@ -34,7 +34,7 @@ void GameServer::addPlayer(sf::Packet &packet) noexcept
 
 void GameServer::removeDestroyedEntities(size_t i)
 {
-	if (this->_entities[i].getRemoveEntity())
+	if (this->_entities[i]->getRemoveEntity())
 	{
 		// delete this->_entities[i];
 		// this->_entities.erase(this->_entities.begin() + i);
@@ -46,10 +46,10 @@ void GameServer::mobGeneration() noexcept
 	int nbMobs = 0;
 
 	for (size_t i = 0; i < this->_entities.size(); i++) {
-		if (this->_entities[i].getType() >= MOB1)
+		if (this->_entities[i]->getType() >= MOB1)
 			nbMobs++;
 	}
 	if (!nbMobs) {
-		this->_entities.push_back(std::move(Mob()));
+		this->_entities.emplace_back(new Mob());
 	}
 }

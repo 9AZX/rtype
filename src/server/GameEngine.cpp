@@ -14,7 +14,7 @@ GameEngine::GameEngine()
 {
 }
 
-void GameEngine::checkCollisions(std::vector<GameEntity> &entities) noexcept
+void GameEngine::checkCollisions(std::vector<std::shared_ptr<GameEntity>> &entities) noexcept
 {
 	for (size_t i = 0; i < entities.size(); i++)
 	{
@@ -22,12 +22,12 @@ void GameEngine::checkCollisions(std::vector<GameEntity> &entities) noexcept
 		{
 			if (i == j)
 				break;
-			if (this->checkPosition(entities[i], entities[j]) &&
-				this->checkEntityType(entities[i], entities[j]))
+			if (this->checkPosition(*entities[i], *entities[j]) &&
+				this->checkEntityType(*entities[i], *entities[j]))
 			{
 				std::cout << "Collision" << std::endl;
-				entities[i].setRemoveEntity();
-				entities[j].setRemoveEntity();
+				entities[i]->setRemoveEntity();
+				entities[j]->setRemoveEntity();
 			}
 		}
 	}

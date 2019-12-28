@@ -86,7 +86,7 @@ void Instance::instance()
 			server->_game.removeDestroyedEntities(i);
 
 			// Mob IA
-			server->_game._gameEngine->mobIA(server->_game._entities[i]);
+			server->_game._gameEngine->mobIA(*server->_game._entities[i]);
 			
 			// Mob generation
 		}
