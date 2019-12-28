@@ -59,3 +59,13 @@ void GameEngine::mobIA(GameEntity &a) noexcept
 	if (a.getType() >= type::MOB1)
 		a.ia();
 }
+
+bool GameEngine::isGameInProgress() const noexcept
+{
+	return this->_gameIP;
+}
+
+void GameEngine::setGameStart(bool value) noexcept
+{
+	this->_gameIP = value;
+}

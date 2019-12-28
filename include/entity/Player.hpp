@@ -38,7 +38,7 @@ public:
 	const std::atomic<int> &getId() const noexcept;
 	void setLives(const int lives) noexcept;
 	const std::atomic<int> &getLives() const noexcept;
-	void ia() override;
+	void ia();
 
 private:
 	std::string _ip = "127.0.0.1";

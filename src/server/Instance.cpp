@@ -13,6 +13,8 @@
 #include "Instance.hpp"
 #include "Server.hpp"
 
+#include <iostream>
+
 Instance::Instance(unsigned short port) : _port(port)
 {
 }
@@ -78,13 +80,19 @@ void Instance::instance()
 		server->_game._gameEngine->checkCollisions(server->_game._entities);
 
 		// Loop over entities
+		std::cout << "Number of entity: " << server->_game._entities.size() << std::endl;
 		for (size_t i = 0; i < server->_game._entities.size(); i++) {
 			// Remove destroyed entities
 			server->_game.removeDestroyedEntities(i);
 
 			// Mob IA
 			server->_game._gameEngine->mobIA(server->_game._entities[i]);
+			
+			// Mob generation
 		}
+
+		// Mob generation
+		server->_game.mobGeneration();
 
 		// Players movements
 

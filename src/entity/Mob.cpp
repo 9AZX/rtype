@@ -5,20 +5,7 @@
 ** Mob
 */
 
-#include <cstdlib>
 #include "Mob.hpp"
-
-void Mob::ia()
-{
-	if (this->_loopCount % 10 == 0)
-	{
-		this->move(0, std::rand() % 2 == 0 ? 15 : -15);
-	}
-	if (this->_loopCount % 5 == 0)
-	{
-		this->_isShooting = std::rand() % 2 == 0 ? true : false;
-	}
-}
 
 void Mob::shootingTime()
 {

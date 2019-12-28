@@ -29,7 +29,7 @@ public:
 	bool limits(const float x, const float y) const noexcept final;
 	bool getRemoveEntity() const noexcept;
 	void setRemoveEntity() noexcept;
-	void virtual ia() = 0;
+	void ia() noexcept;
 
 private:
 	std::atomic<float> _posX;
@@ -37,6 +37,7 @@ private:
 	std::atomic<int> _entityId;
 	std::atomic<int> _type;
 	std::atomic<bool> _removeEntity;
+	
 };
 
 #endif /* !_GAME_ENTITY_HPP_ */

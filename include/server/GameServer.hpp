@@ -29,6 +29,7 @@ public:
 	void gameLoop();
 	void addPlayer(sf::Packet &packet) noexcept;
 	void removeDestroyedEntities(size_t);
+	void mobGeneration() noexcept;
 
 public:
 	std::unique_ptr<GameEngine> _gameEngine = nullptr;

@@ -27,6 +27,11 @@ public:
 	bool checkPosition(GameEntity &, GameEntity &) const noexcept;
 	bool checkEntityType(GameEntity &, GameEntity &) const noexcept;
 	void mobIA(GameEntity &) noexcept;
+	bool isGameInProgress() const noexcept;
+	void setGameStart(bool) noexcept;
+
+private:
+	bool _gameIP = false;
 };
 
 #endif /* !_GAME_ENGINE_HPP_ */

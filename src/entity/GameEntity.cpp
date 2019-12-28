@@ -5,6 +5,7 @@
 ** GameEntity
 */
 
+#include <cstdlib>
 #include "GameEntity.hpp"
 
 GameEntity::GameEntity()
@@ -66,4 +67,16 @@ bool GameEntity::limits(const float x, const float y) const noexcept
 void GameEntity::setRemoveEntity() noexcept
 {
 	this->_removeEntity = true;
+}
+
+void GameEntity::ia() noexcept
+{
+	if (this->_loopCount % 10 == 0)
+	{
+		this->move(0, std::rand() % 2 == 0 ? 15 : -15);
+	}
+	if (this->_loopCount % 5 == 0)
+	{
+		this->_isShooting = std::rand() % 2 == 0 ? true : false;
+	}
 }
