@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   19-11-2019 16:11:34
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 18-12-2019 15:04:37
+** @Last Modified time: 28-12-2019 15:16:43
 */
 
 #ifndef _INSTANCE_HPP_
@@ -19,8 +19,8 @@
 #include <vector>
 #endif
 
-#define SERVER_NEW_INSTANCE "New server instance run (on pid: "
-#define SERVER_PORT_NULL 0
+#define	SERVER_NEW_INSTANCE	"New server instance run (on pid: "
+#define	SERVER_PORT_NULL	0
 
 #if defined(_WIN32) || defined(_WIN64)
 class Instance

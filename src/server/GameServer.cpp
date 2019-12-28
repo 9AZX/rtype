@@ -13,6 +13,7 @@ using namespace Entity;
 
 GameServer::GameServer()
 {
+	this->_gameEngine = std::make_unique<GameEngine>();
 }
 
 void GameServer::gameLoop()
@@ -49,9 +50,14 @@ void GameServer::gameLoop()
 	}
 }
 
-void GameServer::addPlayer(__attribute__((unused)) sf::Packet &packet) noexcept
+void GameServer::addPlayer(sf::Packet &packet) noexcept
 {
-	//this->_players.push_back(Player());
+	std::string ip = "";
+	unsigned short port = 0;
+
+	packet >> ip;
+	packet >> port;
+	this->_players.push_back(std::make_unique<Player>(ip, port));
 }
 
 void GameServer::removeDestroyedEntities(size_t i)

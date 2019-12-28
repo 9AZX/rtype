@@ -73,3 +73,8 @@ const std::atomic<int> &Player::getLives() const noexcept
 {
 	return this->_lives;
 }
+
+void Player::ia()
+{
+	//NTD
+}

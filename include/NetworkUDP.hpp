@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   22-11-2019 00:12:01
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 17:59:22
+** @Last Modified time: 28-12-2019 15:22:09
 */
 
 #ifndef	_NETWORK_UDP_HPP_
@@ -15,7 +15,7 @@
 #include <utility>
 #include <SFML/Network.hpp>
 
-#define NETWORK_BIND_ERR	"An error occured during the bind."
+#define	NETWORK_BIND_ERR	"An error occured during the bind."
 #define	NETWORK_MIN_SIZE	4
 #define	NETWORK_AUTOMATIC_PORT	false
 

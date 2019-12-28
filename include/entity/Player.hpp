@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   28-11-2019 17:28:06
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 23-12-2019 16:58:38
+** @Last Modified time: 28-12-2019 15:34:45
 */
 
 #ifndef	_PLAYER_HPP_
@@ -38,6 +38,7 @@ public:
 	const std::atomic<int> &getId() const noexcept;
 	void setLives(const int lives) noexcept;
 	const std::atomic<int> &getLives() const noexcept;
+	void ia() override;
 
 private:
 	std::string _ip = "127.0.0.1";

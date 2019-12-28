@@ -31,8 +31,8 @@ public:
 	void removeDestroyedEntities(size_t);
 
 public:
-	std::unique_ptr<GameEngine> _gameEngine = std::make_unique<GameEngine>();
-	std::vector<Player> _players = {};
+	std::unique_ptr<GameEngine> _gameEngine = nullptr;
+	std::vector<std::unique_ptr<Player>> _players = {};
 	std::vector<GameEntity> _entities = {};
 };
 
