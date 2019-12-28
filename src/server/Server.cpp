@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 22-12-2019 18:10:50
+** @Last Modified time: 28-12-2019 23:44:27
 */
 
 #include <iostream>
@@ -64,4 +64,32 @@ void Server::extract(sf::Packet &packet)
 				break;
 		};
 	} while (type != NetworkMethods::PACKET_END);
+}
+
+void Server::sendToPlayers()
+{
+	sf::Packet packet;
+	sf::IpAddress ip;
+	unsigned short port;
+
+	if (this->_game._players.size() == 0) {
+		return;
+	}
+	packet << NetworkMethods::PACKET_ENTITY;
+	packet << static_cast<int>(this->_game._entities.size());
+	for (const auto &entity : this->_game._entities) {
+		packet << entity->getType().load() << entity->getPosX();
+		packet << entity->getPosY().load();
+	}
+	packet << NetworkMethods::PACKET_PLAYER;
+	packet << static_cast<int>(this->_game._players.size());
+	for (const auto &player : this->_game._players) {
+		packet << player->getId().load() << player->getPosX();
+		packet << player->getPosY().load();
+	}
+	for (const auto &player : this->_game._players) {
+		ip = player->getIpAddress();
+		port = player->getPort().load();
+		this->send(packet, ip, port);
+	}
 }

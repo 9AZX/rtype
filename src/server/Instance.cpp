@@ -6,14 +6,14 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-12-2019 16:39:49
+** @Last Modified time: 28-12-2019 23:44:52
 */
 
+// TODO: delete after test(s).
+#include <iostream>
 #include <memory>
 #include "Instance.hpp"
 #include "Server.hpp"
-
-#include <iostream>
 
 Instance::Instance(unsigned short port) : _port(port)
 {
@@ -87,7 +87,7 @@ void Instance::instance()
 
 			// Mob IA
 			server->_game._gameEngine->mobIA(*server->_game._entities[i]);
-			
+
 			// Mob generation
 		}
 
@@ -105,6 +105,9 @@ void Instance::instance()
 		ms d = std::chrono::duration_cast<ms>(elapsed_seconds);
 		std::this_thread::sleep_for(std::chrono::milliseconds(40) - d);
 		//std::cout << "finished loop elapsed time: " << d.count() << "ms\n";
+
+		// Call network.
+		server->sendToPlayers();
 	}
 	server->_game.gameLoop();
 }
