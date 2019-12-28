@@ -16,7 +16,7 @@ using namespace Entity;
 class Mob : public GameEntity
 {
 public:
-	Mob() = default;
+	Mob();
 	~Mob() = default;
 
 public:

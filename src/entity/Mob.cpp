@@ -7,6 +7,10 @@
 
 #include "Mob.hpp"
 
+Mob::Mob() {
+	this->setType(MOB1);
+}
+
 void Mob::shootingTime()
 {
 	int num = std::rand() % 2;
