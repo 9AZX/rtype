@@ -34,7 +34,7 @@ public:
 public:
 	std::unique_ptr<GameEngine> _gameEngine = nullptr;
 	std::vector<std::unique_ptr<Player>> _players = {};
-	std::vector<std::shared_ptr<GameEntity>> _entities = {};
+	std::vector<std::unique_ptr<GameEntity>> _entities = {};
 };
 
 #endif /* !_GAME_SERVER_HPP_ */

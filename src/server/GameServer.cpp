@@ -50,6 +50,6 @@ void GameServer::mobGeneration() noexcept
 			nbMobs++;
 	}
 	if (!nbMobs) {
-		this->_entities.emplace_back(new Mob());
+		this->_entities.push_back(std::make_unique<Mob>());
 	}
 }

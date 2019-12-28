@@ -14,7 +14,7 @@ GameEngine::GameEngine()
 {
 }
 
-void GameEngine::checkCollisions(std::vector<std::shared_ptr<GameEntity>> &entities) noexcept
+void GameEngine::checkCollisions(std::vector<std::unique_ptr<GameEntity>> &entities) noexcept
 {
 	for (size_t i = 0; i < entities.size(); i++)
 	{
