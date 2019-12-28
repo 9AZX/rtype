@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 14:52:13
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 21-12-2019 23:56:08
+** @Last Modified time: 28-12-2019 16:39:49
 */
 
 #include <memory>
@@ -70,5 +70,33 @@ void Instance::instance()
 
 	server->_threads.push_back(std::move(threadNetwork));
 	server->_threads.back().detach();
+	while (true) {
+		// Begin GameLoop
+		auto start = std::chrono::system_clock::now();
+
+		// GameEngine
+		server->_game._gameEngine->checkCollisions(server->_game._entities);
+
+		// Loop over entities
+		for (size_t i = 0; i < server->_game._entities.size(); i++) {
+			// Remove destroyed entities
+			server->_game.removeDestroyedEntities(i);
+
+			// Mob IA
+			server->_game._gameEngine->mobIA(server->_game._entities[i]);
+		}
+
+		// Players movements
+
+		// Check game over
+
+		// End GameLoop
+		auto end = std::chrono::system_clock::now();
+
+		std::chrono::duration<double> elapsed_seconds = end - start;
+		ms d = std::chrono::duration_cast<ms>(elapsed_seconds);
+		std::this_thread::sleep_for(std::chrono::milliseconds(40) - d);
+		//std::cout << "finished loop elapsed time: " << d.count() << "ms\n";
+	}
 	server->_game.gameLoop();
 }
