@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-12-2019 23:44:27
+** @Last Modified time: 28-12-2019 23:46:56
 */
 
 #include <iostream>
@@ -87,6 +87,7 @@ void Server::sendToPlayers()
 		packet << player->getId().load() << player->getPosX();
 		packet << player->getPosY().load();
 	}
+	packet << NetworkMethods::PACKET_END;
 	for (const auto &player : this->_game._players) {
 		ip = player->getIpAddress();
 		port = player->getPort().load();
