@@ -90,9 +90,6 @@ void GameEntity::ia() noexcept
 		}
 		this->_direction == 0 ? this->move(0, 10) : this->move(0, -10);
 		this->_moveCount++;
-		std::cout << "Direction:" << _direction;
-		std::cout << " MoveCount:" << _moveCount;
-		std::cout << " NbMovement:" << _nbMovements;
 		std::cout << std::endl;
 	}
 	// if (this->_loopCount % 10 == 0) {
