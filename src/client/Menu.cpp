@@ -81,7 +81,7 @@ void Menu::eventInput()
 
         if (this->_event.type == sf::Event::TextEntered)
         {
-            if (this->_event.text.unicode == '\b')
+            if (this->_event.text.unicode == '\b' && _playerInput.getSize() > 1)
             {
                 _playerInput.erase(_playerInput.getSize() - 1);
                 this->_ip = this->_playerInput.toAnsiString();

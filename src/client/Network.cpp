@@ -42,6 +42,7 @@ bool Network::receiveData()
 
 bool Network::setServerInfo(std::string ip, std::string port)
 {
+    std::cout << ip << ":" << port << std::endl;
     try
     {
         this->_serverIp = ip;
@@ -49,6 +50,7 @@ bool Network::setServerInfo(std::string ip, std::string port)
     }
     catch (...)
     {
+        std::cout << "Error ip or port" << std::endl;
         return false;
     }
     return true;
