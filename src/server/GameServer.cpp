@@ -45,16 +45,16 @@ void GameServer::playerMove(sf::Packet &packet, sf::IpAddress &address) noexcept
 		if (player->getIpAddress() == address.toString()) {
 			switch (move) {
 				case 0: // UP
-					player->setPosY(player->getPosY() + 1);
+					player->setPosY(player->getPosY() + 15);
 					break;
 				case 1: // RIGHT
-					player->setPosX(player->getPosX() + 1);
+					player->setPosX(player->getPosX() + 15);
 					break;
 				case 2: // DOWN
-					player->setPosY(player->getPosY() - 1);
+					player->setPosY(player->getPosY() - 15);
 					break;
 				case 3: // LEFT
-					player->setPosX(player->getPosX() - 1);
+					player->setPosX(player->getPosX() - 15);
 					break;
 				default:
 					break;
