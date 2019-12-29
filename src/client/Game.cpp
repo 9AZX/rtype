@@ -164,7 +164,9 @@ void Game::startLoop()
             {
                 if (!this->_network->setServerInfo(this->_menu->getIp(), this->_menu->getPort()))
                 {
-                    break;
+                    *(this->_isMenu) = true;
+                    this->_menu->setIsPlay();
+                    continue;
                 }
                 packet << 0 << port << 4;
                 this->_network->sendData(packet);
