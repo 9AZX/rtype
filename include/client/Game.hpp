@@ -66,7 +66,7 @@ public:
 protected:
     std::shared_ptr<GameEngineClient> _gameEngine;
     std::shared_ptr<sf::RenderWindow> _window;
-    std::unique_ptr<Network> _network;
+    std::shared_ptr<Network> _network;
     std::unique_ptr<Menu> _menu;
     std::vector<std::unique_ptr<Entity>> _entities;
     std::unordered_map<int, std::pair<sf::Texture, sf::Sprite>> _sprites;

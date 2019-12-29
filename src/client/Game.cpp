@@ -153,7 +153,7 @@ void Game::startLoop()
     sf::Packet packet;
     unsigned short port = 54000;
 
-    packet << 0 << port << 3;
+    packet << 0 << port << 4;
     this->_network->sendData(packet);
     while (this->_window->isOpen())
     {
@@ -169,7 +169,7 @@ void Game::startLoop()
             {
                 if (event.type == sf::Event::KeyPressed)
                 {
-                    this->_gameEngine->TreatmentEvent(event);
+                    this->_gameEngine->TreatmentEvent(event, this->_network);
                 }
                 if (event.type == sf::Event::Closed)
                 {
