@@ -6,8 +6,9 @@
 */
 
 #include <cstdlib>
-#include "GameEntity.hpp"
 #include <chrono>
+#include <iostream>
+#include "GameEntity.hpp"
 
 GameEntity::GameEntity()
 {
@@ -81,13 +82,18 @@ void GameEntity::ia() noexcept
 	if (this->_loopCount % 2 == 0) {
 		if (this->_direction == -1) {
 			this->_direction = std::rand() % 2;
-			this->_nbMovements = std::rand() % 10 + 3;
+			this->_nbMovements = std::rand() % 3 + 2;
 		}
-		if (this->_moveCount == this->_nbMovements) {
+		if (this->_moveCount >= this->_nbMovements) {
 			this->_direction = -1;
+			this->_moveCount = -1;
 		}
 		this->_direction == 0 ? this->move(0, 10) : this->move(0, -10);
 		this->_moveCount++;
+		std::cout << "Direction:" << _direction;
+		std::cout << " MoveCount:" << _moveCount;
+		std::cout << " NbMovement:" << _nbMovements;
+		std::cout << std::endl;
 	}
 	// if (this->_loopCount % 10 == 0) {
 	// 	this->_isShooting = std::rand() % 2 == 0 ? true : false;
