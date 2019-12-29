@@ -36,6 +36,34 @@ void GameServer::addPlayer(sf::Packet &packet, sf::IpAddress &address) noexcept
 	std::cout << std::endl;
 }
 
+void GameServer::playerMove(sf::Packet &packet, sf::IpAddress &address) noexcept
+{
+	int move = 0;
+
+	packet >> move;
+	for (auto const &player : this->_players) {
+		if (player->getIpAddress() == address.toString()) {
+			switch (move) {
+				case 0: // UP
+					player->setPosY(player->getPosY() + 1);
+					break;
+				case 1: // RIGHT
+					player->setPosX(player->getPosX() + 1);
+					break;
+				case 2: // DOWN
+					player->setPosY(player->getPosY() - 1);
+					break;
+				case 3: // LEFT
+					player->setPosX(player->getPosX() - 1);
+					break;
+				default:
+					break;
+			}
+			break;
+		}
+	}
+}
+
 void GameServer::removeDestroyedEntities(size_t i)
 {
 	if (this->_entities[i]->getRemoveEntity())
