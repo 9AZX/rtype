@@ -24,7 +24,7 @@ void Network::bindSocket()
 
 void Network::sendData(sf::Packet &packet)
 {
-    if (this->_socket.send(packet, this->_serverIp, this->_serverPort) != sf::Socket::Done)
+    if (this->_socket.send(packet, IP_ADDR, PORT_SERV) != sf::Socket::Done)
         return;
 }
 

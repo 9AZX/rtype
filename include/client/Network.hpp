@@ -10,6 +10,7 @@
 
 #define PORT 54000
 #define IP_ADDR "127.0.0.1"
+#define PORT_SERV 4242
 
 #include <stdlib.h>
 #include <memory>
