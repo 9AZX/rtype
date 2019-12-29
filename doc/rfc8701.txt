@@ -53,7 +53,7 @@ RFC 8701                R-Type Protocol                       Jan 2020
         The server uses a package system containing
         a sequence of bytes organized as follows:
         +--------+  +----------------------+  +------------+
-	|  TYPE  |  |  NUMBER OF ELEMENTS  |  |  ELEMENTS  |
+        |  TYPE  |  |  NUMBER OF ELEMENTS  |  |  ELEMENTS  |
         | (ENUM) |  |        (int)         |  |  (objet)   |
         +--------+  +----------------------+  +------------+
 
