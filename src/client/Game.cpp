@@ -153,7 +153,7 @@ void Game::startLoop()
     sf::Packet packet;
     unsigned short port = 54000;
 
-    packet << 0 << "127.0.0.1" << port << 3;
+    packet << 0 << port << 3;
     this->_network->sendData(packet);
     while (this->_window->isOpen())
     {
