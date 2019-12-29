@@ -14,3 +14,5 @@ Abstract
     The protocol allows the connection of a player, the sending of
     inputs, the creation and movement of entities such as mobs or
     missiles but also information about the current game.
+
+Table of Contents

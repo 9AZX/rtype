@@ -21,30 +21,24 @@ void GameEngineClient::TreatmentEvent(sf::Event event, std::shared_ptr<Network> 
     switch (event.key.code)
     {
         case sf::Keyboard::W:
-            std::cout << "UP" << std::endl;
             packet << 1 << 0 << 4;
             network->sendData(packet);
             break;
         case sf::Keyboard::S:
-            std::cout << "Down" << std::endl;
             packet << 1 << 2 << 4;
             network->sendData(packet);
             break;
         case sf::Keyboard::A:
             packet << 1 << 3 << 4;
             network->sendData(packet);
-            std::cout << "Left" << std::endl;
             break;
         case sf::Keyboard::D:
-            std::cout << "Right" << std::endl;
             packet << 1 << 1 << 4;
             network->sendData(packet);
             break;
         case sf::Keyboard::Escape:
-            std::cout << "Pause" << std::endl;
             break;
         case sf::Keyboard::Space:
-            std::cout << "Space" << std::endl;
             break;
         case sf::Keyboard::I:
             this->songLevel(false);
