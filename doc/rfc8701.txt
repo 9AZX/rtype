@@ -23,7 +23,7 @@ Table of Contents
 
     1. Introduction .................................................2
     2. Standard Communication .......................................3
-    2. Client Connection ............................................4
+    3. Client Connection ............................................4
 
 Epitech		      	R-Type Protocol     	      	      [Page 1]
 
