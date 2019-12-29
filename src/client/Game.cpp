@@ -164,6 +164,7 @@ void Game::startLoop()
                 this->_network->setServerInfo(this->_menu->getIp(), std::stoi(this->_menu->getPort()));
                 packet << 0 << port << 4;
                 this->_network->sendData(packet);
+                std::cout << "Connected to server" << std::endl;
                 isConnected = true;
             }
             this->renderBackground();
