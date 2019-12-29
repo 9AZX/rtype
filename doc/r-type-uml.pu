@@ -355,8 +355,6 @@ class Instance{
 	-std::vector<std::thread> _instances;
 }
 
-Fork --|> Instance
-
 
 class Server{
 	+Server() = default;
