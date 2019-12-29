@@ -27,8 +27,7 @@
 #define PLAYER2_TEXT "assets/r-typesheet42_2.gif"
 #define PLAYER3_TEXT "assets/r-typesheet42_3.gif"
 #define PLAYER4_TEXT "assets/r-typesheet42_4.gif"
-#define PLAYER5_TEXT "assets/r-typesheet42_5.gif"
-#define MOB "assets/r-typesheet23a_enemy.gif"
+#define MOB_TEXT "assets/r-typesheet23a.gif"
 #define PLAYER_MISSILE "assets/r-typesheet1a_shoot_player.gif"
 #define MOB_MISSILE "assets/r-typesheet37a.gif"
 

@@ -53,7 +53,20 @@ void Game::unpack()
         std::cout << "Id: " << id <<
         " posX: " << posX << " posY: " << posY << std::endl;
     }
-
+    this->_network->_packet >> type;
+    this->_network->_packet >> size;
+    //create ou update players
+    for (int i = 0; i < size; i++) {
+        this->_network->_packet >> typeEntity;
+        this->_network->_packet >> id;
+        this->_network->_packet >> posX;
+        this->_network->_packet >> posY;
+        if (!updateEntity(id, posX, posY)) {
+            createEntity(id, Game::entities::PLAYER1, posX, posY);
+        }
+        std::cout << "Player Id: " << id <<
+        " posX: " << posX << " posY: " << posY << std::endl;
+    }
     // delete entity
 }
 
@@ -99,11 +112,11 @@ void Game::initSprites()
         PLAYER2_TEXT,
         PLAYER3_TEXT,
         PLAYER4_TEXT,
-        PLAYER5_TEXT,
-        PLAYER1_TEXT,
-        PLAYER1_TEXT,
-        PLAYER1_TEXT,
-        PLAYER1_TEXT,
+        PLAYER_MISSILE,
+        MOB_TEXT,
+        MOB_TEXT,
+        MOB_TEXT,
+        MOB_MISSILE,
     };
 
     for (int i = 0; i < static_cast<int>(_paths.size()); i++)
