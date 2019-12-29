@@ -7,10 +7,10 @@ class App {
 }
 
 class Entity{
-	+ Entity(int entityId, int uniqueId, float posX, float posY);;
+	+ Entity(int entityId, int uniqueId, int posX, int posY);;
 	+ ~Entity();
     +int getEntityId() const;
-	+void updatePosition(float &x, float &y);
+	+void updatePosition(int &x, int &y);
 	+sf::Vector2f getPosition() const;
     #sf::Vector2f _pos;
 	#int _entityId;
@@ -23,8 +23,8 @@ class Game{
     +void startLoop();
     +void unpack();
     +void renderEntities();
-    +void createEntity(int &uniqueId, float &posX, float &posY);
-    +void updateEntity(int &id, float &posX, float &posY);
+    +void createEntity(int &uniqueId, int &posX, int &posY);
+    +void updateEntity(int &id, int &posX, int &posY);
     +void deleteEntity(int &id);
     +void initSprites();
     +std::shared_ptr<GameEngine> getGameEngine() const;
@@ -126,14 +126,14 @@ class IEntity{
 	+IEntity() = default;
 	+virtual ~IEntity() = default;
 	+virtual const std::atomic<int> &getId() const noexcept = 0;
-	+virtual const std::atomic<float> &getPosX() const noexcept = 0;
-	+virtual void setPosX(const float x) noexcept = 0;
-	+virtual const std::atomic<float> &getPosY() const noexcept = 0;
-	+virtual void setPosY(const float y) noexcept = 0;
+	+virtual const std::atomic<int> &getPosX() const noexcept = 0;
+	+virtual void setPosX(const int x) noexcept = 0;
+	+virtual const std::atomic<int> &getPosY() const noexcept = 0;
+	+virtual void setPosY(const int y) noexcept = 0;
 	+virtual const std::atomic<int> &getType() const noexcept = 0;
 	+virtual void setType(type type) noexcept = 0;
-	+virtual void move(const float x, const float y) noexcept = 0;
-	+virtual bool limits(const float x, const float y) const noexcept = 0;
+	+virtual void move(const int x, const int y) noexcept = 0;
+	+virtual bool limits(const int x, const int y) const noexcept = 0;
 }
 
 
@@ -143,20 +143,20 @@ class GameEntity{
 +~GameEntity() = default;
 
 +const std::atomic<int> &getId() const noexcept final;
-+const std::atomic<float> &getPosX() const noexcept final;
-+void setPosX(const float x) noexcept final;
-+const std::atomic<float> &getPosY() const noexcept final;
-+void setPosY(const float y) noexcept final;
++const std::atomic<int> &getPosX() const noexcept final;
++void setPosX(const int x) noexcept final;
++const std::atomic<int> &getPosY() const noexcept final;
++void setPosY(const int y) noexcept final;
 +const std::atomic<int> &getType() const noexcept final;
 +void setType(type type) noexcept final;
-+void move(const float x, const float y) noexcept final;
-+bool limits(const float x, const float y) const noexcept final;
++void move(const int x, const int y) noexcept final;
++bool limits(const int x, const int y) const noexcept final;
 +bool getRemoveEntity() const noexcept;
 +void setRemoveEntity() noexcept;
 +void ia() noexcept;
 
--std::atomic<float> _posX;
--std::atomic<float> _posY;
+-std::atomic<int> _posX;
+-std::atomic<int> _posY;
 -std::atomic<int> _entityId;
 -std::atomic<int> _type;
 -std::atomic<bool> _removeEntity;
