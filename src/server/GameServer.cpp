@@ -46,16 +46,16 @@ void GameServer::playerMove(sf::Packet &packet, sf::IpAddress &address) noexcept
 		if (player->getIpAddress() == address.toString()) {
 			switch (move) {
 				case 0: // UP
-					player->setPosY(player->getPosY() - 20);
+					player->move(0, -20);
 					break;
 				case 1: // RIGHT
-					player->setPosX(player->getPosX() + 20);
+					player->move(20, 0);
 					break;
 				case 2: // DOWN
-					player->setPosY(player->getPosY() + 20);
+					player->move(0, 20);
 					break;
 				case 3: // LEFT
-					player->setPosX(player->getPosX() - 20);
+					player->move(-20, 0);
 					break;
 				default:
 					break;
@@ -70,7 +70,7 @@ void GameServer::removeDestroyedEntities(size_t i)
 	if (this->_entities[i]->getRemoveEntity())
 	{
 		// delete this->_entities[i];
-		// this->_entities.erase(this->_entities.begin() + i);
+		this->_entities.erase(this->_entities.begin() + i);
 	}
 }
 

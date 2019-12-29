@@ -67,7 +67,7 @@ void GameEntity::move(const int x, const int y) noexcept
 
 bool GameEntity::limits(const int x, const int y) const noexcept
 {
-	return (x > 1920 - ENTITY_HEIGHT || x < 0) || (y > 1080 - ENTITY_WIDTH || y < 0);
+	return (x > 1920 - ENTITY_WIDTH || x < 0) || (y > 1080 - ENTITY_HEIGHT || y < 0);
 }
 
 void GameEntity::setRemoveEntity() noexcept
