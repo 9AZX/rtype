@@ -56,14 +56,11 @@ void Game::unpack()
     this->_network->_packet >> type;
     this->_network->_packet >> size;
     //create ou update players
-    std::cout << "Combien de joeuur: " << size;
     for (int i = 0; i < size; i++)
     {
-        this->_network->_packet >> typeEntity;
         this->_network->_packet >> id;
         this->_network->_packet >> posX;
         this->_network->_packet >> posY;
-        std::cout << "Avec comme id " << id << std::endl;
         if (!updateEntity(id, posX, posY))
         {
             createEntity(id, Game::entities::PLAYER1, posX, posY);
