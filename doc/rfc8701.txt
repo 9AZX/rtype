@@ -1,6 +1,6 @@
-Network Working Group                                         J. Ihlas
+EPITECH Network Working Group                                 J. Ihlas
 Request for Comments: 8701                            G. De Lataillade
-Category: Standard                                          R. Gautiez
+Category: R-Type Protocol                                   R. Gautiez
                                                           C. Hennequin
                                                       Epitech Bordeaux
                                                          December 2019
@@ -10,7 +10,46 @@ Category: Standard                                          R. Gautiez
 Abstract
 
     This document describes the R-Type Protocol, a network protocol
-    client/server for the game engine of R-Type.
+    between clients and the server for the game engine of R-Type.
     The protocol allows the connection of a player, the sending of
     inputs, the creation and movement of entities such as mobs or
     missiles but also information about the current game.
+
+Copyright Notice
+
+    Copyright (C) 2020 EPITECH. All Rights Reserved.
+
+Table of Contents
+
+    1. Introduction .................................................2
+    2. Standard Communication .......................................3
+
+Epitech		      	R-Type Protocol     	      	      [Page 1]
+
+
+
+
+
+
+RFC 8701                R-Type Protocol                       Jan 2020
+
+    1.  Introduction
+
+        The R-Type Protocol provides information about the
+        communication between clients and the R-Type game's server.
+        The game use a UDP protocol for the communication.
+
+Epitech		      	R-Type Protocol     	      	      [Page 2]
+
+
+
+
+
+
+RFC 8701                R-Type Protocol                       Jan 2020
+
+    2.  Standard Communication
+
+        -
+
+Epitech		      	R-Type Protocol     	      	      [Page 3]
