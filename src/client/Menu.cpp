@@ -55,6 +55,22 @@ void Menu::displayMenuString()
         y += 70;
     }
 }
+std::string Menu::getIp()
+{
+    return this->_ip;
+}
+
+std::string Menu::getPort()
+{
+    return this->_port;
+}
+
+void Menu::detachIpPort()
+{
+    int pos = this->_ip.find_first_of(':');
+    this->_port = this->_ip.substr(pos + 1),
+    this->_ip = this->_ip.substr(0, pos);
+}
 
 void Menu::eventInput()
 {
@@ -76,9 +92,12 @@ void Menu::eventInput()
                 playerText.setString(this->_playerInput);
             }
             if (this->_event.key.code == sf::Keyboard::BackSpace)
+            {
                 return;
+            }
         }
         this->_ip = this->_playerInput.toAnsiString();
+        this->detachIpPort();
     }
 }
 

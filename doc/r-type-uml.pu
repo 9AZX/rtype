@@ -76,6 +76,9 @@ class Menu{
     +void eventPressed();
     +void eventInput();
     +void renderEntitiesMenu();
+	+std::string getIp();
+    +std::string getPort();
+    +void detachIpPort();
     #sf::Texture _text_background;
     #sf::Sprite _background;
     #sf::Texture _text_logo;
@@ -85,6 +88,7 @@ class Menu{
     #std::shared_ptr<bool> _isMenu;
     #bool _isPlay = false;
     #std::string _ip = "";
+	#std::string _port = "";
     #std::vector<std::string> gameName;
     #sf::String _playerInput;
     #sf::Font _font;

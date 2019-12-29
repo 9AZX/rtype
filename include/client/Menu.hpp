@@ -30,6 +30,9 @@ public:
     void eventPressed();
     void eventInput();
     void renderEntitiesMenu();
+    std::string getIp();
+    std::string getPort();
+    void detachIpPort();
 
 protected:
     sf::Texture _text_background;
@@ -42,6 +45,7 @@ protected:
     std::shared_ptr<bool> _isMenu;
     bool _isPlay = false;
     std::string _ip = "";
+    std::string _port = "";
     std::vector<std::string> gameName;
     sf::String _playerInput;
     sf::Font _font;
