@@ -37,35 +37,37 @@ void Game::unpack()
     float posX;
     float posY;
     int id;
-    
+
     // create entity
     this->_network->_packet >> type;
     this->_network->_packet >> size;
     //create ou update mobs
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++)
+    {
         this->_network->_packet >> typeEntity;
         this->_network->_packet >> id;
         this->_network->_packet >> posX;
         this->_network->_packet >> posY;
-        if (!updateEntity(id, posX, posY)) {
+        if (!updateEntity(id, posX, posY))
+        {
             createEntity(id, Game::entities::MOB1, posX, posY);
         }
-        std::cout << "Id: " << id <<
-        " posX: " << posX << " posY: " << posY << std::endl;
+        std::cout << "Id: " << id << " posX: " << posX << " posY: " << posY << std::endl;
     }
     this->_network->_packet >> type;
     this->_network->_packet >> size;
     //create ou update players
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++)
+    {
         this->_network->_packet >> typeEntity;
         this->_network->_packet >> id;
         this->_network->_packet >> posX;
         this->_network->_packet >> posY;
-        if (!updateEntity(id, posX, posY)) {
+        if (!updateEntity(id, posX, posY))
+        {
             createEntity(id, Game::entities::PLAYER1, posX, posY);
         }
-        std::cout << "Player Id: " << id <<
-        " posX: " << posX << " posY: " << posY << std::endl;
+        std::cout << "Player Id: " << id << " posX: " << posX << " posY: " << posY << std::endl;
     }
     // delete entity
 }
@@ -138,6 +140,7 @@ void Game::renderEntities()
     {
         entityId = this->_entities[i]->getEntityId();
         pos = this->_entities[i]->getPosition();
+        this->_sprites[entityId].second.setScale(3.0f, 3.0f);
         this->_sprites[entityId].second.setPosition(pos);
         this->_window->draw(this->_sprites[entityId].second);
     }
