@@ -24,7 +24,6 @@ public:
 	void shootingTime();
 
 private:
-	int _healthPoints;
 	int _movements = 0;
 	int _lastShoot = 0;
 };
