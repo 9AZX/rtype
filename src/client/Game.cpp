@@ -34,8 +34,8 @@ void Game::unpack()
     int type = -1;
     int size = -1;
     int typeEntity = -1;
-    float posX;
-    float posY;
+    int posX;
+    int posY;
     int id;
 
     // create entity
@@ -52,40 +52,40 @@ void Game::unpack()
         {
             createEntity(id, Game::entities::MOB1, posX, posY);
         }
-        std::cout << "Id: " << id << " posX: " << posX << " posY: " << posY << std::endl;
     }
     this->_network->_packet >> type;
     this->_network->_packet >> size;
     //create ou update players
+    std::cout << "Combien de joeuur: " << size;
     for (int i = 0; i < size; i++)
     {
         this->_network->_packet >> typeEntity;
         this->_network->_packet >> id;
         this->_network->_packet >> posX;
         this->_network->_packet >> posY;
+        std::cout << "Avec comme id " << id << std::endl;
         if (!updateEntity(id, posX, posY))
         {
             createEntity(id, Game::entities::PLAYER1, posX, posY);
         }
-        std::cout << "Player Id: " << id << " posX: " << posX << " posY: " << posY << std::endl;
     }
     // delete entity
 }
 
-void Game::createEntity(int &uniqueId, Game::entities type, float &posX, float &posY)
+void Game::createEntity(int &uniqueId, Game::entities type, int &posX, int &posY)
 {
     this->_entities.push_back(std::make_unique<Entity>(type, uniqueId, posX, posY));
     std::cout << "Entity " << uniqueId << " created." << std::endl;
 }
 
-bool Game::updateEntity(int &uniqueId, float &posX, float &posY)
+bool Game::updateEntity(int &uniqueId, int &posX, int &posY)
 {
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
         if (this->_entities[i]->getId() == uniqueId)
         {
             this->_entities[static_cast<int>(i)]->updatePosition(posX, posY);
-            std::cout << "Entity " << uniqueId << " updated." << std::endl;
+            //std::cout << "Entity " << uniqueId << " updated." << std::endl;
             return true;
         }
     }
@@ -135,7 +135,6 @@ void Game::renderEntities()
     int entityId;
     sf::Vector2f pos;
 
-    std::cout << "Number of entities: " << this->_entities.size() << std::endl;
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
         entityId = this->_entities[i]->getEntityId();

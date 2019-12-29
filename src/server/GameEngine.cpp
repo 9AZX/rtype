@@ -35,10 +35,10 @@ void GameEngine::checkCollisions(std::vector<std::unique_ptr<GameEntity>> &entit
 
 bool GameEngine::checkPosition(GameEntity &a, GameEntity &b) const noexcept
 {
-	float ax = a.getPosX();
-	float ay = a.getPosY();
-	float bPosX = b.getPosX();
-	float bPosY = b.getPosY();
+	int ax = a.getPosX();
+	int ay = a.getPosY();
+	int bPosX = b.getPosX();
+	int bPosY = b.getPosY();
 
 	if (bPosX >= ax && bPosX <= ax + SPRITE_DIM_X &&
 		bPosY >= ay && bPosY <= ay + SPRITE_DIM_Y)
