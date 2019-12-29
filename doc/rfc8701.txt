@@ -3,7 +3,7 @@ Request for Comments: 8701                            G. De Lataillade
 Category: R-Type Protocol                                   R. Gautiez
                                                           C. Hennequin
                                                       Epitech Bordeaux
-                                                         December 2019
+                                                              Jan 2020
 
                         R-Type Protocol
 
