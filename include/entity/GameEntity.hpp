@@ -12,6 +12,9 @@
 
 using namespace Entity;
 
+#define ENTITY_WIDTH 102
+#define ENTITY_HEIGHT 51
+
 class GameEntity : public IEntity
 {
 public:
@@ -39,6 +42,9 @@ private:
 	std::atomic<int> _type;
 	std::atomic<bool> _removeEntity;
 	int _loopCount = 0;
+	int _moveCount = 0;
+	int _direction = -1;
+	int _nbMovements = 0;
 	bool _isShooting = false;
 	
 };
