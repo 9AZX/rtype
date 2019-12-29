@@ -23,6 +23,7 @@ Table of Contents
 
     1. Introduction .................................................2
     2. Standard Communication .......................................3
+    2. Client Connection ............................................4
 
 Epitech		      	R-Type Protocol     	      	      [Page 1]
 
@@ -57,4 +58,35 @@ RFC 8701                R-Type Protocol                       Jan 2020
         | (ENUM) |  |        (int)         |  |  (objet)  |
         +--------+  +----------------------+  +-----------+
 
+        The server uses an instruction list (with an ENUM)
+        to communicate with the server.
+
+            +------------------------+
+            |  "PACKET_PLAYER_NEW"   |
+            |  "PACKET_PLAYER_MOVE"  |
+            |  "PACKET_PLAYER"       |
+            |  "PACKET_ENTITY"       |
+            |  "PACKET_END"          |
+            +------------------------+
+
+        A packet MUST always end with an ENUM
+        of type "PACKET_END" to indicate the end.
+
 Epitech		      	R-Type Protocol     	      	      [Page 3]
+
+
+
+
+
+
+RFC 8701                R-Type Protocol                       Jan 2020
+
+    2.  Client Connection
+
+        You MUST use
+        +--------+  +----------------------+  +-----------+
+        |  TYPE  |  |  NUMBER OF ELEMENTS  |  |  ELEMENT  |
+        | (ENUM) |  |        (int)         |  |  (objet)  |
+        +--------+  +----------------------+  +-----------+
+
+Epitech		      	R-Type Protocol     	      	      [Page 4]
