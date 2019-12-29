@@ -30,6 +30,7 @@
 #define MOB_TEXT "assets/r-typesheet23a.gif"
 #define PLAYER_MISSILE "assets/r-typesheet1a_shoot_player.gif"
 #define MOB_MISSILE "assets/r-typesheet37a.gif"
+#define BACKGROUND "assets/background.png"
 
 class Game
 {
@@ -61,6 +62,7 @@ public:
     void deleteEntity(int &id);
 
     void initSprites();
+    void renderBackground();
     std::shared_ptr<GameEngineClient> getGameEngine() const;
 
 protected:

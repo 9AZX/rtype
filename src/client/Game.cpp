@@ -136,6 +136,17 @@ void Game::renderEntities()
     }
 }
 
+void Game::renderBackground()
+{
+    sf::Texture _text_background;
+    sf::Sprite _background;
+    if (!_text_background.loadFromFile(BACKGROUND))
+        return;
+    _background.setTexture(_text_background);
+    _background.setPosition(0, 0);
+    this->_window->draw(_background);
+}
+
 void Game::startLoop()
 {
     sf::Event event;
@@ -155,6 +166,7 @@ void Game::startLoop()
                 this->_network->sendData(packet);
                 isConnected = true;
             }
+            this->renderBackground();
             this->_gameEngine->playSong();
             if (this->_network->receiveData())
                 this->unpack();
