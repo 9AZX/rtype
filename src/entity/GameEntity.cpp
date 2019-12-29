@@ -67,7 +67,7 @@ void GameEntity::move(const float x, const float y) noexcept
 
 bool GameEntity::limits(const float x, const float y) const noexcept
 {
-	return (x > 1920 || x < 0) || (y > 1080 || y < 0);
+	return (x > 1920 - ENTITY_HEIGHT || x < 0) || (y > 1080 - ENTITY_WIDTH || y < 0);
 }
 
 void GameEntity::setRemoveEntity() noexcept
@@ -77,10 +77,19 @@ void GameEntity::setRemoveEntity() noexcept
 
 void GameEntity::ia() noexcept
 {
-	if (this->_loopCount % 10 == 0) {
-		this->move(0, std::rand() % 2 == 0 ? 10 : -10);
+	this->_loopCount++;
+	if (this->_loopCount % 2 == 0) {
+		if (this->_direction == -1) {
+			this->_direction = std::rand() % 2;
+			this->_nbMovements = std::rand() % 10 + 3;
+		}
+		if (this->_moveCount == this->_nbMovements) {
+			this->_direction = -1;
+		}
+		this->_direction == 0 ? this->move(0, 10) : this->move(0, -10);
+		this->_moveCount++;
 	}
-	if (this->_loopCount % 5 == 0) {
-		this->_isShooting = std::rand() % 2 == 0 ? true : false;
-	}
+	// if (this->_loopCount % 10 == 0) {
+	// 	this->_isShooting = std::rand() % 2 == 0 ? true : false;
+	// }
 }
