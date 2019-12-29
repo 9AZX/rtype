@@ -52,7 +52,7 @@ enum EEntities{
     ENTITIES_NUMBER
 }
 
-class GameEngine{
+class GameEngineClient{
     +GameEngine();
 	+~GameEngine();
 	+void TreatmentEvent(sf::Event event);
@@ -100,9 +100,10 @@ class Network {
     +void sendData(const char data[]);
     +char *receiveData();
     #sf::UdpSocket _socket;
+	+sf::Packet _packet;
 }
 
-namespace Entity{
+namespace EntityNamespace{
 enum e_type{
     PLAYER1,
     PLAYER2,
@@ -118,105 +119,118 @@ enum e_type{
 }
 
 class IEntity{
-        +IEntity() = default;
-        +virtual ~IEntity() = default;
-        +virtual void move(float, float) = 0;
-        +virtual bool positionLimits(float x, float y) const = 0;
-        +virtual float getPosX() const = 0;
-        +virtual float getPosY() const = 0;
-        +virtual e_type getType() const = 0;
-
-        #float _posX;
-        #float _posY;
-        #int _id;
-        #e_type _type;
-        #bool _removeEntity = false;
-}
-class GameServer{
-	+GameServer();
-	+~GameServer() = default;
-	+void gameLoop();
-	+void addPlayer(sf::Packet &packet) noexcept;
-	+std::unique_ptr<GameEngine> _gameEngine;
-	+std::vector<Player> _players;
-	+std::vector<GameEntity> _entities;
+	+IEntity() = default;
+	+virtual ~IEntity() = default;
+	+virtual const std::atomic<int> &getId() const noexcept = 0;
+	+virtual const std::atomic<float> &getPosX() const noexcept = 0;
+	+virtual void setPosX(const float x) noexcept = 0;
+	+virtual const std::atomic<float> &getPosY() const noexcept = 0;
+	+virtual void setPosY(const float y) noexcept = 0;
+	+virtual const std::atomic<int> &getType() const noexcept = 0;
+	+virtual void setType(type type) noexcept = 0;
+	+virtual void move(const float x, const float y) noexcept = 0;
+	+virtual bool limits(const float x, const float y) const noexcept = 0;
 }
 
-class GameEngine{
-    +GameEngine();
-    +~GameEngine() = default;
 
-    +void checkCollisions();
-    +bool checkPosition(size_t i, size_t j) const;
-    +bool checkEntityType(size_t i, size_t j) const;
-    +void mobIA(size_t i);
-}
-
-GameServer --|> GameEngine
-}
 
 class GameEntity{
-	+GameEntity();
-	+~GameEntity() = default;
++GameEntity();
++~GameEntity() = default;
 
-    +void move(float x, float y) final;
-    +bool positionLimits(float x, float y) const override;
++const std::atomic<int> &getId() const noexcept final;
++const std::atomic<float> &getPosX() const noexcept final;
++void setPosX(const float x) noexcept final;
++const std::atomic<float> &getPosY() const noexcept final;
++void setPosY(const float y) noexcept final;
++const std::atomic<int> &getType() const noexcept final;
++void setType(type type) noexcept final;
++void move(const float x, const float y) noexcept final;
++bool limits(const float x, const float y) const noexcept final;
++bool getRemoveEntity() const noexcept;
++void setRemoveEntity() noexcept;
++void ia() noexcept;
 
-    +float getPosX() const final;
-    +float getPosY() const final;
-    +e_type getType() const final;
+-std::atomic<float> _posX;
+-std::atomic<float> _posY;
+-std::atomic<int> _entityId;
+-std::atomic<int> _type;
+-std::atomic<bool> _removeEntity;
+-int _loopCount = 0;
+-bool _isShooting = false;
 }
-
-
-Entity --|> GameEntity
-
+IEntity --|> GameEntity
 class Missile{
-    +Missile(bool isAlly);
-    +~Missile() = default;
-    +bool positionLimits(float x, float y) const final;
-    #bool _isAlly;
+	+Missile() = default;
+	+Missile(const bool ally);
+	+~Missile() = default;
+	+void setAlly(const bool ally) noexcept;
+	+const std::atomic<bool> &getAlly() const noexcept;
+	-std::atomic<bool> _ally;
+
 }
-Entity --|> Missile
+GameEntity --|> Missile
 
 class Mob {
     +Mob();
     +~Mob() = default;
-    +void ia();
-    +void move(float x, float y) final;
-    +bool positionLimits(float x, float y) const final;
-    +float getPosX() const final;
-    +float getPosY() const final;
-    +e_type getType() const final;
-    #int _loopCount = 0;
-    #bool _isShooting = false;
+    +void path(int path);
+	+void shootingTime();
+	-int _healthPoints;
+	-int _movements = 0;
+	-int _lastShoot = 0;
 }
-Entity --|> Mob
+GameEntity --|> Mob
 
 class Player{
 	+Player();
 	+Player(const std::string &ip, const unsigned short port);
 	+~Player() = default;
 
-	#void setIpAddress(const std::string &address) noexcept;
-	#const std::string &getIpAddress() const noexcept;
-	#void setPort(const unsigned short port) noexcept;
-	#const std::atomic<unsigned short> &getPort() const noexcept;
-	#void setConnected(const bool connected) noexcept;
-	#const std::atomic<bool> &isConnected() const noexcept;
-	#void setId(const int id) noexcept;
-	#const std::atomic<int> &getId() const noexcept;
-	#void setLives(const int lives) noexcept;
-	#const std::atomic<int> &getLives() const noexcept;
+	+void setIpAddress(const std::string &address) noexcept;
+	+const std::string &getIpAddress() const noexcept;
+	+void setPort(const unsigned short port) noexcept;
+	+const std::atomic<unsigned short> &getPort() const noexcept;
+	+void setConnected(const bool connected) noexcept;
+	+const std::atomic<bool> &isConnected() const noexcept;
+	+void setId(const int id) noexcept;
+	+void setLives(const int lives) noexcept;
+	+const std::atomic<int> &getLives() const noexcept;
+	+void ia();
 
 	-std::string _ip = "127.0.0.1";
 	-std::atomic<unsigned short> _port;
 	-std::atomic<bool> _connected;
-	-std::atomic<int> _id;
 	-std::atomic<int> _lives;
 }
 
-Entity --|> Player
+GameEntity --|> Player
+}
 
+class GameServer{
+	+GameServer();
+	+~GameServer() = default;
+	+void gameLoop();
+	+void addPlayer(sf::Packet &packet) noexcept;
+	+void removeDestroyedEntities(size_t);
+	+void mobGeneration() noexcept;
+	+std::unique_ptr<GameEngine> _gameEngine = nullptr;
+	+std::vector<std::unique_ptr<Player>> _players = {};
+	+std::vector<std::unique_ptr<GameEntity>> _entities = {};
+}
+
+class GameEngine{
+    +GameEngine();
+    +~GameEngine() = default;
+
+    +void checkCollisions(std::vector<std::unique_ptr<GameEntity>> &) noexcept;
+	+bool checkPosition(GameEntity &, GameEntity &) const noexcept;
+	+bool checkEntityType(GameEntity &, GameEntity &) const noexcept;
+	+void mobIA(GameEntity &) noexcept;
+	+bool isGameInProgress() const noexcept;
+	+void setGameStart(bool) noexcept;
+	-bool _gameIP = false;
+}
 
 namespace NetworkMethods{
     enum e_type{
@@ -263,7 +277,7 @@ class Exception{
 std::exception --|> Exception
 
 
-namespace App{
+namespace AppNameSpace {
 	class CLI{
 		+CLI() = default;
 		+CLI(int argc, char **argv);
