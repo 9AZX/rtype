@@ -10,7 +10,7 @@
 Mob::Mob() {
 	this->setType(MOB1);
 	this->setPosY(std::rand() % 1070);
-	this->setPosX(500);
+	this->setPosX(std::rand() % 800 + 800);
 }
 
 void Mob::shootingTime()

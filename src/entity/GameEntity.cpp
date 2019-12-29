@@ -80,7 +80,7 @@ void GameEntity::ia() noexcept
 {
 	if (this->_loopCount % 10 == 0)
 	{
-		this->move(0, std::rand() % 4 == 0 ? 10 : -10);
+		this->move(0, std::rand() % 2 == 0 ? 10 : -10);
 	}
 	if (this->_loopCount % 5 == 0)
 	{

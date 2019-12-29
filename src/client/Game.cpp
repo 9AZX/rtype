@@ -67,7 +67,7 @@ bool Game::updateEntity(int &uniqueId, float &posX, float &posY)
 {
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
-        if (this->_entities[i]->getEntityId() == uniqueId)
+        if (this->_entities[i]->getId() == uniqueId)
         {
             this->_entities[static_cast<int>(i)]->updatePosition(posX, posY);
             std::cout << "Entity " << uniqueId << " updated." << std::endl;
@@ -81,7 +81,7 @@ void Game::deleteEntity(int &uniqueId)
 {
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
-        if (this->_entities[i]->getEntityId() == uniqueId)
+        if (this->_entities[i]->getId() == uniqueId)
         {
             this->_entities.erase(this->_entities.begin() + static_cast<int>(i));
             std::cout << "Entity " << uniqueId << " deleted." << std::endl;
@@ -126,7 +126,7 @@ void Game::renderEntities()
         entityId = this->_entities[i]->getEntityId();
         pos = this->_entities[i]->getPosition();
         this->_sprites[entityId].second.setPosition(pos);
-        this->_window->draw(this->_sprites[this->_entities[i]->getEntityId()].second);
+        this->_window->draw(this->_sprites[entityId].second);
     }
 }
 

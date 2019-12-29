@@ -14,8 +14,6 @@
 #define SPRITE_DIM_X 34
 #define SPRITE_DIM_Y 17
 
-using namespace Entity;
-
 class GameEngine
 {
 public:

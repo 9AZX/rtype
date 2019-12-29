@@ -20,6 +20,11 @@ Entity::~Entity()
 
 int Entity::getEntityId() const
 {
+    return this->_entityId;
+}
+
+int Entity::getId() const
+{
     return this->_uniqueId;
 }
 

@@ -55,6 +55,5 @@ void GameServer::mobGeneration() noexcept
 		this->_entities.push_back(std::make_unique<Mob>());
 		this->_entities.push_back(std::make_unique<Mob>());
 		this->_entities.push_back(std::make_unique<Mob>());
-		this->_entities.push_back(std::make_unique<Mob>());
 	}
 }
