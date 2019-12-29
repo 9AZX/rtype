@@ -11,8 +11,8 @@
 
 GameEntity::GameEntity()
 {
-	this->_posX = 0;
-	this->_posY = 0;
+	atomic_init(&this->_posX, 0);
+	atomic_init(&this->_posY, 0);
 	this->_entityId = std::rand();
 }
 
@@ -21,22 +21,22 @@ const std::atomic<int> &GameEntity::getId() const noexcept
 	return this->_entityId;
 }
 
-const std::atomic<float> &GameEntity::getPosX() const noexcept
+const std::atomic<int> &GameEntity::getPosX() const noexcept
 {
 	return this->_posX;
 }
 
-void GameEntity::setPosX(const float x) noexcept
+void GameEntity::setPosX(const int x) noexcept
 {
 	this->_posX = x;
 }
 
-const std::atomic<float> &GameEntity::getPosY() const noexcept
+const std::atomic<int> &GameEntity::getPosY() const noexcept
 {
 	return this->_posY;
 }
 
-void GameEntity::setPosY(const float y) noexcept
+void GameEntity::setPosY(const int y) noexcept
 {
 	this->_posY = y;
 }
@@ -56,7 +56,7 @@ bool GameEntity::getRemoveEntity() const noexcept
 	return this->_removeEntity;
 }
 
-void GameEntity::move(const float x, const float y) noexcept
+void GameEntity::move(const int x, const int y) noexcept
 {
 	if (this->limits(this->_posX + x, this->_posY + y)) {
 		return;
@@ -65,7 +65,7 @@ void GameEntity::move(const float x, const float y) noexcept
 	this->_posY = this->_posY + y;
 }
 
-bool GameEntity::limits(const float x, const float y) const noexcept
+bool GameEntity::limits(const int x, const int y) const noexcept
 {
 	return (x > 1920 - ENTITY_HEIGHT || x < 0) || (y > 1080 - ENTITY_WIDTH || y < 0);
 }

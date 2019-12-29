@@ -7,7 +7,7 @@
 
 #include "Entity.hpp"
 
-Entity::Entity(int entityId, int uniqueId, float posX, float posY)
+Entity::Entity(int entityId, int uniqueId, int posX, int posY)
     : _entityId(entityId), _uniqueId(uniqueId)
 {
     this->_pos.x = posX;
@@ -28,7 +28,7 @@ int Entity::getId() const
     return this->_uniqueId;
 }
 
-void Entity::updatePosition(float &x, float &y)
+void Entity::updatePosition(int &x, int &y)
 {
     this->_pos.x = x;
     this->_pos.y = y;

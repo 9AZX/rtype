@@ -41,20 +41,21 @@ void GameServer::playerMove(sf::Packet &packet, sf::IpAddress &address) noexcept
 	int move = 0;
 
 	packet >> move;
+	std::cout << move << std::endl;
 	for (auto const &player : this->_players) {
 		if (player->getIpAddress() == address.toString()) {
 			switch (move) {
 				case 0: // UP
-					player->setPosY(player->getPosY() + 15);
+					player->setPosY(player->getPosY() - 20);
 					break;
 				case 1: // RIGHT
-					player->setPosX(player->getPosX() + 15);
+					player->setPosX(player->getPosX() + 20);
 					break;
 				case 2: // DOWN
-					player->setPosY(player->getPosY() - 15);
+					player->setPosY(player->getPosY() + 20);
 					break;
 				case 3: // LEFT
-					player->setPosX(player->getPosX() - 15);
+					player->setPosX(player->getPosX() - 20);
 					break;
 				default:
 					break;

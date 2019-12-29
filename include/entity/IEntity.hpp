@@ -35,14 +35,14 @@ namespace Entity
 
 	public:
 		virtual const std::atomic<int> &getId() const noexcept = 0;
-		virtual const std::atomic<float> &getPosX() const noexcept = 0;
-		virtual void setPosX(const float x) noexcept = 0;
-		virtual const std::atomic<float> &getPosY() const noexcept = 0;
-		virtual void setPosY(const float y) noexcept = 0;
+		virtual const std::atomic<int> &getPosX() const noexcept = 0;
+		virtual void setPosX(const int x) noexcept = 0;
+		virtual const std::atomic<int> &getPosY() const noexcept = 0;
+		virtual void setPosY(const int y) noexcept = 0;
 		virtual const std::atomic<int> &getType() const noexcept = 0;
 		virtual void setType(type type) noexcept = 0;
-		virtual void move(const float x, const float y) noexcept = 0;
-		virtual bool limits(const float x, const float y) const noexcept = 0;
+		virtual void move(const int x, const int y) noexcept = 0;
+		virtual bool limits(const int x, const int y) const noexcept = 0;
 	};
 }
 

@@ -17,7 +17,6 @@ GameEngineClient::~GameEngineClient()
 
 void GameEngineClient::TreatmentEvent(sf::Event event, std::shared_ptr<Network> network)
 {
-    std::cout << "hol" << std::endl;
     sf::Packet packet;
     switch (event.key.code)
     {

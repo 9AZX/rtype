@@ -23,21 +23,21 @@ public:
 
 public:
 	const std::atomic<int> &getId() const noexcept final;
-	const std::atomic<float> &getPosX() const noexcept final;
-	void setPosX(const float x) noexcept final;
-	const std::atomic<float> &getPosY() const noexcept final;
-	void setPosY(const float y) noexcept final;
+	const std::atomic<int> &getPosX() const noexcept final;
+	void setPosX(const int x) noexcept final;
+	const std::atomic<int> &getPosY() const noexcept final;
+	void setPosY(const int y) noexcept final;
 	const std::atomic<int> &getType() const noexcept final;
 	void setType(type type) noexcept final;
-	void move(const float x, const float y) noexcept final;
-	bool limits(const float x, const float y) const noexcept final;
+	void move(const int x, const int y) noexcept final;
+	bool limits(const int x, const int y) const noexcept final;
 	bool getRemoveEntity() const noexcept;
 	void setRemoveEntity() noexcept;
 	void ia() noexcept;
 
 private:
-	std::atomic<float> _posX;
-	std::atomic<float> _posY;
+	std::atomic<int> _posX;
+	std::atomic<int> _posY;
 	std::atomic<int> _entityId;
 	std::atomic<int> _type;
 	std::atomic<bool> _removeEntity;

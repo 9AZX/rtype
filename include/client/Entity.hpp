@@ -13,12 +13,12 @@
 class Entity
 {
 public:
-	Entity(int entityId, int uniqueId, float posX, float posY);
+	Entity(int entityId, int uniqueId, int posX, int posY);
 	~Entity();
 
 	int getEntityId() const;
 	int getId() const;
-	void updatePosition(float &x, float &y);
+	void updatePosition(int &x, int &y);
 	sf::Vector2f getPosition() const;
 
 protected:
