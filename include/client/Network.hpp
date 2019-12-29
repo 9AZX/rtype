@@ -34,7 +34,7 @@ public:
 	sf::Packet _packet;
 
 private:
-	sf::IpAddress _serverIp;
+	std::string _serverIp;
 	unsigned short _serverPort = 4242;
 };
 
