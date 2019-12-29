@@ -17,28 +17,27 @@ Network::~Network()
 
 void Network::bindSocket()
 {
-    if (this->_socket.bind(PORT) != sf::Socket::Done)
+    if (this->_socket.bind(PORT) != sf::Socket::Done) 
         return;
+    this->_socket.setBlocking(false);
 }
 
-void Network::sendData(const char data[])
+void Network::sendData(sf::Packet &packet)
 {
     sf::IpAddress recipient = IP_ADDR;
 
-    if (this->_socket.send(data, 100, recipient, PORT) != sf::Socket::Done)
+    if (this->_socket.send(packet, recipient, 4242) != sf::Socket::Done)
         return;
 }
 
-char *Network::receiveData()
+bool Network::receiveData()
 {
-    char *data = (char *)malloc(sizeof(char) * 2048);
-    std::size_t received;
     sf::IpAddress sender;
     unsigned short port;
 
-
-    if (this->_socket.receive(data, 100, received, sender, port) != sf::Socket::Done)
-        return NULL;
-    std::cout << "Received " << received << " bytes from " << sender << " on port " << port << std::endl;
-    return data;
+    if (this->_socket.receive(this->_packet, sender, port) != sf::Socket::Done) {
+        return false;
+    }
+    std::cout << "Receive from " << sender << " on port " << port << " this size " << _packet.getDataSize() << std::endl;
+    return true;
 }

@@ -112,7 +112,11 @@ void Game::startLoop()
 {
     std::cout << "Start window" << std::endl;
     sf::Event event;
+    sf::Packet packet;
+    unsigned short port = 54000;
 
+    packet << 0 << "127.0.0.1" << port << 3;
+    this->_network->sendData(packet);
     while (this->_window->isOpen())
     {
         if (*(this->_isMenu))
@@ -120,7 +124,7 @@ void Game::startLoop()
         else
         {
             this->_gameEngine->playSong();
-            // this->_network->receiveData();
+            this->_network->receiveData();
             this->unpack();
             this->renderEntities();
             while (this->_window->pollEvent(event))

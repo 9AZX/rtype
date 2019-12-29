@@ -9,7 +9,7 @@
 #define NETWORK_HPP_
 
 #define PORT 54000
-#define IP_ADDR "192.168.0.5"
+#define IP_ADDR "127.0.0.1"
 
 #include <stdlib.h>
 #include <memory>
@@ -22,11 +22,12 @@ class Network {
 		~Network();
 
         void bindSocket();
-        void sendData(const char data[]);
-        char *receiveData();
+        void sendData(sf::Packet &packet);
+        bool receiveData();
 	protected:
         sf::UdpSocket _socket;
 	private:
+		sf::Packet _packet;
 };
 
 #endif /* !NETWORK_HPP_ */

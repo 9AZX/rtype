@@ -80,7 +80,6 @@ void Instance::instance()
 		server->_game._gameEngine->checkCollisions(server->_game._entities);
 
 		// Loop over entities
-		std::cout << "Number of entity: " << server->_game._entities.size() << std::endl;
 		for (size_t i = 0; i < server->_game._entities.size(); i++) {
 			// Remove destroyed entities
 			server->_game.removeDestroyedEntities(i);
