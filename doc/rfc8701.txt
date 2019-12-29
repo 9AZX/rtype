@@ -26,7 +26,7 @@ Table of Contents
     3. Client Connection ............................................4
     4. Receiving Data ...............................................5
 
-Epitech		      	R-Type Protocol     	      	      [Page 1]
+Epitech                 R-Type Protocol                       [Page 1]
 
 
 
@@ -74,7 +74,7 @@ RFC 8701                R-Type Protocol                       Jan 2020
         A packet MUST always end with an ENUM
         of type "PACKET_END" to indicate the end.
 
-Epitech		      	R-Type Protocol     	      	      [Page 3]
+Epitech                 R-Type Protocol                       [Page 3]
 
 
 
@@ -95,7 +95,7 @@ RFC 8701                R-Type Protocol                       Jan 2020
         a timeout of two seconds maximum to wait for
         the server's response and handle connection errors.
 
-Epitech		      	R-Type Protocol     	      	      [Page 4]
+Epitech                 R-Type Protocol                       [Page 4]
 
 
 
@@ -111,4 +111,23 @@ RFC 8701                R-Type Protocol                       Jan 2020
         The information is sent in a package containing information
         about the players and entities (enemies and shots).
 
-Epitech		      	R-Type Protocol     	      	      [Page 5]
+        For the players the list is sent in the following format:
+
+        - PACKET_PLAYER (enum)
+        - number of elements (int)
+        - element(s)
+            - player id (int)
+            - position X (int)
+            - position Y (int)
+
+        For entities the list is sent in the following format:
+
+        - PACKET_ENTITY (enum)
+        - number of elements (int)
+        - element(s)
+            - entity type (int)
+            - entity id (int)
+            - position X (int)
+            - position Y (int)
+
+Epitech                 R-Type Protocol                       [Page 5]
