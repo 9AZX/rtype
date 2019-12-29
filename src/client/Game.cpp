@@ -37,11 +37,8 @@ void Game::unpack()
     int posX;
     int posY;
     int id;
-
-    // create entity
     this->_network->_packet >> type;
     this->_network->_packet >> size;
-    //create ou update mobs
     for (int i = 0; i < size; i++)
     {
         this->_network->_packet >> typeEntity;
@@ -55,7 +52,6 @@ void Game::unpack()
     }
     this->_network->_packet >> type;
     this->_network->_packet >> size;
-    //create ou update players
     for (int i = 0; i < size; i++)
     {
         this->_network->_packet >> id;
@@ -66,7 +62,6 @@ void Game::unpack()
             createEntity(id, Game::entities::PLAYER1, posX, posY);
         }
     }
-    // delete entity
 }
 
 void Game::createEntity(int &uniqueId, Game::entities type, int &posX, int &posY)
@@ -82,7 +77,6 @@ bool Game::updateEntity(int &uniqueId, int &posX, int &posY)
         if (this->_entities[i]->getId() == uniqueId)
         {
             this->_entities[static_cast<int>(i)]->updatePosition(posX, posY);
-            //std::cout << "Entity " << uniqueId << " updated." << std::endl;
             return true;
         }
     }
@@ -97,7 +91,7 @@ void Game::deleteEntity(int &uniqueId)
         {
             this->_entities.erase(this->_entities.begin() + static_cast<int>(i));
             std::cout << "Entity " << uniqueId << " deleted." << std::endl;
-            i = this->_entities.size(); // stop unecessary loop
+            i = this->_entities.size();
         }
     }
 }
@@ -144,19 +138,23 @@ void Game::renderEntities()
 
 void Game::startLoop()
 {
-    std::cout << "Start window" << std::endl;
     sf::Event event;
     sf::Packet packet;
+    bool isConnected = false;
     unsigned short port = 54000;
 
-    packet << 0 << port << 4;
-    this->_network->sendData(packet);
     while (this->_window->isOpen())
     {
         if (*(this->_isMenu))
             this->_menu->renderMenu();
         else
         {
+            if (!isConnected) {
+                this->_network->setServerInfo(this->_menu->getIp(), std::stoi(this->_menu->getPort()));
+                packet << 0 << port << 4;
+                this->_network->sendData(packet);
+                isConnected = true;
+            }
             this->_gameEngine->playSong();
             if (this->_network->receiveData())
                 this->unpack();
@@ -171,10 +169,8 @@ void Game::startLoop()
                 {
                     this->_window->close();
                 }
-                // process events...
             }
         }
-        // send events to server...
         this->_window->display();
         this->_window->clear();
     }
