@@ -24,6 +24,7 @@ Table of Contents
     1. Introduction .................................................2
     2. Standard Communication .......................................3
     3. Client Connection ............................................4
+    4. Receiving Data ...............................................5
 
 Epitech		      	R-Type Protocol     	      	      [Page 1]
 
@@ -95,3 +96,19 @@ RFC 8701                R-Type Protocol                       Jan 2020
         the server's response and handle connection errors.
 
 Epitech		      	R-Type Protocol     	      	      [Page 4]
+
+
+
+
+
+
+RFC 8701                R-Type Protocol                       Jan 2020
+
+    4.  Receiving Data
+
+        When the connection to the server is made the server will
+        send the entity and player information 25 times per second.
+        The information is sent in a package containing information
+        about the players and entities (enemies and shots).
+
+Epitech		      	R-Type Protocol     	      	      [Page 5]
