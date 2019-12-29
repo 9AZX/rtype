@@ -9,6 +9,8 @@
 
 Mob::Mob() {
 	this->setType(MOB1);
+	this->setPosY(500);
+	this->setPosX(500);
 }
 
 void Mob::shootingTime()

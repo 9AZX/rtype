@@ -26,7 +26,7 @@ class Network {
         bool receiveData();
 	protected:
         sf::UdpSocket _socket;
-	private:
+	public:
 		sf::Packet _packet;
 };
 

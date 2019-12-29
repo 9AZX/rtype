@@ -31,14 +31,31 @@ void Game::initNetwork()
 
 void Game::unpack()
 {
+    int type = -1;
+    int size = -1;
+    int typeEntity = -1;
+    float posX; 
+    float posY;
+    
     // create entity
+    this->_network->_packet >> type;
+    this->_network->_packet >> size;
+    this->_network->_packet >> typeEntity;
+    this->_network->_packet >> posX;
+    this->_network->_packet >> posY;
+    std::cout << "Type: " << type << " Numbers of ent: " << size <<
+    " posX: " << posX << " posY: " << posY << std::endl;
     // update entity
+    if(this->_entities.empty())
+        createEntity(size, Game::entities::MOB1, posX, posY);
+    else
+        updateEntity(size, posX, posY);
     // delete entity
 }
 
-void Game::createEntity(int &uniqueId, float &posX, float &posY)
+void Game::createEntity(int &uniqueId, Game::entities type, float &posX, float &posY)
 {
-    this->_entities.push_back(std::make_unique<Entity>(PLAYER1, uniqueId, posX, posY));
+    this->_entities.push_back(std::make_unique<Entity>(type, uniqueId, posX, posY));
     std::cout << "Entity " << uniqueId << " created." << std::endl;
 }
 
@@ -124,8 +141,8 @@ void Game::startLoop()
         else
         {
             this->_gameEngine->playSong();
-            this->_network->receiveData();
-            this->unpack();
+            if (this->_network->receiveData())
+                this->unpack();
             this->renderEntities();
             while (this->_window->pollEvent(event))
             {

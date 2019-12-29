@@ -57,7 +57,7 @@ public:
     void unpack();
 
     void renderEntities();
-    void createEntity(int &uniqueId, float &posX, float &posY);
+    void createEntity(int &uniqueId, Game::entities, float &posX, float &posY);
     void updateEntity(int &id, float &posX, float &posY);
     void deleteEntity(int &id);
 

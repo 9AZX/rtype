@@ -37,7 +37,7 @@ private:
 	std::atomic<int> _entityId;
 	std::atomic<int> _type;
 	std::atomic<bool> _removeEntity;
-	int _loopCount = 0;
+	int _loopCount = 80;
 	bool _isShooting = false;
 	
 };

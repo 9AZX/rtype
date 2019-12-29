@@ -20,7 +20,7 @@ Entity::~Entity()
 
 int Entity::getEntityId() const
 {
-    return this->_entityId;
+    return this->_uniqueId;
 }
 
 void Entity::updatePosition(float &x, float &y)
