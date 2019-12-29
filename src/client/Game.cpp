@@ -34,22 +34,26 @@ void Game::unpack()
     int type = -1;
     int size = -1;
     int typeEntity = -1;
-    float posX; 
+    float posX;
     float posY;
+    int id;
     
     // create entity
     this->_network->_packet >> type;
     this->_network->_packet >> size;
-    this->_network->_packet >> typeEntity;
-    this->_network->_packet >> posX;
-    this->_network->_packet >> posY;
-    std::cout << "Type: " << type << " Numbers of ent: " << size <<
-    " posX: " << posX << " posY: " << posY << std::endl;
-    // update entity
-    if(this->_entities.empty())
-        createEntity(size, Game::entities::MOB1, posX, posY);
-    else
-        updateEntity(size, posX, posY);
+    //create ou update mobs
+    for (int i = 0; i < size; i++) {
+        this->_network->_packet >> typeEntity;
+        this->_network->_packet >> id;
+        this->_network->_packet >> posX;
+        this->_network->_packet >> posY;
+        if (!updateEntity(id, posX, posY)) {
+            createEntity(id, Game::entities::MOB1, posX, posY);
+        }
+        std::cout << "Id: " << id <<
+        " posX: " << posX << " posY: " << posY << std::endl;
+    }
+
     // delete entity
 }
 
@@ -59,7 +63,7 @@ void Game::createEntity(int &uniqueId, Game::entities type, float &posX, float &
     std::cout << "Entity " << uniqueId << " created." << std::endl;
 }
 
-void Game::updateEntity(int &uniqueId, float &posX, float &posY)
+bool Game::updateEntity(int &uniqueId, float &posX, float &posY)
 {
     for (size_t i = 0; i < this->_entities.size(); i++)
     {
@@ -67,9 +71,10 @@ void Game::updateEntity(int &uniqueId, float &posX, float &posY)
         {
             this->_entities[static_cast<int>(i)]->updatePosition(posX, posY);
             std::cout << "Entity " << uniqueId << " updated." << std::endl;
-            i = this->_entities.size(); // stop unecessary loop
+            return true;
         }
     }
+    return false;
 }
 
 void Game::deleteEntity(int &uniqueId)

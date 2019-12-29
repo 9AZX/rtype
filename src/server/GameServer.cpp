@@ -9,6 +9,7 @@
 #include "GameServer.hpp"
 #include <utility>
 #include "Mob.hpp"
+#include <iostream>
 
 using namespace Entity;
 
@@ -30,6 +31,7 @@ void GameServer::addPlayer(sf::Packet &packet) noexcept
 	packet >> ip;
 	packet >> port;
 	this->_players.push_back(std::make_unique<Player>(ip, port));
+	std::cout << "New player " << ip << ':' << port << std::endl;
 }
 
 void GameServer::removeDestroyedEntities(size_t i)
@@ -50,6 +52,9 @@ void GameServer::mobGeneration() noexcept
 			nbMobs++;
 	}
 	if (!nbMobs) {
+		this->_entities.push_back(std::make_unique<Mob>());
+		this->_entities.push_back(std::make_unique<Mob>());
+		this->_entities.push_back(std::make_unique<Mob>());
 		this->_entities.push_back(std::make_unique<Mob>());
 	}
 }

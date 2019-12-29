@@ -58,7 +58,7 @@ public:
 
     void renderEntities();
     void createEntity(int &uniqueId, Game::entities, float &posX, float &posY);
-    void updateEntity(int &id, float &posX, float &posY);
+    bool updateEntity(int &id, float &posX, float &posY);
     void deleteEntity(int &id);
 
     void initSprites();

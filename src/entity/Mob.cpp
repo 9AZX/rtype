@@ -9,7 +9,7 @@
 
 Mob::Mob() {
 	this->setType(MOB1);
-	this->setPosY(500);
+	this->setPosY(std::rand() % 1070);
 	this->setPosX(500);
 }
 

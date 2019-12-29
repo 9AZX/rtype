@@ -78,8 +78,8 @@ void Server::sendToPlayers()
 	packet << NetworkMethods::PACKET_ENTITY;
 	packet << static_cast<int>(this->_game._entities.size());
 	for (const auto &entity : this->_game._entities) {
-		packet << entity->getType().load() << entity->getPosX();
-		packet << entity->getPosY().load();
+		packet << entity->getType().load() << entity->getId().load();
+		packet << entity->getPosX() << entity->getPosY().load();
 	}
 	packet << NetworkMethods::PACKET_PLAYER;
 	packet << static_cast<int>(this->_game._players.size());

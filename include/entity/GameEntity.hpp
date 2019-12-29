@@ -19,6 +19,7 @@ public:
 	~GameEntity() = default;
 
 public:
+	const std::atomic<int> &getId() const noexcept final;
 	const std::atomic<float> &getPosX() const noexcept final;
 	void setPosX(const float x) noexcept final;
 	const std::atomic<float> &getPosY() const noexcept final;
@@ -37,7 +38,7 @@ private:
 	std::atomic<int> _entityId;
 	std::atomic<int> _type;
 	std::atomic<bool> _removeEntity;
-	int _loopCount = 80;
+	int _loopCount = 0;
 	bool _isShooting = false;
 	
 };

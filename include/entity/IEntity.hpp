@@ -34,6 +34,7 @@ namespace Entity
 		virtual ~IEntity() = default;
 
 	public:
+		virtual const std::atomic<int> &getId() const noexcept = 0;
 		virtual const std::atomic<float> &getPosX() const noexcept = 0;
 		virtual void setPosX(const float x) noexcept = 0;
 		virtual const std::atomic<float> &getPosY() const noexcept = 0;

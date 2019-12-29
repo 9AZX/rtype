@@ -35,7 +35,6 @@ public:
 	void setConnected(const bool connected) noexcept;
 	const std::atomic<bool> &isConnected() const noexcept;
 	void setId(const int id) noexcept;
-	const std::atomic<int> &getId() const noexcept;
 	void setLives(const int lives) noexcept;
 	const std::atomic<int> &getLives() const noexcept;
 	void ia();
@@ -44,7 +43,6 @@ private:
 	std::string _ip = "127.0.0.1";
 	std::atomic<unsigned short> _port;
 	std::atomic<bool> _connected;
-	std::atomic<int> _id;
 	std::atomic<int> _lives;
 };
 

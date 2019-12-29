@@ -7,11 +7,18 @@
 
 #include <cstdlib>
 #include "GameEntity.hpp"
+#include <chrono>
 
 GameEntity::GameEntity()
 {
 	this->_posX = 0;
 	this->_posY = 0;
+	this->_entityId = std::rand();
+}
+
+const std::atomic<int> &GameEntity::getId() const noexcept
+{
+	return this->_entityId;
 }
 
 const std::atomic<float> &GameEntity::getPosX() const noexcept
@@ -73,7 +80,7 @@ void GameEntity::ia() noexcept
 {
 	if (this->_loopCount % 10 == 0)
 	{
-		this->move(0, std::rand() % 2 == 0 ? 15 : -15);
+		this->move(0, std::rand() % 4 == 0 ? 10 : -10);
 	}
 	if (this->_loopCount % 5 == 0)
 	{
