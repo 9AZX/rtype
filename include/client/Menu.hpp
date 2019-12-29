@@ -33,6 +33,7 @@ public:
     std::string getIp();
     std::string getPort();
     void detachIpPort();
+    void setIsPlay();
 
 protected:
     sf::Texture _text_background;
