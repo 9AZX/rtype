@@ -10,6 +10,7 @@
 
 #include "GameEntity.hpp"
 #include <vector>
+#include <memory>
 
 #define SPRITE_DIM_X 34
 #define SPRITE_DIM_Y 17
