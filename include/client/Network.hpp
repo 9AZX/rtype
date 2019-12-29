@@ -16,22 +16,26 @@
 #include <iostream>
 #include <SFML/Network.hpp>
 
-class Network {
-	public:
-		Network();
-		~Network();
+class Network
+{
+public:
+	Network();
+	~Network();
 
-        void bindSocket();
-        void sendData(sf::Packet &packet);
-        bool receiveData();
-		void setServerInfo(std::string, unsigned short);
-	protected:
-        sf::UdpSocket _socket;
-	public:
-		sf::Packet _packet;
-	private:
-		sf::IpAddress _serverIp;
-		unsigned short _serverPort = 4242;
+	void bindSocket();
+	void sendData(sf::Packet &packet);
+	bool receiveData();
+	bool setServerInfo(std::string, std::string);
+
+protected:
+	sf::UdpSocket _socket;
+
+public:
+	sf::Packet _packet;
+
+private:
+	sf::IpAddress _serverIp;
+	unsigned short _serverPort = 4242;
 };
 
 #endif /* !NETWORK_HPP_ */

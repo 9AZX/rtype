@@ -67,8 +67,9 @@ std::string Menu::getPort()
 
 void Menu::detachIpPort()
 {
+
     int pos = this->_ip.find_first_of(':');
-    this->_port = this->_ip.substr(pos + 1),
+    this->_port = this->_ip.substr(pos + 1);
     this->_ip = this->_ip.substr(0, pos);
 }
 
@@ -172,4 +173,9 @@ void Menu::renderMenu()
         this->eventMenu();
     }
     this->eventMenu();
+}
+
+void Menu::setIsPlay()
+{
+    this->_isPlay = true;
 }

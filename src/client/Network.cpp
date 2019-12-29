@@ -17,7 +17,7 @@ Network::~Network()
 
 void Network::bindSocket()
 {
-    if (this->_socket.bind(PORT) != sf::Socket::Done) 
+    if (this->_socket.bind(PORT) != sf::Socket::Done)
         return;
     this->_socket.setBlocking(false);
 }
@@ -33,14 +33,23 @@ bool Network::receiveData()
     sf::IpAddress sender;
     unsigned short port;
 
-    if (this->_socket.receive(this->_packet, sender, port) != sf::Socket::Done) {
+    if (this->_socket.receive(this->_packet, sender, port) != sf::Socket::Done)
+    {
         return false;
     }
     return true;
 }
 
-void Network::setServerInfo(std::string ip, unsigned short port)
+bool Network::setServerInfo(std::string ip, std::string port)
 {
-    this->_serverIp = ip;
-    this->_serverPort = port;
+    try
+    {
+        this->_serverIp = ip;
+        this->_serverPort = std::stoi(port);
+    }
+    catch (...)
+    {
+        return false;
+    }
+    return true;
 }

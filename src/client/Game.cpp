@@ -160,8 +160,14 @@ void Game::startLoop()
             this->_menu->renderMenu();
         else
         {
-            if (!isConnected) {
-                this->_network->setServerInfo(this->_menu->getIp(), std::stoi(this->_menu->getPort()));
+            if (!isConnected)
+            {
+                if (this->_network->setServerInfo(this->_menu->getIp(), this->_menu->getPort()) == false)
+                {
+                    *(this->_isMenu) = true;
+                    this->_menu->setIsPlay();
+                    continue;
+                }
                 packet << 0 << port << 4;
                 this->_network->sendData(packet);
                 std::cout << "Connected to server" << std::endl;
