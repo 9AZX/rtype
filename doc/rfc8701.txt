@@ -82,10 +82,10 @@ Epitech		      	R-Type Protocol     	      	      [Page 3]
 
 RFC 8701                R-Type Protocol                       Jan 2020
 
-    2.  Client Connection
+    3.  Client Connection
 
         To connect to a server you must send a packet
         of type "PACKET_PLAYER_NEW" followed by
-        the port and the end of packet indication ("PACKET_END").
+        the port and the end of packet indication (with "PACKET_END").
 
 Epitech		      	R-Type Protocol     	      	      [Page 4]
