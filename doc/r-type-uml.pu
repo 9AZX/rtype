@@ -28,6 +28,7 @@ class Game{
     +void deleteEntity(int &id);
     +void initSprites();
     +std::shared_ptr<GameEngine> getGameEngine() const;
+	+void renderBackground();
 
     #std::shared_ptr<GameEngine> _gameEngine;
     #std::shared_ptr<sf::RenderWindow> _window;

@@ -41,7 +41,6 @@ void GameServer::playerMove(sf::Packet &packet, sf::IpAddress &address) noexcept
 	int move = 0;
 
 	packet >> move;
-	std::cout << move << std::endl;
 	for (auto const &player : this->_players) {
 		if (player->getIpAddress() == address.toString()) {
 			switch (move) {

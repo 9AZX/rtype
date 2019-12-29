@@ -82,15 +82,16 @@ void GameEntity::ia() noexcept
 	if (this->_loopCount % 2 == 0) {
 		if (this->_direction == -1) {
 			this->_direction = std::rand() % 2;
-			this->_nbMovements = std::rand() % 3 + 2;
+			this->_nbMovements = std::rand() % 8 + 2;
 		}
 		if (this->_moveCount >= this->_nbMovements) {
 			this->_direction = -1;
 			this->_moveCount = -1;
 		}
+		if (this->_posY < 100) this->_direction = 0;
+		if (this->_posY > 900) this->_direction = 1;
 		this->_direction == 0 ? this->move(0, 10) : this->move(0, -10);
 		this->_moveCount++;
-		std::cout << std::endl;
 	}
 	// if (this->_loopCount % 10 == 0) {
 	// 	this->_isShooting = std::rand() % 2 == 0 ? true : false;

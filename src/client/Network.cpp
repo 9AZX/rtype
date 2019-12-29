@@ -24,9 +24,7 @@ void Network::bindSocket()
 
 void Network::sendData(sf::Packet &packet)
 {
-    sf::IpAddress recipient = IP_ADDR;
-
-    if (this->_socket.send(packet, recipient, 4242) != sf::Socket::Done)
+    if (this->_socket.send(packet, this->_serverIp, this->_serverPort) != sf::Socket::Done)
         return;
 }
 
@@ -38,6 +36,11 @@ bool Network::receiveData()
     if (this->_socket.receive(this->_packet, sender, port) != sf::Socket::Done) {
         return false;
     }
-    std::cout << "Receive from " << sender << " on port " << port << " this size " << _packet.getDataSize() << std::endl;
     return true;
+}
+
+void Network::setServerInfo(std::string ip, unsigned short port)
+{
+    this->_serverIp = ip;
+    this->_serverPort = port;
 }
