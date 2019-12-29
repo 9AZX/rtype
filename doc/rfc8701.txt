@@ -86,7 +86,8 @@ RFC 8701                R-Type Protocol                       Jan 2020
 
         To connect to a server you MUST send a packet
         of type "PACKET_PLAYER_NEW" followed by
-        the port and the end of packet indication (with "PACKET_END").
+        the client port and the end of packet
+        indication (with "PACKET_END").
 
         Once the client is connected the server will instantly send data
         on the entities to be displayed. It is RECOMMENDED to configure
