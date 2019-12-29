@@ -79,6 +79,7 @@ class Menu{
     +void renderEntitiesMenu();
 	+std::string getIp();
     +std::string getPort();
+	+void setIsPlay();
     +void detachIpPort();
     #sf::Texture _text_background;
     #sf::Sprite _background;
@@ -104,6 +105,7 @@ class Network {
     +void bindSocket();
     +void sendData(const char data[]);
     +char *receiveData();
+	+bool setServerInfo(std::string, std::string);
     #sf::UdpSocket _socket;
 	+sf::Packet _packet;
 }
