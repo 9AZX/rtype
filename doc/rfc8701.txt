@@ -25,6 +25,7 @@ Table of Contents
     2. Standard Communication .......................................3
     3. Client Connection ............................................4
     4. Receiving Data ...............................................5
+    5. Player Movement ..............................................6
 
 Epitech                 R-Type Protocol                       [Page 1]
 
@@ -129,5 +130,33 @@ RFC 8701                R-Type Protocol                       Jan 2020
             - entity id (int)
             - position X (int)
             - position Y (int)
+
+        A packet MUST always end with a "PACKET_END".
+
+Epitech                 R-Type Protocol                       [Page 5]
+
+
+
+
+
+
+RFC 8701                R-Type Protocol                       Jan 2020
+
+    5.  Player Movement
+
+        In order for the player to send his moves,
+        a packet MUST be sent with the player's direction.
+        To send the player's move you MUST to start the
+        packet with the instruction "PACKET_PLAYER_MOVE"
+        and then the desired direction.
+
+        The package SHOULD look like this:
+
+        - PACKET_PLAYER_MOVE (enum)
+        - movement (int)
+        - PACKET_END (enum)
+
+        For movements, 0 corresponds to upward movement,
+        1 to the right, 2 to the bottom and 3 to the left.
 
 Epitech                 R-Type Protocol                       [Page 5]
