@@ -27,7 +27,7 @@ public:
 
 public:
 	void gameLoop();
-	void addPlayer(sf::Packet &packet) noexcept;
+	void addPlayer(sf::Packet &packet, sf::IpAddress &address) noexcept;
 	void removeDestroyedEntities(size_t);
 	void mobGeneration() noexcept;
 

@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:44:41
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-12-2019 23:22:06
+** @Last Modified time: 29-12-2019 16:51:48
 */
 
 #ifndef	_SERVER_HPP_
@@ -39,7 +39,7 @@ public:
 	void sendToPlayers();
 
 private:
-	void extract(sf::Packet &packet);
+	void extract(sf::Packet &packet, sf::IpAddress &address);
 
 public:
 	std::vector< std::thread> _threads;

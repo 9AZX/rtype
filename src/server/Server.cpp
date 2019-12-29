@@ -6,7 +6,7 @@
 ** @Author: Cédric Hennequin
 ** @Date:   21-11-2019 23:45:32
 ** @Last Modified by:   Cédric Hennequin
-** @Last Modified time: 28-12-2019 23:46:56
+** @Last Modified time: 29-12-2019 16:51:56
 */
 
 #include <iostream>
@@ -34,7 +34,7 @@ void Server::network()
 			packet.clear();
 			continue;
 		}
-		this->extract(packet);
+		this->extract(packet, remoteAddress);
 		packet.clear();
 	} while (this->_run);
 }
@@ -47,7 +47,7 @@ void Server::networkDebug(const sf::IpAddress &addr, const unsigned short port)
 }
 #endif
 
-void Server::extract(sf::Packet &packet)
+void Server::extract(sf::Packet &packet, sf::IpAddress &address)
 {
 	int type = NetworkMethods::PACKET_END;
 
@@ -55,7 +55,7 @@ void Server::extract(sf::Packet &packet)
 		packet >> type;
 		switch (type) {
 			case NetworkMethods::PACKET_PLAYER_NEW:
-				this->_game.addPlayer(packet);
+				this->_game.addPlayer(packet, address);
 				break;
 			case NetworkMethods::PACKET_END:
 				break;

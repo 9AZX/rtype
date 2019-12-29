@@ -23,15 +23,17 @@ void GameServer::gameLoop()
 	//NTD
 }
 
-void GameServer::addPlayer(sf::Packet &packet) noexcept
+void GameServer::addPlayer(sf::Packet &packet, sf::IpAddress &address) noexcept
 {
-	std::string ip = "";
 	unsigned short port = 0;
 
-	packet >> ip;
 	packet >> port;
-	this->_players.push_back(std::make_unique<Player>(ip, port));
-	std::cout << "New player " << ip << ':' << port << std::endl;
+	this->_players.push_back(std::make_unique<Player>(
+		address.toString(),
+		port
+	));
+	std::cout << "New player \"" << address.toString() << "\": " << port;
+	std::cout << std::endl;
 }
 
 void GameServer::removeDestroyedEntities(size_t i)
